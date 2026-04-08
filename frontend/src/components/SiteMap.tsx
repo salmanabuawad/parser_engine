@@ -177,10 +177,10 @@ export default function SiteMap({
         const isSel = selectedTracker?.tracker_code === t.tracker_code;
         ctx.strokeStyle = isSel ? "#16a34a" : "rgba(22,163,74,0.3)";
         ctx.lineWidth = isSel ? 2.5 : 1;
-        // Draw N-S line through center of bbox (top to bottom)
-        const cx = bb.x + bb.w / 2;
-        const [x1, y1] = mapPt(cx, bb.y);
-        const [x2, y2] = mapPt(cx, bb.y + bb.h);
+        // Draw N-S line (horizontal in PDF, becomes vertical after 90° CCW rotation)
+        const cy = bb.y + bb.h / 2;
+        const [x1, y1] = mapPt(bb.x, cy);
+        const [x2, y2] = mapPt(bb.x + bb.w, cy);
         ctx.beginPath();
         ctx.moveTo(x1, y1);
         ctx.lineTo(x2, y2);
