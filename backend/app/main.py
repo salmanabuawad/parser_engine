@@ -1,7 +1,9 @@
+import json
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel
 from app.config import PROJECTS_ROOT
 from app.services.project_cache import ProjectCache
 from app.services.system_cache import SystemCache
@@ -80,6 +82,44 @@ def get_zoom(project_id: str, pier_id: str):
     if not z:
         raise HTTPException(status_code=404, detail="Zoom target not found")
     return z
+
+
+# --- Pier statuses --------------------------------------------------------
+
+VALID_STATUSES = {"Not Started", "Implemented", "Approved", "Rejected", "Fixed"}
+
+def _statuses_path(project_id: str) -> Path:
+    return PROJECTS_ROOT / project_id / "pier_statuses.json"
+
+def _load_statuses(project_id: str) -> dict:
+    p = _statuses_path(project_id)
+    if p.exists():
+        return json.loads(p.read_text(encoding="utf-8"))
+    return {}
+
+def _save_statuses(project_id: str, data: dict):
+    p = _statuses_path(project_id)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps(data, indent=2), encoding="utf-8")
+
+class StatusUpdate(BaseModel):
+    status: str
+
+@app.get("/api/projects/{project_id}/pier-statuses")
+def get_pier_statuses(project_id: str):
+    return _load_statuses(project_id)
+
+@app.put("/api/projects/{project_id}/pier/{pier_id}/status")
+def update_pier_status(project_id: str, pier_id: str, body: StatusUpdate):
+    if body.status not in VALID_STATUSES:
+        raise HTTPException(status_code=400, detail=f"Invalid status. Must be one of: {VALID_STATUSES}")
+    statuses = _load_statuses(project_id)
+    if body.status == "Not Started":
+        statuses.pop(pier_id, None)
+    else:
+        statuses[pier_id] = body.status
+    _save_statuses(project_id, statuses)
+    return {"pier_id": pier_id, "status": body.status}
 
 
 @app.post("/api/projects/{project_id}/system/ensure")
