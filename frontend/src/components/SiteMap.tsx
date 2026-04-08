@@ -95,10 +95,10 @@ export default function SiteMap({
     ctx.fillStyle = "#f8fafc";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Rotate 90° clockwise only: (x,y) → (H-y, x)
+    // Rotate 90° counter-clockwise: (x,y) → (y, W-x)
     const mapPt = (ix: number, iy: number): [number, number] => [
-      ox + (imageHeight - iy) * s,
-      oy + ix * s,
+      ox + iy * s,
+      oy + (imageWidth - ix) * s,
     ];
 
     // Draw subtle background rect (rotated dimensions)
@@ -320,11 +320,10 @@ export default function SiteMap({
     const mx = clientX - rect.left;
     const my = clientY - rect.top;
     const { x: ox, y: oy, scale: s } = view;
-    // Reverse the transform: canvas → image coords
-    // mapPt: ix → ox + (H-iy)*s, iy → oy + ix*s
-    // Inverse: ix = (my - oy)/s, iy = H - (mx - ox)/s
-    const ix = (my - oy) / s;
-    const iy = imageHeight - (mx - ox) / s;
+    // Reverse: mapPt: cx = oy + iy*s, cy = oy + (W-ix)*s
+    // Inverse: iy = (mx - ox)/s, ix = W - (my - oy)/s
+    const ix = imageWidth - (my - oy) / s;
+    const iy = (mx - ox) / s;
 
     // Check piers first (smallest)
     if (layerVisible("piers")) {
