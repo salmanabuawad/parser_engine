@@ -673,20 +673,23 @@ def extract_trackers_from_pdf_vector(ramming_pdf, page_idx, base_shape, profile,
             tracker_piers[a_idx] = pier_list
             continue
 
-        # Walk P3, P4, ... P19 along this direction
+        # Walk P3, P4, ... P19: predict from LAST found pier + step direction
+        prev_x, prev_y = p2["x"], p2["y"]
         for k in range(3, 20):
             label_k = f"P{k}"
             pk_info = pier_grids.get(label_k)
             if not pk_info:
                 break
             pk_coords, pk_list, pk_grid = pk_info
-            # Expected position: P1 + (k-1) * direction
-            ex = p1["x"] + dx * (k - 1)
-            ey = p1["y"] + dy * (k - 1)
-            pk_idx, pk_d2 = _nearest_by_grid(pk_coords, pk_grid, 15.0, ex, ey, max_rings=3)
-            if pk_idx is None or pk_d2 > 2500.0:  # within 50pt
+            # Predict next pier from last found pier + one step
+            ex = prev_x + dx
+            ey = prev_y + dy
+            pk_idx, pk_d2 = _nearest_by_grid(pk_coords, pk_grid, 15.0, ex, ey, max_rings=4)
+            if pk_idx is None or pk_d2 > 2500.0:
                 break
-            pier_list.append({**pk_list[pk_idx], "_label": label_k})
+            found = pk_list[pk_idx]
+            pier_list.append({**found, "_label": label_k})
+            prev_x, prev_y = found["x"], found["y"]
 
         tracker_piers[a_idx] = pier_list
 

@@ -50,7 +50,7 @@
   "block_label_count": 13,
   "block_count": 13,
   "tracker_count": 1533,
-  "pier_count": 20770,
+  "pier_count": 25530,
   "coordinate_system": {
     "origin_rule": "P1 of lowest-leftmost valid tracker",
     "origin_pier_id": "T0001-P01",
