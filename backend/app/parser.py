@@ -539,7 +539,8 @@ def detect_piers_by_rows(ramming_img, trackers, row_model):
 # Vector-based PDF extraction (preferred over CV)
 # ---------------------------------------------------------------------------
 
-def extract_trackers_from_pdf_vector(ramming_pdf, page_idx, base_shape, profile):
+def extract_trackers_from_pdf_vector(ramming_pdf, page_idx, base_shape, profile,
+                                     base_block_labels=None):
     """Extract trackers and piers directly from PDF text/vector data.
 
     Returns (trackers, piers) with coordinates already in base-image pixel space.
@@ -660,9 +661,53 @@ def extract_trackers_from_pdf_vector(ramming_pdf, page_idx, base_shape, profile)
             })
 
     # --- Step 4: coordinate mapping (PDF pts -> base image pixels) -----------
+    # Use matching block labels in both PDFs to compute an affine transform.
+    # This handles different scale, position, and rotation between the two PDFs.
     base_h, base_w = base_shape[:2]
-    sx = base_w / max(float(page_rect.width), 1.0)
-    sy = base_h / max(float(page_rect.height), 1.0)
+
+    def _map_coord(x_pdf, y_pdf):
+        """Transform a point from ramming PDF space to base image space."""
+        return _pdf_to_base_transform(x_pdf, y_pdf)
+
+    # Build correspondences: ramming PDF block positions <-> base image block positions
+    ramming_block_pts = {int(b["block"]): (b["x"], b["y"]) for b in block_labels}
+    base_block_pts = {}
+    if base_block_labels:
+        for bl in base_block_labels:
+            base_block_pts[bl["block_id"]] = (bl["x"], bl["y"])
+
+    matched_src = []
+    matched_dst = []
+    for bid in ramming_block_pts:
+        if bid in base_block_pts:
+            matched_src.append(ramming_block_pts[bid])
+            matched_dst.append(base_block_pts[bid])
+
+    if len(matched_src) >= 3:
+        # Compute affine transform from ramming PDF coords to base image coords
+        src = np.float32(matched_src)
+        dst = np.float32(matched_dst)
+        # Use least-squares affine fit
+        A = np.zeros((2 * len(src), 6), dtype=np.float64)
+        b_vec = np.zeros(2 * len(src), dtype=np.float64)
+        for i, ((sx_i, sy_i), (dx_i, dy_i)) in enumerate(zip(src, dst)):
+            A[2*i]   = [sx_i, sy_i, 1, 0, 0, 0]
+            A[2*i+1] = [0, 0, 0, sx_i, sy_i, 1]
+            b_vec[2*i]   = dx_i
+            b_vec[2*i+1] = dy_i
+        params, _, _, _ = np.linalg.lstsq(A, b_vec, rcond=None)
+        a11, a12, tx, a21, a22, ty = params
+
+        def _pdf_to_base_transform(x_pdf, y_pdf):
+            return (a11 * x_pdf + a12 * y_pdf + tx,
+                    a21 * x_pdf + a22 * y_pdf + ty)
+    else:
+        # Fallback: simple proportional scaling
+        s_x = base_w / max(float(page_rect.width), 1.0)
+        s_y = base_h / max(float(page_rect.height), 1.0)
+
+        def _pdf_to_base_transform(x_pdf, y_pdf):
+            return (x_pdf * s_x, y_pdf * s_y)
 
     # --- Step 5: build output objects ----------------------------------------
     # Sort tracker anchors spatially for sequential T0001 numbering
@@ -688,8 +733,9 @@ def extract_trackers_from_pdf_vector(ramming_pdf, page_idx, base_shape, profile)
         pier_list.sort(key=_label_num)
 
         # Compute tracker bbox from pier positions (in base coords)
-        xs = [p["x"] * sx for p in pier_list]
-        ys = [p["y"] * sy for p in pier_list]
+        mapped = [_map_coord(p["x"], p["y"]) for p in pier_list]
+        xs = [m[0] for m in mapped]
+        ys = [m[1] for m in mapped]
         if not xs:
             continue
         t_x = min(xs) - bbox_padding
@@ -726,8 +772,7 @@ def extract_trackers_from_pdf_vector(ramming_pdf, page_idx, base_shape, profile)
         }
 
         for i, p in enumerate(pier_list, start=1):
-            bx = p["x"] * sx
-            by = p["y"] * sy
+            bx, by = _map_coord(p["x"], p["y"])
             pier_type = p.get("pier_type") or _infer_pier_type_from_position(i, pier_count)
             pier_obj = {
                 "pier_id": f"{tracker_id}-P{i:02d}",
@@ -1023,6 +1068,7 @@ def run_pipeline(construction_pdf, ramming_pdf, overlay_source, out_dir, profile
     try:
         trackers, all_piers = extract_trackers_from_pdf_vector(
             ramming_pdf, ramming_page_idx, base_site.shape, profile,
+            base_block_labels=block_labels,
         )
         if trackers:
             vector_ok = True
