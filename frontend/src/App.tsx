@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { getProjects, getProject, getBlocks, getTrackers, getPiers, getPier, getZoomTarget } from "./api";
+import { getProjects, getProject, getBlocks, getTrackers, getPiers, getPier } from "./api";
 import SimpleGrid from "./components/SimpleGrid";
 import LayerTogglePanel from "./components/LayerTogglePanel";
 import SiteMap from "./components/SiteMap";
@@ -19,18 +19,17 @@ function getInitialProjectId() {
 }
 
 export default function App() {
-  const [mode, setMode] = useState<"core" | "system">("core");
-  const [coreView, setCoreView] = useState<"map" | "grid">("grid");
+  const [mode, setMode] = useState<"grid" | "map" | "system">("grid");
   const [projects, setProjects] = useState<any[]>([]);
   const [projectId, setProjectId] = useState(getInitialProjectId);
   const [project, setProject] = useState<any>(null);
   const [blocks, setBlocks] = useState<any[]>([]);
   const [trackers, setTrackers] = useState<any[]>([]);
   const [piers, setPiers] = useState<any[]>([]);
-  const [selectedBlock, setSelectedBlock] = useState<any>(null);
-  const [selectedTracker, setSelectedTracker] = useState<any>(null);
   const [selectedPier, setSelectedPier] = useState<any>(null);
   const [selectedPierFull, setSelectedPierFull] = useState<any>(null);
+  const [filterBlock, setFilterBlock] = useState("");
+  const [filterTracker, setFilterTracker] = useState("");
   const [layers, setLayers] = useState(INITIAL_LAYERS);
   const [error, setError] = useState("");
 
@@ -56,7 +55,10 @@ export default function App() {
     setBlocks([]);
     setTrackers([]);
     setPiers([]);
-    clearSelection();
+    setSelectedPier(null);
+    setSelectedPierFull(null);
+    setFilterBlock("");
+    setFilterTracker("");
 
     Promise.all([getProject(projectId), getBlocks(projectId), getTrackers(projectId), getPiers(projectId)])
       .then(([p, b, t, pi]: any[]) => {
@@ -74,18 +76,9 @@ export default function App() {
     return () => { ignore = true; };
   }, [projectId]);
 
-  function clearSelection() {
-    setSelectedBlock(null);
-    setSelectedTracker(null);
-    setSelectedPier(null);
-    setSelectedPierFull(null);
-  }
-
   async function handlePierClick(p: any) {
     if (!projectId) return;
     setSelectedPier(p);
-    setSelectedTracker(trackers.find((t: any) => t.tracker_code === p.tracker_code) || null);
-    setSelectedBlock(blocks.find((b: any) => b.block_code === p.block_code) || null);
     try {
       const full = await getPier(projectId, p.pier_code);
       setSelectedPierFull(full);
@@ -94,16 +87,27 @@ export default function App() {
     }
   }
 
-  const visibleTrackers = useMemo(() => {
-    if (!selectedBlock) return trackers;
-    return trackers.filter((t: any) => t.block_code === selectedBlock.block_code);
-  }, [trackers, selectedBlock]);
+  // Filtered data based on block/tracker selection
+  const filteredPiers = useMemo(() => {
+    let result = piers;
+    if (filterBlock) result = result.filter((p: any) => p.block_code === filterBlock);
+    if (filterTracker) result = result.filter((p: any) => p.tracker_code === filterTracker);
+    return result;
+  }, [piers, filterBlock, filterTracker]);
 
-  const visiblePiers = useMemo(() => {
-    if (selectedTracker) return piers.filter((p: any) => p.tracker_code === selectedTracker.tracker_code);
-    if (selectedBlock) return piers.filter((p: any) => p.block_code === selectedBlock.block_code);
-    return piers;
-  }, [piers, selectedBlock, selectedTracker]);
+  const filteredTrackers = useMemo(() => {
+    if (!filterBlock) return trackers;
+    return trackers.filter((t: any) => t.block_code === filterBlock);
+  }, [trackers, filterBlock]);
+
+  // Unique block codes for filter dropdown
+  const blockCodes = useMemo(() => {
+    return [...new Set(blocks.map((b: any) => b.block_code))].sort();
+  }, [blocks]);
+
+  const trackerCodes = useMemo(() => {
+    return [...new Set(filteredTrackers.map((t: any) => t.tracker_code))].sort();
+  }, [filteredTrackers]);
 
   const Pill = ({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) => (
     <button
@@ -139,23 +143,23 @@ export default function App() {
           ))}
         </select>
         <div style={{ marginLeft: "auto", display: "flex", gap: 6 }}>
-          <Pill active={mode === "core" && coreView === "grid"} onClick={() => { setMode("core"); setCoreView("grid"); }}>Grid</Pill>
-          <Pill active={mode === "core" && coreView === "map"} onClick={() => { setMode("core"); setCoreView("map"); }}>Map</Pill>
+          <Pill active={mode === "grid"} onClick={() => setMode("grid")}>Grid</Pill>
+          <Pill active={mode === "map"} onClick={() => setMode("map")}>Map</Pill>
           <Pill active={mode === "system"} onClick={() => setMode("system")}>System</Pill>
         </div>
       </div>
 
       {error && <div style={{ color: "#b00020", marginBottom: 8, fontSize: 13 }}>{error}</div>}
 
-      {project?.coordinate_system?.origin_pier_id && (
+      {project && (
         <div style={{ marginBottom: 8, fontSize: 12, color: "#64748b" }}>
-          {project.tracker_count} trackers / {project.pier_count} piers / Origin: {project.coordinate_system.origin_pier_id}
+          {project.block_count} blocks / {project.tracker_count} trackers / {project.pier_count} piers
         </div>
       )}
 
       {mode === "system" ? (
         <SystemPanel projectId={projectId} />
-      ) : coreView === "map" ? (
+      ) : mode === "map" ? (
         /* ---- MAP VIEW ---- */
         <div>
           <div style={{ display: "flex", gap: 8, marginBottom: 8, flexWrap: "wrap", alignItems: "center" }}>
@@ -164,17 +168,17 @@ export default function App() {
               onChange={(key: string, visible: boolean) => setLayers((prev) => prev.map((l) => l.key === key ? { ...l, visible } : l))}
               inline
             />
-            {selectedBlock && (
-              <span style={{ fontSize: 12, background: "#eff6ff", padding: "4px 10px", borderRadius: 8 }}>
-                Block: {selectedBlock.block_code}
-                <button onClick={() => { clearSelection(); }} style={{ marginLeft: 6, background: "none", border: "none", cursor: "pointer", fontSize: 12 }}>x</button>
-              </span>
-            )}
-            {selectedTracker && (
-              <span style={{ fontSize: 12, background: "#f0fdf4", padding: "4px 10px", borderRadius: 8 }}>
-                Tracker: {selectedTracker.tracker_code}
-                <button onClick={() => { setSelectedTracker(null); setSelectedPier(null); setSelectedPierFull(null); }} style={{ marginLeft: 6, background: "none", border: "none", cursor: "pointer", fontSize: 12 }}>x</button>
-              </span>
+            {/* Block filter */}
+            <select
+              value={filterBlock}
+              onChange={(e) => { setFilterBlock(e.target.value); setFilterTracker(""); }}
+              style={{ padding: "4px 8px", borderRadius: 8, border: "1px solid #d1d5db", fontSize: 12 }}
+            >
+              <option value="">All blocks</option>
+              {blockCodes.map((c: string) => <option key={c} value={c}>{c}</option>)}
+            </select>
+            {filterBlock && (
+              <button onClick={() => { setFilterBlock(""); setFilterTracker(""); }} style={{ fontSize: 12, background: "none", border: "none", cursor: "pointer", color: "#64748b" }}>Clear filter</button>
             )}
           </div>
           <div style={{ height: "calc(100vh - 160px)", minHeight: 400, borderRadius: 12, overflow: "hidden", border: "1px solid #e2e8f0" }}>
@@ -182,14 +186,14 @@ export default function App() {
               imageWidth={project?.base_image?.width || 1}
               imageHeight={project?.base_image?.height || 1}
               blocks={blocks}
-              trackers={visibleTrackers}
-              piers={visiblePiers}
-              selectedBlock={selectedBlock}
-              selectedTracker={selectedTracker}
+              trackers={filteredTrackers}
+              piers={filteredPiers}
+              selectedBlock={filterBlock ? blocks.find((b: any) => b.block_code === filterBlock) : null}
+              selectedTracker={filterTracker ? trackers.find((t: any) => t.tracker_code === filterTracker) : null}
               selectedPier={selectedPier}
               layers={layers}
-              onBlockClick={(b: any) => { setSelectedBlock(b); setSelectedTracker(null); setSelectedPier(null); setSelectedPierFull(null); }}
-              onTrackerClick={(t: any) => { setSelectedTracker(t); setSelectedPier(null); setSelectedPierFull(null); }}
+              onBlockClick={(b: any) => { setFilterBlock(b.block_code); setFilterTracker(""); }}
+              onTrackerClick={(t: any) => { setFilterTracker(t.tracker_code); }}
               onPierClick={handlePierClick}
             />
           </div>
@@ -200,55 +204,67 @@ export default function App() {
           )}
         </div>
       ) : (
-        /* ---- GRID VIEW ---- */
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-          <div style={{ display: "grid", gap: 12 }}>
-            <SimpleGrid
-              rows={blocks}
-              columns={[
-                { field: "block_code", pinned: "left", maxWidth: 100 },
-                { field: "original_block_id", headerName: "Orig Block", maxWidth: 100 },
-                { field: "block_pier_plan_sheet", headerName: "Sheet", maxWidth: 100 }
-              ]}
-              height={260}
-              enableQuickFilter
-              quickFilterPlaceholder="Search blocks..."
-              onRowClick={(row: any) => { setSelectedBlock(row); setSelectedTracker(null); setSelectedPier(null); setSelectedPierFull(null); }}
-            />
-            <SimpleGrid
-              rows={visibleTrackers}
-              columns={[
-                { field: "tracker_code", pinned: "left", maxWidth: 100 },
-                { field: "block_code", maxWidth: 80 },
-                { field: "tracker_type_code", headerName: "Type" },
-                { field: "pier_count", maxWidth: 80 }
-              ]}
-              height={300}
-              enableQuickFilter
-              quickFilterPlaceholder="Search trackers..."
-              onRowClick={(row: any) => { setSelectedTracker(row); setSelectedPier(null); setSelectedPierFull(null); }}
-            />
+        /* ---- GRID VIEW (single detailed grid) ---- */
+        <div>
+          {/* Filters */}
+          <div style={{ display: "flex", gap: 8, marginBottom: 10, flexWrap: "wrap", alignItems: "center" }}>
+            <select
+              value={filterBlock}
+              onChange={(e) => { setFilterBlock(e.target.value); setFilterTracker(""); }}
+              style={{ padding: "6px 10px", borderRadius: 8, border: "1px solid #d1d5db", fontSize: 13 }}
+            >
+              <option value="">All blocks</option>
+              {blockCodes.map((c: string) => <option key={c} value={c}>{c}</option>)}
+            </select>
+            <select
+              value={filterTracker}
+              onChange={(e) => setFilterTracker(e.target.value)}
+              style={{ padding: "6px 10px", borderRadius: 8, border: "1px solid #d1d5db", fontSize: 13 }}
+            >
+              <option value="">All trackers</option>
+              {trackerCodes.map((c: string) => <option key={c} value={c}>{c}</option>)}
+            </select>
+            {(filterBlock || filterTracker) && (
+              <button
+                onClick={() => { setFilterBlock(""); setFilterTracker(""); }}
+                style={{ fontSize: 13, padding: "6px 10px", borderRadius: 8, border: "1px solid #d1d5db", background: "#fff", cursor: "pointer" }}
+              >
+                Clear
+              </button>
+            )}
+            <span style={{ fontSize: 12, color: "#64748b" }}>
+              {filteredPiers.length.toLocaleString()} piers
+            </span>
           </div>
-          <div style={{ display: "grid", gap: 12 }}>
-            <SimpleGrid
-              rows={visiblePiers}
-              columns={[
-                { field: "pier_code", pinned: "left", maxWidth: 120 },
-                { field: "block_code", maxWidth: 80 },
-                { field: "tracker_code", maxWidth: 100 },
-                { field: "row_index", maxWidth: 60 },
-                { field: "pier_type", maxWidth: 90 }
-              ]}
-              height={360}
-              enableQuickFilter
-              quickFilterPlaceholder="Search piers..."
-              pagination
-              pageSize={200}
-              getRowId={(p: any) => p.data?.pier_code}
-              onRowClick={handlePierClick}
-            />
-            <PierDetailsPanel selected={selectedPierFull} />
-          </div>
+
+          <SimpleGrid
+            rows={filteredPiers}
+            columns={[
+              { field: "pier_code", headerName: "Pier", pinned: "left", maxWidth: 120 },
+              { field: "block_code", headerName: "Block", maxWidth: 80 },
+              { field: "tracker_code", headerName: "Tracker", maxWidth: 100 },
+              { field: "row_index", headerName: "Row", maxWidth: 60 },
+              { field: "pier_type", headerName: "Pier Type", maxWidth: 100 },
+              { field: "structure_code", headerName: "Structure", maxWidth: 100 },
+              { field: "slope_band", headerName: "Slope", maxWidth: 90 },
+              { field: "tracker_type_code", headerName: "Tracker Type" },
+              { field: "x", headerName: "X", maxWidth: 80, valueFormatter: (p: any) => p.value?.toFixed(1) },
+              { field: "y", headerName: "Y", maxWidth: 80, valueFormatter: (p: any) => p.value?.toFixed(1) },
+            ]}
+            height={Math.min(700, Math.max(400, window.innerHeight - 200))}
+            enableQuickFilter
+            quickFilterPlaceholder="Search piers..."
+            pagination
+            pageSize={100}
+            getRowId={(p: any) => p.data?.pier_code}
+            onRowClick={handlePierClick}
+          />
+
+          {selectedPierFull && (
+            <div style={{ marginTop: 12 }}>
+              <PierDetailsPanel selected={selectedPierFull} />
+            </div>
+          )}
         </div>
       )}
     </div>

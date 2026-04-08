@@ -91,6 +91,11 @@ export default function SiteMap({
     ctx.fillStyle = "#f8fafc";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+    // Helper: map image coords to canvas coords (flip Y to correct mirror)
+    const ih = imageHeight;
+    const mapX = (ix: number) => ox + ix * s;
+    const mapY = (iy: number) => oy + (ih - iy) * s;
+
     // Draw subtle background rect for the site bounds
     ctx.save();
     ctx.strokeStyle = "#cbd5e1";
@@ -104,9 +109,9 @@ export default function SiteMap({
         const pts = b.polygon;
         if (!pts || pts.length < 3) continue;
         ctx.beginPath();
-        ctx.moveTo(ox + pts[0].x * s, oy + pts[0].y * s);
+        ctx.moveTo(mapX(pts[0].x), mapY(pts[0].y));
         for (let i = 1; i < pts.length; i++) {
-          ctx.lineTo(ox + pts[i].x * s, oy + pts[i].y * s);
+          ctx.lineTo(mapX(pts[i].x), mapY(pts[i].y));
         }
         ctx.closePath();
         const isSel = selectedBlock?.block_code === b.block_code;
@@ -126,8 +131,8 @@ export default function SiteMap({
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       for (const b of blocks) {
-        const cx = ox + b.centroid.x * s;
-        const cy = ox + b.centroid.y * s;
+        const cx = mapX(b.centroid.x);
+        const cy = mapY(b.centroid.y);
         ctx.fillStyle = "#1e3a5f";
         ctx.fillText(b.block_code, cx, cy);
       }
@@ -141,15 +146,16 @@ export default function SiteMap({
         const isSel = selectedTracker?.tracker_code === t.tracker_code;
         ctx.strokeStyle = isSel ? "#16a34a" : "rgba(22,163,74,0.4)";
         ctx.lineWidth = isSel ? 2 : 0.8;
-        ctx.strokeRect(ox + bb.x * s, oy + bb.y * s, bb.w * s, bb.h * s);
+        // Flip Y: top-left becomes (x, ih - (y+h))
+        ctx.strokeRect(mapX(bb.x), mapY(bb.y + bb.h), bb.w * s, bb.h * s);
       }
     }
 
     // Piers
     if (layerVisible("piers")) {
       for (const p of piers) {
-        const px = ox + p.x * s;
-        const py = oy + p.y * s;
+        const px = mapX(p.x);
+        const py = mapY(p.y);
         const isSel = selectedPier?.pier_code === p.pier_code;
         const r = isSel ? SELECTED_RADIUS : PIER_RADIUS;
         ctx.beginPath();
@@ -291,9 +297,9 @@ export default function SiteMap({
     const mx = clientX - rect.left;
     const my = clientY - rect.top;
     const { x: ox, y: oy, scale: s } = view;
-    // Convert to image coords
+    // Convert to image coords (flip Y back)
     const ix = (mx - ox) / s;
-    const iy = (my - oy) / s;
+    const iy = imageHeight - (my - oy) / s;
 
     // Check piers first (smallest)
     if (layerVisible("piers")) {
