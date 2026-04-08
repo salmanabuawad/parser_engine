@@ -91,7 +91,8 @@ export default function SiteMap({
     ctx.fillStyle = "#f8fafc";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Helper: map image coords to canvas coords (flip Y so north is up)
+    // Helper: map image coords to canvas coords
+    // Flip Y only to match original plan orientation
     const mapX = (ix: number) => ox + ix * s;
     const mapY = (iy: number) => oy + (imageHeight - iy) * s;
 
@@ -303,7 +304,7 @@ export default function SiteMap({
     const mx = clientX - rect.left;
     const my = clientY - rect.top;
     const { x: ox, y: oy, scale: s } = view;
-    // Convert to image coords (reverse Y-flip)
+    // Convert canvas coords back to image coords (reverse Y-flip)
     const ix = (mx - ox) / s;
     const iy = imageHeight - (my - oy) / s;
 
