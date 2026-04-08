@@ -171,15 +171,21 @@ export default function SiteMap({
     }
   }, [view, blocks, trackers, piers, selectedBlock, selectedTracker, selectedPier, layers, imageWidth, imageHeight, layerVisible]);
 
-  // Zoom with scroll wheel
-  function handleWheel(e: React.WheelEvent) {
-    e.preventDefault();
-    const rect = canvasRef.current!.getBoundingClientRect();
-    const mx = e.clientX - rect.left;
-    const my = e.clientY - rect.top;
-    const factor = e.deltaY < 0 ? 1.15 : 1 / 1.15;
-    zoom(mx, my, factor);
-  }
+  // Zoom with scroll wheel — use native listener to avoid passive event issue
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    function onWheel(e: WheelEvent) {
+      e.preventDefault();
+      const rect = canvas!.getBoundingClientRect();
+      const mx = e.clientX - rect.left;
+      const my = e.clientY - rect.top;
+      const factor = e.deltaY < 0 ? 1.15 : 1 / 1.15;
+      zoom(mx, my, factor);
+    }
+    canvas.addEventListener("wheel", onWheel, { passive: false });
+    return () => canvas.removeEventListener("wheel", onWheel);
+  });
 
   function zoom(cx: number, cy: number, factor: number) {
     setView((v) => {
@@ -225,10 +231,11 @@ export default function SiteMap({
   }
 
   function handlePointerMove(e: React.PointerEvent) {
-    if (!dragRef.current) return;
-    const dx = e.clientX - dragRef.current.startX;
-    const dy = e.clientY - dragRef.current.startY;
-    setView((v) => ({ ...v, x: dragRef.current!.viewX + dx, y: dragRef.current!.viewY + dy }));
+    const drag = dragRef.current;
+    if (!drag) return;
+    const dx = e.clientX - drag.startX;
+    const dy = e.clientY - drag.startY;
+    setView((v) => ({ ...v, x: drag.viewX + dx, y: drag.viewY + dy }));
   }
 
   function handlePointerUp(e: React.PointerEvent) {
@@ -273,9 +280,10 @@ export default function SiteMap({
       zoom(cx - rect.left, cy - rect.top, factor / (view.scale / pinchRef.current.scale));
       pinchRef.current = { dist: d, scale: view.scale };
     } else if (e.touches.length === 1 && dragRef.current) {
-      const dx = e.touches[0].clientX - dragRef.current.startX;
-      const dy = e.touches[0].clientY - dragRef.current.startY;
-      setView((v) => ({ ...v, x: dragRef.current!.viewX + dx, y: dragRef.current!.viewY + dy }));
+      const drag = dragRef.current;
+      const dx = e.touches[0].clientX - drag.startX;
+      const dy = e.touches[0].clientY - drag.startY;
+      setView((v) => ({ ...v, x: drag.viewX + dx, y: drag.viewY + dy }));
     }
   }
 
@@ -350,7 +358,6 @@ export default function SiteMap({
       <canvas
         ref={canvasRef}
         style={{ width: "100%", height: "100%", cursor: "grab" }}
-        onWheel={handleWheel}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
