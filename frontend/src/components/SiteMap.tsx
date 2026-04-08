@@ -91,9 +91,8 @@ export default function SiteMap({
     ctx.fillStyle = "#f8fafc";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Helper: map image coords to canvas coords
-    // Flip Y only to match original plan orientation
-    const mapX = (ix: number) => ox + ix * s;
+    // Helper: map image coords to canvas coords — flip both X and Y
+    const mapX = (ix: number) => ox + (imageWidth - ix) * s;
     const mapY = (iy: number) => oy + (imageHeight - iy) * s;
 
     // Draw subtle background rect for the site bounds
@@ -146,7 +145,7 @@ export default function SiteMap({
         const isSel = selectedTracker?.tracker_code === t.tracker_code;
         ctx.strokeStyle = isSel ? "#16a34a" : "rgba(22,163,74,0.4)";
         ctx.lineWidth = isSel ? 2 : 0.8;
-        ctx.strokeRect(mapX(bb.x), mapY(bb.y + bb.h), bb.w * s, bb.h * s);
+        ctx.strokeRect(mapX(bb.x + bb.w), mapY(bb.y + bb.h), bb.w * s, bb.h * s);
       }
     }
 
@@ -304,8 +303,8 @@ export default function SiteMap({
     const mx = clientX - rect.left;
     const my = clientY - rect.top;
     const { x: ox, y: oy, scale: s } = view;
-    // Convert canvas coords back to image coords (reverse Y-flip)
-    const ix = (mx - ox) / s;
+    // Convert canvas coords back to image coords (reverse both flips)
+    const ix = imageWidth - (mx - ox) / s;
     const iy = imageHeight - (my - oy) / s;
 
     // Check piers first (smallest)
