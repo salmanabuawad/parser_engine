@@ -9,23 +9,23 @@
     "page_index": 0
   },
   "base_image": {
-    "width": 2693,
-    "height": 1743
+    "width": 3370.0,
+    "height": 2384.0
   },
   "overlay_homography": [
     [
-      0.9826863677553288,
-      -0.00024419312729931044,
-      22.503993706699575
+      0.9901713350944525,
+      -0.00013813654262354784,
+      12.679174444815692
     ],
     [
-      -0.002873892615680028,
-      0.9913635293620537,
-      7.363827907766325
+      -0.0018093751861144778,
+      0.995048773071404,
+      4.635501145489085
     ],
     [
-      -3.328187040633311e-06,
-      -9.420371825842353e-08,
+      -1.9039457009391354e-06,
+      -5.363568759012865e-08,
       1.0
     ]
   ],
@@ -46,15 +46,16 @@
       1.0
     ]
   ],
+  "extraction_method": "vector_pdf",
   "block_label_count": 13,
-  "block_count": 5,
-  "tracker_count": 30,
-  "pier_count": 147,
+  "block_count": 13,
+  "tracker_count": 1533,
+  "pier_count": 25530,
   "coordinate_system": {
     "origin_rule": "P1 of lowest-leftmost valid tracker",
-    "origin_pier_id": "T0011-P01",
-    "origin_tracker_id": "T0011",
-    "origin_x": 725.4775328529038,
-    "origin_y": 941.8623315663735
+    "origin_pier_id": "T0001-P01",
+    "origin_tracker_id": "T0001",
+    "origin_x": 262.61866760253906,
+    "origin_y": 758.3813781738281
   }
 }

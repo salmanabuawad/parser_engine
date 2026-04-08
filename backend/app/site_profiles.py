@@ -86,6 +86,13 @@ DEFAULT_PROFILE = {
             "min_points_before_fallback": 3,
             "merge_gap": 8,
         },
+        "vector": {
+            "cell_size": 12.0,
+            "anchor_max_rings": 3,
+            "axis_min_distance": 5.0,
+            "axis_max_distance": 30.0,
+            "bbox_padding": 5.0,
+        },
     },
 }
 
