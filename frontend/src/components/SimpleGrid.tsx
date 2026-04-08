@@ -1,4 +1,5 @@
 import { AgGridReact } from "ag-grid-react";
+import { themeQuartz } from "ag-grid-community";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 function setQuickFilter(api, value) {
@@ -22,7 +23,8 @@ export default function SimpleGrid({
   pagination = false,
   pageSize = 200,
   getRowId,
-  rowSelection = "single"
+  rowSelection = "single",
+  paginationPageSizeSelector = [20, 50, 100, 200]
 }: any) {
   const gridApiRef = useRef<any>(null);
   const [q, setQ] = useState("");
@@ -57,15 +59,17 @@ export default function SimpleGrid({
           />
         </div>
       )}
-      <div className="ag-theme-quartz" style={{ height, width: "100%", borderRadius: 16, overflow: "hidden" }}>
+      <div style={{ height, width: "100%", borderRadius: 16, overflow: "hidden" }}>
         <AgGridReact<any>
+          theme={themeQuartz}
           rowData={rows}
           columnDefs={columns}
           defaultColDef={defaultColDef}
           animateRows
-          rowSelection={rowSelection}
+          rowSelection={{ mode: rowSelection === "multiple" ? "multiRow" : "singleRow" }}
           pagination={pagination}
           paginationPageSize={pageSize}
+          paginationPageSizeSelector={paginationPageSizeSelector}
           getRowId={getRowId}
           onGridReady={(e) => {
             gridApiRef.current = e.api;

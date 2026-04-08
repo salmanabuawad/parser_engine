@@ -1,0 +1,13 @@
+{
+  "project_id": "ashalim3",
+  "created_at": "2026-04-08T15:49:48.591082+00:00",
+  "inputs": {
+    "construction_pdf": "D:\\Users\\salma\\Downloads\\2850345_Nextcom_Ashalim 3_Construction set_Rev 2_11-07-2025.pdf",
+    "ramming_pdf": "D:\\Users\\salma\\Downloads\\ASH3-DRW-ELE-PV_withPieringPlan-Ramming plan.pdf",
+    "overlay_image": "D:\\Users\\salma\\Downloads\\2850345_Nextcom_Ashalim 3_Construction set_Rev 2_11-07-2025.pdf"
+  },
+  "profile": {
+    "site_profile": "auto",
+    "profile_config": ""
+  }
+}
