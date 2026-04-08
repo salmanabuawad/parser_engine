@@ -154,7 +154,7 @@ export default function SiteMap({
 
     // Block labels
     if (layerVisible("blockLabels")) {
-      ctx.font = `${Math.max(10, 12 * s)}px Arial`;
+      ctx.font = `${Math.max(8, 9 * s)}px Arial`;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       for (const b of blocks) {
@@ -170,9 +170,9 @@ export default function SiteMap({
       for (const p of piers) {
         if (p.tracker_code) (piersByTracker[p.tracker_code] ??= []).push(p);
       }
-      const showRowLabels = s > 0.25;
+      const showRowLabels = s > 0.5;
       if (showRowLabels) {
-        ctx.font = `${Math.max(7, 8 * s)}px Arial`;
+        ctx.font = `${Math.max(5, 6 * s)}px Arial`;
         ctx.textBaseline = "middle";
       }
       for (const t of trackers) {
@@ -198,9 +198,9 @@ export default function SiteMap({
 
     // Piers
     if (layerVisible("piers")) {
-      const showRowNums = s > 0.4; // show row numbers when zoomed in
+      const showRowNums = s > 0.6;
       if (showRowNums) {
-        ctx.font = `${Math.max(7, 9 * s)}px Arial`;
+        ctx.font = `${Math.max(5, 6 * s)}px Arial`;
         ctx.textAlign = "left";
         ctx.textBaseline = "middle";
       }

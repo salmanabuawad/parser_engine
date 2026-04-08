@@ -260,9 +260,7 @@ export default function App() {
           />
 
           {selectedPierFull && (
-            <div style={{ marginTop: 12 }}>
-              <PierDetailsPanel selected={selectedPierFull} />
-            </div>
+            <PierModal selected={selectedPierFull} onClose={() => { setSelectedPier(null); setSelectedPierFull(null); }} />
           )}
         </div>
       )}
