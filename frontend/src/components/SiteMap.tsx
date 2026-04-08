@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 /**
  * Lightweight canvas-based site map.
@@ -59,22 +59,42 @@ export default function SiteMap({
     [layers]
   );
 
-  // Fit to canvas on mount / resize
-  // After rotation: display width = imageHeight, display height = imageWidth
-  const dispW = imageHeight;
-  const dispH = imageWidth;
+  // Compute actual data bounds (in rotated canvas space)
+  const dataBounds = useMemo(() => {
+    if (!piers.length && !blocks.length) return null;
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    for (const p of piers) {
+      // Apply rotation: 90° CCW → (y, W-x)
+      const rx = p.y;
+      const ry = imageWidth - p.x;
+      if (rx < minX) minX = rx;
+      if (rx > maxX) maxX = rx;
+      if (ry < minY) minY = ry;
+      if (ry > maxY) maxY = ry;
+    }
+    const pad = 20;
+    return { minX: minX - pad, minY: minY - pad, maxX: maxX + pad, maxY: maxY + pad };
+  }, [piers, blocks, imageWidth]);
 
-  useEffect(() => {
-    if (!containerRef.current || !dispW || !dispH) return;
+  // Fit to data bounds
+  function fitToData() {
+    if (!containerRef.current || !dataBounds) return;
     const cw = containerRef.current.clientWidth;
     const ch = containerRef.current.clientHeight;
-    const scale = Math.min(cw / dispW, ch / dispH) * 0.95;
+    const dw = dataBounds.maxX - dataBounds.minX;
+    const dh = dataBounds.maxY - dataBounds.minY;
+    if (dw <= 0 || dh <= 0) return;
+    const scale = Math.min(cw / dw, ch / dh) * 0.92;
     setView({
-      x: (cw - dispW * scale) / 2,
-      y: (ch - dispH * scale) / 2,
+      x: (cw - dw * scale) / 2 - dataBounds.minX * scale,
+      y: (ch - dh * scale) / 2 - dataBounds.minY * scale,
       scale,
     });
-  }, [dispW, dispH]);
+  }
+
+  useEffect(() => {
+    fitToData();
+  }, [dataBounds]);
 
   // Draw
   useEffect(() => {
@@ -150,8 +170,8 @@ export default function SiteMap({
         const bb = t.bbox;
         if (!bb) continue;
         const isSel = selectedTracker?.tracker_code === t.tracker_code;
-        ctx.strokeStyle = isSel ? "#16a34a" : "rgba(22,163,74,0.4)";
-        ctx.lineWidth = isSel ? 2 : 0.8;
+        ctx.strokeStyle = isSel ? "#16a34a" : "rgba(22,163,74,0.15)";
+        ctx.lineWidth = isSel ? 2 : 0.5;
         // Draw tracker as 4 corners mapped through mapPt
         const [x0, y0] = mapPt(bb.x, bb.y);
         const [x1, y1] = mapPt(bb.x + bb.w, bb.y);
@@ -227,15 +247,7 @@ export default function SiteMap({
   }
 
   function fitAll() {
-    if (!containerRef.current || !dispW || !dispH) return;
-    const cw = containerRef.current.clientWidth;
-    const ch = containerRef.current.clientHeight;
-    const scale = Math.min(cw / dispW, ch / dispH) * 0.95;
-    setView({
-      x: (cw - dispW * scale) / 2,
-      y: (ch - dispH * scale) / 2,
-      scale,
-    });
+    fitToData();
   }
 
   // Pan with mouse drag
