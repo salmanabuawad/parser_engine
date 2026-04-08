@@ -595,28 +595,35 @@ def extract_trackers_from_pdf_vector(ramming_pdf, page_idx, base_shape, profile,
     if not anchors or not raw_piers:
         return [], [], {"width": float(page_rect.width), "height": float(page_rect.height)}
 
-    # --- Step 2: estimate pier axis ------------------------------------------
-    p1_pts = [(p["x"], p["y"]) for p in raw_piers if str(p.get("label", "")).upper() == "P1"]
-    p2_pts = [(p["x"], p["y"]) for p in raw_piers if str(p.get("label", "")).upper() == "P2"]
-    axis_u, step = _estimate_axis(p1_pts, p2_pts)
+    # --- Step 2: match each anchor to its P1 (they're ~1.3pt apart) ----------
+    # Build spatial index of all piers by label
+    all_pier_list = raw_piers + [
+        {"label": p["label"], "pier_type": None, "x": p["x"], "y": p["y"]}
+        for p in unresolved
+    ]
+    piers_by_label = {}
+    for p in all_pier_list:
+        label = str(p.get("label", "")).upper()
+        piers_by_label.setdefault(label, []).append(p)
 
-    # --- Step 3: assign piers to TRK: anchors --------------------------------
-    p1_grid = _grid_index(p1_pts, cell_size=25.0)
-    # Map each anchor to its unique nearest P1
-    anchor_to_p1 = {}
+    p1_list = piers_by_label.get("P1", [])
+    p1_coords = [(p["x"], p["y"]) for p in p1_list]
+    p1_grid = _grid_index(p1_coords, cell_size=10.0)
+
+    # Match each anchor to nearest P1 (within ~5pt)
+    anchor_to_p1_pier = {}  # a_idx -> p1 pier dict
     used_p1 = set()
     for a_idx, a in enumerate(anchors):
-        idx, _ = _nearest_by_grid(p1_pts, p1_grid, 25.0, a["x"], a["y"], max_rings=anchor_max_rings)
-        if idx is None:
-            continue
-        if idx in used_p1:
-            idx2, _ = _nearest_by_grid(p1_pts, p1_grid, 25.0, a["x"], a["y"], max_rings=anchor_max_rings + 2)
-            if idx2 is not None and idx2 not in used_p1:
-                idx = idx2
-        used_p1.add(idx)
-        anchor_to_p1[a_idx] = idx
+        idx, d2 = _nearest_by_grid(p1_coords, p1_grid, 10.0, a["x"], a["y"], max_rings=1)
+        if idx is not None and idx not in used_p1 and d2 < 25.0:  # within 5pt
+            anchor_to_p1_pier[a_idx] = p1_list[idx]
+            used_p1.add(idx)
 
-    p1_to_anchor = {p1_idx: a_idx for a_idx, p1_idx in anchor_to_p1.items()}
+    # --- Step 3: for each anchor, walk P1→P2→P3... to build tracker ----------
+    # Estimate the P1→P2 direction from matched pairs
+    p2_list = piers_by_label.get("P2", [])
+    p2_coords = [(p["x"], p["y"]) for p in p2_list]
+    p2_grid = _grid_index(p2_coords, cell_size=15.0)
 
     # Map anchors to blocks
     block_pts = [(b["x"], b["y"]) for b in block_labels] if block_labels else []
@@ -629,52 +636,59 @@ def extract_trackers_from_pdf_vector(ramming_pdf, page_idx, base_shape, profile,
         b_idx, _ = _nearest_by_grid(block_pts, block_grid, 250.0, a["x"], a["y"], max_rings=3)
         anchor_block[a_idx] = int(block_labels[b_idx]["block"]) if b_idx is not None else None
 
-    expected_offset = {f"P{k}": (k - 1) * step for k in range(1, 30)}
+    # Build pier grids for P2-P19
+    pier_grids = {}  # label -> (coord_list, pier_list, grid)
+    for label_key in piers_by_label:
+        if label_key == "P1":
+            continue
+        pl = piers_by_label[label_key]
+        coords = [(p["x"], p["y"]) for p in pl]
+        grid = _grid_index(coords, cell_size=15.0)
+        pier_grids[label_key] = (coords, pl, grid)
 
-    # Group piers by tracker anchor
-    tracker_piers = {}   # a_idx -> list of pier dicts (in PDF coords)
-    for p in raw_piers:
-        label = str(p.get("label", "")).upper()
-        x, y = p["x"], p["y"]
-        off = expected_offset.get(label, 0.0)
-        # Back-project to predicted P1 position
-        px = x - axis_u[0] * off
-        py = y - axis_u[1] * off
-        p1_idx, _ = _nearest_by_grid(p1_pts, p1_grid, 25.0, px, py, max_rings=anchor_max_rings)
-        a_idx = p1_to_anchor.get(p1_idx) if p1_idx is not None else None
-        if a_idx is None:
-            # Fallback: closest anchor by distance to predicted P1
-            best, best_d2 = None, float("inf")
-            for j, a in enumerate(anchors):
-                dd2 = (a["x"] - px) ** 2 + (a["y"] - py) ** 2
-                if dd2 < best_d2:
-                    best_d2 = dd2
-                    best = j
-            a_idx = best
-        if a_idx is not None:
-            tracker_piers.setdefault(a_idx, []).append({**p, "_label": label})
+    # For each anchor with P1, walk along tracker to find P2, P3, ..., P19
+    tracker_piers = {}
+    for a_idx, p1 in anchor_to_p1_pier.items():
+        pier_list = [{**p1, "_label": "P1"}]
 
-    # Also try to assign unresolved labels (piers without matching vector symbols)
-    for p in unresolved:
-        label = str(p.get("label", "")).upper()
-        x, y = p["x"], p["y"]
-        off = expected_offset.get(label, 0.0)
-        px = x - axis_u[0] * off
-        py = y - axis_u[1] * off
-        p1_idx, _ = _nearest_by_grid(p1_pts, p1_grid, 25.0, px, py, max_rings=anchor_max_rings)
-        a_idx = p1_to_anchor.get(p1_idx) if p1_idx is not None else None
-        if a_idx is None:
-            best, best_d2 = None, float("inf")
-            for j, a in enumerate(anchors):
-                dd2 = (a["x"] - px) ** 2 + (a["y"] - py) ** 2
-                if dd2 < best_d2:
-                    best_d2 = dd2
-                    best = j
-            a_idx = best
-        if a_idx is not None:
-            tracker_piers.setdefault(a_idx, []).append({
-                "label": label, "pier_type": None, "x": x, "y": y, "_label": label,
-            })
+        # Find P2 nearest to P1 (within ~20pt)
+        p2_info = pier_grids.get("P2")
+        if not p2_info:
+            tracker_piers[a_idx] = pier_list
+            continue
+        p2_coords_l, p2_list_l, p2_grid_l = p2_info
+        p2_idx, p2_d2 = _nearest_by_grid(p2_coords_l, p2_grid_l, 15.0, p1["x"], p1["y"], max_rings=3)
+        if p2_idx is None or p2_d2 > 2500.0:  # within 50pt
+            tracker_piers[a_idx] = pier_list
+            continue
+
+        p2 = p2_list_l[p2_idx]
+        pier_list.append({**p2, "_label": "P2"})
+
+        # Direction vector P1→P2
+        dx = p2["x"] - p1["x"]
+        dy = p2["y"] - p1["y"]
+        step = float(np.hypot(dx, dy))
+        if step < 1.0:
+            tracker_piers[a_idx] = pier_list
+            continue
+
+        # Walk P3, P4, ... P19 along this direction
+        for k in range(3, 20):
+            label_k = f"P{k}"
+            pk_info = pier_grids.get(label_k)
+            if not pk_info:
+                break
+            pk_coords, pk_list, pk_grid = pk_info
+            # Expected position: P1 + (k-1) * direction
+            ex = p1["x"] + dx * (k - 1)
+            ey = p1["y"] + dy * (k - 1)
+            pk_idx, pk_d2 = _nearest_by_grid(pk_coords, pk_grid, 15.0, ex, ey, max_rings=3)
+            if pk_idx is None or pk_d2 > 2500.0:  # within 50pt
+                break
+            pier_list.append({**pk_list[pk_idx], "_label": label_k})
+
+        tracker_piers[a_idx] = pier_list
 
     # --- Step 4: use raw PDF coordinates directly ----------------------------
     # No transform needed — the map view renders in PDF space which matches
