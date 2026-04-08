@@ -164,17 +164,14 @@ export default function SiteMap({
       }
     }
 
-    // Trackers — line from first pier to last pier + row numbers
+    // Trackers — line from first pier to last pier
     if (layerVisible("trackers")) {
       const piersByTracker: Record<string, any[]> = {};
       for (const p of piers) {
         if (p.tracker_code) (piersByTracker[p.tracker_code] ??= []).push(p);
       }
-      const showRowLabels = s > 0.5;
-      if (showRowLabels) {
-        ctx.font = `${Math.max(4, 5 * s)}px Arial`;
-        ctx.textBaseline = "middle";
-      }
+      // Track edge positions per row for labels
+      const rowEdges: Record<string, { x: number; y: number }> = {};
       for (const t of trackers) {
         const tPiers = piersByTracker[t.tracker_code];
         if (!tPiers || tPiers.length < 2) continue;
@@ -188,10 +185,24 @@ export default function SiteMap({
         ctx.moveTo(x1, y1);
         ctx.lineTo(x2, y2);
         ctx.stroke();
-        if (showRowLabels && t.row) {
-          ctx.fillStyle = "#64748b";
-          ctx.textAlign = "right";
-          ctx.fillText(t.row, Math.min(x1, x2) - 4, (y1 + y2) / 2);
+        // Track the leftmost position for each row number
+        if (t.row) {
+          const edgeX = Math.min(x1, x2);
+          const edgeY = (y1 + y2) / 2;
+          if (!rowEdges[t.row] || edgeX < rowEdges[t.row].x) {
+            rowEdges[t.row] = { x: edgeX, y: edgeY };
+          }
+        }
+      }
+      // Draw row numbers at the left edge
+      const showRowLabels = s > 0.3;
+      if (showRowLabels) {
+        ctx.font = `${Math.max(4, 5 * s)}px Arial`;
+        ctx.textAlign = "right";
+        ctx.textBaseline = "middle";
+        ctx.fillStyle = "#334155";
+        for (const [row, pos] of Object.entries(rowEdges)) {
+          ctx.fillText(row, pos.x - 3, pos.y);
         }
       }
     }
