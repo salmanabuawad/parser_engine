@@ -69,10 +69,6 @@ export default function PierModal({ selected, onClose }: { selected: any; onClos
           <Field label="Tracker type" value={pier.tracker_type_code} />
           <Field label="Structure" value={pier.structure_code} />
           <Field label="Slope" value={pier.slope_band} />
-          <Field label="X" value={pier.x?.toFixed?.(1)} />
-          <Field label="Y" value={pier.y?.toFixed?.(1)} />
-          <Field label="X local" value={pier.x_local?.toFixed?.(2)} />
-          <Field label="Y local" value={pier.y_local?.toFixed?.(2)} />
           <Field label="Tracker sheet" value={pier.tracker_sheet} />
           <Field label="Pier sheet" value={pier.pier_type_sheet} />
         </div>
