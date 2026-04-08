@@ -164,10 +164,9 @@ export default function SiteMap({
       }
     }
 
-    // Trackers — draw as N-S lines through their piers
+    // Trackers — straight line from P1 to last pier
     if (layerVisible("trackers")) {
-      // Group piers by tracker
-      const piersByTracker: Record<string, {x: number; y: number}[]> = {};
+      const piersByTracker: Record<string, any[]> = {};
       for (const p of piers) {
         const tid = p.tracker_code;
         if (!tid) continue;
@@ -176,18 +175,17 @@ export default function SiteMap({
       for (const t of trackers) {
         const tPiers = piersByTracker[t.tracker_code];
         if (!tPiers || tPiers.length < 2) continue;
-        // Sort piers by row_index to draw line in order
         const sorted = [...tPiers].sort((a: any, b: any) => (a.row_index || 0) - (b.row_index || 0));
+        const first = sorted[0];
+        const last = sorted[sorted.length - 1];
         const isSel = selectedTracker?.tracker_code === t.tracker_code;
         ctx.strokeStyle = isSel ? "#16a34a" : "rgba(22,163,74,0.3)";
         ctx.lineWidth = isSel ? 2.5 : 1;
+        const [x1, y1] = mapPt(first.x, first.y);
+        const [x2, y2] = mapPt(last.x, last.y);
         ctx.beginPath();
-        const [fx, fy] = mapPt(sorted[0].x, sorted[0].y);
-        ctx.moveTo(fx, fy);
-        for (let i = 1; i < sorted.length; i++) {
-          const [mx, my] = mapPt(sorted[i].x, sorted[i].y);
-          ctx.lineTo(mx, my);
-        }
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
         ctx.stroke();
       }
     }
