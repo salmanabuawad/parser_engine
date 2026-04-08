@@ -194,6 +194,12 @@ export default function SiteMap({
 
     // Piers
     if (layerVisible("piers")) {
+      const showRowNums = s > 0.4; // show row numbers when zoomed in
+      if (showRowNums) {
+        ctx.font = `${Math.max(7, 9 * s)}px Arial`;
+        ctx.textAlign = "left";
+        ctx.textBaseline = "middle";
+      }
       for (const p of piers) {
         const [px, py] = mapPt(p.x, p.y);
         const isSel = selectedPier?.pier_code === p.pier_code;
@@ -206,6 +212,11 @@ export default function SiteMap({
           ctx.strokeStyle = "#fff";
           ctx.lineWidth = 2;
           ctx.stroke();
+        }
+        // Row number label
+        if (showRowNums && p.row_index != null) {
+          ctx.fillStyle = "#333";
+          ctx.fillText(String(p.row_index), px + r * s + 2, py);
         }
       }
     }
