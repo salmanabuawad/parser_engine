@@ -1,0 +1,38 @@
+[
+  {
+    "pier_type": "HAP",
+    "pier_type_name": "Heavy Array Pier",
+    "details_raw": "W6X20/138 73392 WEX20/138 73392 W6X20/162 73400 OO 235",
+    "source": "tesseract_ocr"
+  },
+  {
+    "pier_type": "HMP",
+    "pier_type_name": "Heavy Motor Pier",
+    "details_raw": "W6X20/138 72014 WX25/138 72064 W6X25/162 72072 CC ZZ & 5",
+    "source": "tesseract_ocr"
+  },
+  {
+    "pier_type": "SAP",
+    "pier_type_name": "Standard Array Pier",
+    "details_raw": "WEX8.5/120 73536 W6X8.5/120 73536 WEX9/141 73593 \\2) G UE",
+    "source": "tesseract_ocr"
+  },
+  {
+    "pier_type": "SAPE",
+    "pier_type_name": "Standard Array Pier, Edge",
+    "details_raw": "\u00c2\u20ac\u201d W6X12/126 73292 WEX12/126 73292 W6X12/150 73300 AS &",
+    "source": "tesseract_ocr"
+  },
+  {
+    "pier_type": "SAPEND",
+    "pier_type_name": "Standard Array Pierend",
+    "details_raw": "W6X8.5/120 73536 W6X8.5/120 73536 WEX9/141 73593 | SEAL",
+    "source": "tesseract_ocr"
+  },
+  {
+    "pier_type": "SMP",
+    "pier_type_name": "Standard Motor Pier",
+    "details_raw": "WEX15/120 71958 WEXX25/120 72064 W6X25/162 72072",
+    "source": "tesseract_ocr"
+  }
+]

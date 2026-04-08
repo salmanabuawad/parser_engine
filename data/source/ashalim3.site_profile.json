@@ -1,0 +1,16 @@
+{
+  "extends": "ashalim3",
+  "construction": {
+    "candidate_pages": [1, 0, 2, 3],
+    "fallback_pages": [1, 0]
+  },
+  "ramming": {
+    "candidate_pages": [0],
+    "fallback_pages": [0]
+  },
+  "overlay": {
+    "candidate_pages": [0],
+    "fallback_pages": [0],
+    "keywords": ["block", "site", "plan"]
+  }
+}

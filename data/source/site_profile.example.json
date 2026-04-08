@@ -1,0 +1,25 @@
+{
+  "extends": "default",
+  "construction": {
+    "keywords": ["site plan", "electrical cable plan"],
+    "candidate_pages": [0, 1, 2]
+  },
+  "ramming": {
+    "keywords": ["ramming", "piering plan"],
+    "candidate_pages": [0]
+  },
+  "overlay": {
+    "keywords": ["color map", "block"],
+    "candidate_pages": [0]
+  },
+  "heuristics": {
+    "trackers": {
+      "cluster_eps": 44,
+      "fragment_min_height": 110
+    },
+    "piers": {
+      "merge_gap": 10,
+      "fallback_threshold": 170
+    }
+  }
+}

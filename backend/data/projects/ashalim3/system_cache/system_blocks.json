@@ -1,0 +1,132 @@
+[
+  {
+    "block": "1",
+    "total_piers": 2145,
+    "HAP": 550,
+    "HMP": 43,
+    "SAP": 1157,
+    "SAPE": 166,
+    "SAPEND": 124,
+    "SMP": 105
+  },
+  {
+    "block": "10",
+    "total_piers": 1549,
+    "HAP": 0,
+    "HMP": 0,
+    "SAP": 1240,
+    "SAPE": 72,
+    "SAPEND": 146,
+    "SMP": 91
+  },
+  {
+    "block": "11",
+    "total_piers": 2396,
+    "HAP": 50,
+    "HMP": 4,
+    "SAP": 1726,
+    "SAPE": 271,
+    "SAPEND": 182,
+    "SMP": 163
+  },
+  {
+    "block": "12",
+    "total_piers": 1777,
+    "HAP": 19,
+    "HMP": 2,
+    "SAP": 1355,
+    "SAPE": 148,
+    "SAPEND": 144,
+    "SMP": 109
+  },
+  {
+    "block": "13",
+    "total_piers": 1826,
+    "HAP": 305,
+    "HMP": 23,
+    "SAP": 1123,
+    "SAPE": 180,
+    "SAPEND": 101,
+    "SMP": 94
+  },
+  {
+    "block": "2",
+    "total_piers": 2335,
+    "HAP": 237,
+    "HMP": 22,
+    "SAP": 1553,
+    "SAPE": 229,
+    "SAPEND": 154,
+    "SMP": 140
+  },
+  {
+    "block": "3",
+    "total_piers": 2242,
+    "HAP": 72,
+    "HMP": 4,
+    "SAP": 1722,
+    "SAPE": 119,
+    "SAPEND": 197,
+    "SMP": 128
+  },
+  {
+    "block": "4",
+    "total_piers": 1972,
+    "HAP": 72,
+    "HMP": 4,
+    "SAP": 1511,
+    "SAPE": 99,
+    "SAPEND": 174,
+    "SMP": 112
+  },
+  {
+    "block": "5",
+    "total_piers": 1753,
+    "HAP": 72,
+    "HMP": 4,
+    "SAP": 1345,
+    "SAPE": 70,
+    "SAPEND": 163,
+    "SMP": 99
+  },
+  {
+    "block": "6",
+    "total_piers": 2426,
+    "HAP": 410,
+    "HMP": 33,
+    "SAP": 1527,
+    "SAPE": 164,
+    "SAPEND": 167,
+    "SMP": 125
+  },
+  {
+    "block": "7",
+    "total_piers": 1204,
+    "HAP": 221,
+    "HMP": 20,
+    "SAP": 757,
+    "SAPE": 59,
+    "SAPEND": 88,
+    "SMP": 59
+  },
+  {
+    "block": "8",
+    "total_piers": 1962,
+    "HAP": 25,
+    "HMP": 2,
+    "SAP": 1538,
+    "SAPE": 104,
+    "SAPEND": 178,
+    "SMP": 115
+  },
+  {
+    "block": "9",
+    "total_piers": 543,
+    "HAP": 0,
+    "HMP": 0,
+    "SAP": 415,
+    "SAPE": 64,
+    "SAPEND": 32,
+    "SMP": 32
+  }
+]

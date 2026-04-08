@@ -1,0 +1,62 @@
+{
+  "page_width": 9436,
+  "page_height": 6675,
+  "total_symbols": 2224,
+  "shape_counts": {
+    "diamond": 373,
+    "circle": 1843,
+    "other": 8
+  },
+  "raw_group_sizes": {
+    "1": 25,
+    "2": 12,
+    "3": 2,
+    "4": 2,
+    "5": 1,
+    "6": 17,
+    "7": 4,
+    "9": 1,
+    "11": 20,
+    "12": 2,
+    "13": 2,
+    "14": 1,
+    "15": 23,
+    "19": 37,
+    "22": 2,
+    "25": 2,
+    "30": 2,
+    "33": 1,
+    "34": 1,
+    "38": 4,
+    "57": 1,
+    "109": 1,
+    "146": 1
+  },
+  "set_sizes": {
+    "5": 6,
+    "6": 27,
+    "9": 4,
+    "11": 22,
+    "13": 3,
+    "15": 24,
+    "17": 2,
+    "19": 66
+  },
+  "leftovers": {
+    "1": 29,
+    "2": 12,
+    "3": 2,
+    "4": 2
+  },
+  "resolved_symbol_count": 2157,
+  "unresolved_symbol_count": 67,
+  "complete_set_count": 154,
+  "pier_type_counts": {
+    "SAP": 1387,
+    "SAPE": 308,
+    "SAPEND": 308,
+    "SMP": 154,
+    "red_circle_symbols": 1843,
+    "red_diamond_symbols": 373
+  }
+}

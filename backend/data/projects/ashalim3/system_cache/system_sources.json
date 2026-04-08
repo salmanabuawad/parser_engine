@@ -1,0 +1,17 @@
+{
+  "vector_json": {
+    "path": "C:\\Users\\salma\\Documents\\New project\\solarica_review\\backend\\data\\projects\\ashalim3\\piers_vector_labeled.json",
+    "mtime_ns": 1775622991403441900,
+    "size": 8494282
+  },
+  "ramming_pdf": {
+    "path": "C:\\Users\\salma\\Downloads\\ASH3-DRW-ELE-PV_withPieringPlan-Ramming plan.pdf",
+    "mtime_ns": 1775345342105324200,
+    "size": 6626564
+  },
+  "legend_image": {
+    "path": "C:\\Users\\salma\\Documents\\New project\\solarica_review\\tmp_preview\\page4_pier_legend_full.png",
+    "mtime_ns": 1775602363433095800,
+    "size": 506276
+  }
+}

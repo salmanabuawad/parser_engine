@@ -1,0 +1,10 @@
+{
+  "vector_json": "C:\\Users\\salma\\Documents\\New project\\solarica_review\\backend\\data\\projects\\ashalim3\\piers_vector_labeled.json",
+  "ramming_pdf": "C:\\Users\\salma\\Downloads\\ASH3-DRW-ELE-PV_withPieringPlan-Ramming plan.pdf",
+  "pier_count": 24130,
+  "axis_u_x": -0.8303113942277033,
+  "axis_u_y": 0.5572997296030633,
+  "p_step_mean": 10.314678420388253,
+  "anchor_count": 1533,
+  "block_label_count": 13
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "pier_type": "HAP",
+    "count": 2033
+  },
+  {
+    "pier_type": "HMP",
+    "count": 161
+  },
+  {
+    "pier_type": "SAP",
+    "count": 16969
+  },
+  {
+    "pier_type": "SAPE",
+    "count": 1745
+  },
+  {
+    "pier_type": "SAPEND",
+    "count": 1850
+  },
+  {
+    "pier_type": "SMP",
+    "count": 1372
+  }
+]

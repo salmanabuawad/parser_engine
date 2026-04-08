@@ -1,0 +1,7352 @@
+{
+  "T0001-P01": {
+    "map_target": {
+      "object_id": "T0001-P01",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1781.1028703962054,
+        "y": 1040.027711204314,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0001-P01"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0001",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 930.6615556601298,
+        "y": 1064.1613525975743,
+        "w": 955.9380851250778,
+        "h": 433.0253131699605
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0001"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0001-P02": {
+    "map_target": {
+      "object_id": "T0001-P02",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1786.8107974839545,
+        "y": 1037.9390353505094,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0001-P02"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0001",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 930.6615556601298,
+        "y": 1064.1613525975743,
+        "w": 955.9380851250778,
+        "h": 433.0253131699605
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0001"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0001-P03": {
+    "map_target": {
+      "object_id": "T0001-P03",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1797.9413946587538,
+        "y": 1035.719817255842,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0001-P03"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0001",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 930.6615556601298,
+        "y": 1064.1613525975743,
+        "w": 955.9380851250778,
+        "h": 433.0253131699605
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0001"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0001-P04": {
+    "map_target": {
+      "object_id": "T0001-P04",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1806.5032852903773,
+        "y": 1028.1808753633584,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0001-P04"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0001",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 930.6615556601298,
+        "y": 1064.1613525975743,
+        "w": 955.9380851250778,
+        "h": 433.0253131699605
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0001"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0001-P05": {
+    "map_target": {
+      "object_id": "T0001-P05",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1820.4877066553624,
+        "y": 1023.4488466147393,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0001-P05"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0001",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 930.6615556601298,
+        "y": 1064.1613525975743,
+        "w": 955.9380851250778,
+        "h": 433.0253131699605
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0001"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0001-P06": {
+    "map_target": {
+      "object_id": "T0001-P06",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1826.195355035734,
+        "y": 1016.791192330737,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0001-P06"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0001",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 930.6615556601298,
+        "y": 1064.1613525975743,
+        "w": 955.9380851250778,
+        "h": 433.0253131699605
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0001"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0002-P01": {
+    "map_target": {
+      "object_id": "T0002-P01",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 362.96848996022135,
+        "y": 935.8550029958059,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P01"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B4",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 405.7200244031957,
+        "y": 469.215423364565,
+        "w": 1146.0620171650835,
+        "h": 594.2988443437488
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B4"
+      ]
+    }
+  },
+  "T0002-P02": {
+    "map_target": {
+      "object_id": "T0002-P02",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 368.67645188639256,
+        "y": 932.7219892150989,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P02"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B4",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 405.7200244031957,
+        "y": 469.215423364565,
+        "w": 1146.0620171650835,
+        "h": 594.2988443437488
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B4"
+      ]
+    }
+  },
+  "T0002-P03": {
+    "map_target": {
+      "object_id": "T0002-P03",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 459.004363211599,
+        "y": 888.8597325438722,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P03"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0002-P04": {
+    "map_target": {
+      "object_id": "T0002-P04",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 464.56962696057656,
+        "y": 885.9878032448908,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P04"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0002-P05": {
+    "map_target": {
+      "object_id": "T0002-P05",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 475.98548113607455,
+        "y": 879.4606912017512,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P05"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0002-P06": {
+    "map_target": {
+      "object_id": "T0002-P06",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 481.69340822382367,
+        "y": 876.3276774210441,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P06"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0002-P07": {
+    "map_target": {
+      "object_id": "T0002-P07",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 498.53179313268333,
+        "y": 877.1109308662209,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P07"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0002-P08": {
+    "map_target": {
+      "object_id": "T0002-P08",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 504.23972022043233,
+        "y": 873.9779808268424,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P08"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0002-P09": {
+    "map_target": {
+      "object_id": "T0002-P09",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 673.7651547265791,
+        "y": 795.391488086113,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P09"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0002-P10": {
+    "map_target": {
+      "object_id": "T0002-P10",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 679.4730818143281,
+        "y": 791.9973898236805,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P10"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0002-P11": {
+    "map_target": {
+      "object_id": "T0002-P11",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 696.1687685459941,
+        "y": 782.0762432594368,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P11"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0002-P12": {
+    "map_target": {
+      "object_id": "T0002-P12",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 701.733927779705,
+        "y": 779.0737717195926,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P12"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0002-P13": {
+    "map_target": {
+      "object_id": "T0002-P13",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 882.6752861381941,
+        "y": 701.9233073696824,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P13"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0002-P14": {
+    "map_target": {
+      "object_id": "T0002-P14",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 888.3832132259432,
+        "y": 698.7902935889755,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P14"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0002-P15": {
+    "map_target": {
+      "object_id": "T0002-P15",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 905.2215981348029,
+        "y": 688.8690832834033,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P15"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0002-P16": {
+    "map_target": {
+      "object_id": "T0002-P16",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 910.9294555457076,
+        "y": 685.4749212796421,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P16"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0002-P17": {
+    "map_target": {
+      "object_id": "T0002-P17",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1097.4359731379077,
+        "y": 606.6274715398442,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P17"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B3",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 711.3415809104179,
+        "y": 583.5146208272286,
+        "w": 987.4629221645741,
+        "h": 473.048081331156
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B3"
+      ]
+    }
+  },
+  "T0002-P18": {
+    "map_target": {
+      "object_id": "T0002-P18",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1103.0012717253073,
+        "y": 603.2333732774116,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P18"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B3",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 711.3415809104179,
+        "y": 583.5146208272286,
+        "w": 987.4629221645741,
+        "h": 473.048081331156
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B3"
+      ]
+    }
+  },
+  "T0002-P19": {
+    "map_target": {
+      "object_id": "T0002-P19",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1120.1250529885544,
+        "y": 593.3121629718394,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P19"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B3",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 711.3415809104179,
+        "y": 583.5146208272286,
+        "w": 987.4629221645741,
+        "h": 473.048081331156
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B3"
+      ]
+    }
+  },
+  "T0002-P20": {
+    "map_target": {
+      "object_id": "T0002-P20",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1125.6902818991098,
+        "y": 590.1791491911324,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P20"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B3",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 711.3415809104179,
+        "y": 583.5146208272286,
+        "w": 987.4629221645741,
+        "h": 473.048081331156
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B3"
+      ]
+    }
+  },
+  "T0002-P21": {
+    "map_target": {
+      "object_id": "T0002-P21",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1272.526706231454,
+        "y": 524.6469442780108,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P21"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B4",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 405.7200244031957,
+        "y": 469.215423364565,
+        "w": 1146.0620171650835,
+        "h": 594.2988443437488
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B4"
+      ]
+    }
+  },
+  "T0002-P22": {
+    "map_target": {
+      "object_id": "T0002-P22",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1278.234633319203,
+        "y": 521.2528460155781,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P22"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B4",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 405.7200244031957,
+        "y": 469.215423364565,
+        "w": 1146.0620171650835,
+        "h": 594.2988443437488
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B4"
+      ]
+    }
+  },
+  "T0002-P23": {
+    "map_target": {
+      "object_id": "T0002-P23",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1295.0730182280627,
+        "y": 518.6420011983223,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P23"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B4",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 405.7200244031957,
+        "y": 469.215423364565,
+        "w": 1146.0620171650835,
+        "h": 594.2988443437488
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B4"
+      ]
+    }
+  },
+  "T0002-P24": {
+    "map_target": {
+      "object_id": "T0002-P24",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1300.7809453158118,
+        "y": 515.2479029358898,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P24"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B4",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 405.7200244031957,
+        "y": 469.215423364565,
+        "w": 1146.0620171650835,
+        "h": 594.2988443437488
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B4"
+      ]
+    }
+  },
+  "T0002-P25": {
+    "map_target": {
+      "object_id": "T0002-P25",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1379.835735481136,
+        "y": 479.21821258709485,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P25"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B4",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 405.7200244031957,
+        "y": 469.215423364565,
+        "w": 1146.0620171650835,
+        "h": 594.2988443437488
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B4"
+      ]
+    }
+  },
+  "T0002-P26": {
+    "map_target": {
+      "object_id": "T0002-P26",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1385.5435232151965,
+        "y": 475.95459282419654,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P26"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B4",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 405.7200244031957,
+        "y": 469.215423364565,
+        "w": 1146.0620171650835,
+        "h": 594.2988443437488
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B4"
+      ]
+    }
+  },
+  "T0002-P27": {
+    "map_target": {
+      "object_id": "T0002-P27",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1396.9593773906945,
+        "y": 469.29706602285125,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P27"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B4",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 405.7200244031957,
+        "y": 469.215423364565,
+        "w": 1146.0620171650835,
+        "h": 594.2988443437488
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B4"
+      ]
+    }
+  },
+  "T0002-P28": {
+    "map_target": {
+      "object_id": "T0002-P28",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1402.5247456549384,
+        "y": 465.9029040190901,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P28"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B4",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 405.7200244031957,
+        "y": 469.215423364565,
+        "w": 1146.0620171650835,
+        "h": 594.2988443437488
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B4"
+      ]
+    }
+  },
+  "T0002-P29": {
+    "map_target": {
+      "object_id": "T0002-P29",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1413.7977622995543,
+        "y": 459.50636608747755,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P29"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B4",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 405.7200244031957,
+        "y": 469.215423364565,
+        "w": 1146.0620171650835,
+        "h": 594.2988443437488
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B4"
+      ]
+    }
+  },
+  "T0002-P30": {
+    "map_target": {
+      "object_id": "T0002-P30",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1419.505828740992,
+        "y": 456.2427463245792,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P30"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B4",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 405.7200244031957,
+        "y": 469.215423364565,
+        "w": 1146.0620171650835,
+        "h": 594.2988443437488
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B4"
+      ]
+    }
+  },
+  "T0002-P31": {
+    "map_target": {
+      "object_id": "T0002-P31",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1484.4333600104487,
+        "y": 434.0832328087845,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0002-P31"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0002",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 415.4402063360857,
+        "y": 477.215423364565,
+        "w": 1128.3418352321933,
+        "h": 509.96061866536263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0002"
+      ]
+    },
+    "block_target": {
+      "object_id": "B4",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 405.7200244031957,
+        "y": 469.215423364565,
+        "w": 1146.0620171650835,
+        "h": 594.2988443437488
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B4"
+      ]
+    }
+  },
+  "T0003-P01": {
+    "map_target": {
+      "object_id": "T0003-P01",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 492.8237963680899,
+        "y": 1260.6439707797756,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0003-P01"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0003",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 544.5357215949265,
+        "y": 758.5459676643129,
+        "w": 1233.5631371951295,
+        "h": 556.9157002096479
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0003"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0003-P02": {
+    "map_target": {
+      "object_id": "T0003-P02",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 498.53179313268333,
+        "y": 1257.249872517343,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0003-P02"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0003",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 544.5357215949265,
+        "y": 758.5459676643129,
+        "w": 1233.5631371951295,
+        "h": 556.9157002096479
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0003"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0003-P03": {
+    "map_target": {
+      "object_id": "T0003-P03",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1303.6349088596862,
+        "y": 899.4337177950869,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0003-P03"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0003",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 544.5357215949265,
+        "y": 758.5459676643129,
+        "w": 1233.5631371951295,
+        "h": 556.9157002096479
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0003"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0003-P04": {
+    "map_target": {
+      "object_id": "T0003-P04",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1605.8696481559982,
+        "y": 764.0614140203714,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0003-P04"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0003",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 544.5357215949265,
+        "y": 758.5459676643129,
+        "w": 1233.5631371951295,
+        "h": 556.9157002096479
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0003"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0003-P05": {
+    "map_target": {
+      "object_id": "T0003-P05",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1611.5775752437473,
+        "y": 762.1031529247725,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0003-P05"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0003",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 544.5357215949265,
+        "y": 758.5459676643129,
+        "w": 1233.5631371951295,
+        "h": 556.9157002096479
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0003"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0003-P06": {
+    "map_target": {
+      "object_id": "T0003-P06",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1710.3603884061042,
+        "y": 717.033508008222,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0003-P06"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0003",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 544.5357215949265,
+        "y": 758.5459676643129,
+        "w": 1233.5631371951295,
+        "h": 556.9157002096479
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0003"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0004-P01": {
+    "map_target": {
+      "object_id": "T0004-P01",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 492.8237963680899,
+        "y": 1161.9541641701617,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0004-P01"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0004",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 543.5196590124424,
+        "y": 684.711837156009,
+        "w": 1171.3119283549206,
+        "h": 529.136081885263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0004"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0004-P02": {
+    "map_target": {
+      "object_id": "T0004-P02",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 498.53179313268333,
+        "y": 1158.690608148592,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0004-P02"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0004",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 543.5196590124424,
+        "y": 684.711837156009,
+        "w": 1171.3119283549206,
+        "h": 529.136081885263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0004"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0004-P03": {
+    "map_target": {
+      "object_id": "T0004-P03",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1645.5396020621656,
+        "y": 647.6176714294323,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0004-P03"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0004",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 543.5196590124424,
+        "y": 684.711837156009,
+        "w": 1171.3119283549206,
+        "h": 529.136081885263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0004"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0004-P04": {
+    "map_target": {
+      "object_id": "T0004-P04",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1651.1049703264096,
+        "y": 644.354051666534,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0004-P04"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0004",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 543.5196590124424,
+        "y": 684.711837156009,
+        "w": 1171.3119283549206,
+        "h": 529.136081885263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0004"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0004-P05": {
+    "map_target": {
+      "object_id": "T0004-P05",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1661.2649690596518,
+        "y": 638.1404194771851,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0004-P05"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0004",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 543.5196590124424,
+        "y": 684.711837156009,
+        "w": 1171.3119283549206,
+        "h": 529.136081885263
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0004"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0005-P01": {
+    "map_target": {
+      "object_id": "T0005-P01",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 362.9685247986435,
+        "y": 965.3574856894684,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0005-P01"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0005",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 413.7200244031957,
+        "y": 522.714397999539,
+        "w": 1098.2255521598838,
+        "h": 496.5212376013425
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0005"
+      ]
+    },
+    "block_target": {
+      "object_id": "B4",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 405.7200244031957,
+        "y": 469.215423364565,
+        "w": 1146.0620171650835,
+        "h": 594.2988443437488
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B4"
+      ]
+    }
+  },
+  "T0005-P02": {
+    "map_target": {
+      "object_id": "T0005-P02",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 368.67645188639256,
+        "y": 962.2244719087613,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0005-P02"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0005",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 413.7200244031957,
+        "y": 522.714397999539,
+        "w": 1098.2255521598838,
+        "h": 496.5212376013425
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0005"
+      ]
+    },
+    "block_target": {
+      "object_id": "B4",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 405.7200244031957,
+        "y": 469.215423364565,
+        "w": 1146.0620171650835,
+        "h": 594.2988443437488
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B4"
+      ]
+    }
+  },
+  "T0005-P03": {
+    "map_target": {
+      "object_id": "T0005-P03",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 459.004363211599,
+        "y": 919.9288496105453,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0005-P03"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0005",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 413.7200244031957,
+        "y": 522.714397999539,
+        "w": 1098.2255521598838,
+        "h": 496.5212376013425
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0005"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0005-P04": {
+    "map_target": {
+      "object_id": "T0005-P04",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 464.56955728373214,
+        "y": 916.7957083471812,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0005-P04"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0005",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 413.7200244031957,
+        "y": 522.714397999539,
+        "w": 1098.2255521598838,
+        "h": 496.5212376013425
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0005"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0005-P05": {
+    "map_target": {
+      "object_id": "T0005-P05",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 478.80377013565067,
+        "y": 913.1732886458957,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0005-P05"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0005",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 413.7200244031957,
+        "y": 522.714397999539,
+        "w": 1098.2255521598838,
+        "h": 496.5212376013425
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0005"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0005-P06": {
+    "map_target": {
+      "object_id": "T0005-P06",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 498.53179313268333,
+        "y": 906.0913720790893,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0005-P06"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0005",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 413.7200244031957,
+        "y": 522.714397999539,
+        "w": 1098.2255521598838,
+        "h": 496.5212376013425
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0005"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0005-P07": {
+    "map_target": {
+      "object_id": "T0005-P07",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 504.38238355920396,
+        "y": 902.827752316191,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0005-P07"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0005",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 413.7200244031957,
+        "y": 522.714397999539,
+        "w": 1098.2255521598838,
+        "h": 496.5212376013425
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0005"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0005-P08": {
+    "map_target": {
+      "object_id": "T0005-P08",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 673.7651547265791,
+        "y": 823.5886121124761,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0005-P08"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0005",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 413.7200244031957,
+        "y": 522.714397999539,
+        "w": 1098.2255521598838,
+        "h": 496.5212376013425
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0005"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0005-P09": {
+    "map_target": {
+      "object_id": "T0005-P09",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 679.4730818143281,
+        "y": 820.1945138500436,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0005-P09"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0005",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 413.7200244031957,
+        "y": 522.714397999539,
+        "w": 1098.2255521598838,
+        "h": 496.5212376013425
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0005"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0005-P10": {
+    "map_target": {
+      "object_id": "T0005-P10",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 699.1654302670623,
+        "y": 813.4715884456098,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0005-P10"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0005",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 413.7200244031957,
+        "y": 522.714397999539,
+        "w": 1098.2255521598838,
+        "h": 496.5212376013425
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0005"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0005-P11": {
+    "map_target": {
+      "object_id": "T0005-P11",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 882.6752861381941,
+        "y": 731.4258538046735,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0005-P11"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0005",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 413.7200244031957,
+        "y": 522.714397999539,
+        "w": 1098.2255521598838,
+        "h": 496.5212376013425
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0005"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0005-P12": {
+    "map_target": {
+      "object_id": "T0005-P12",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 888.3832132259432,
+        "y": 728.0316280595838,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0005-P12"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0005",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 413.7200244031957,
+        "y": 522.714397999539,
+        "w": 1098.2255521598838,
+        "h": 496.5212376013425
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0005"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0005-P13": {
+    "map_target": {
+      "object_id": "T0005-P13",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 905.2215981348029,
+        "y": 718.3715659770658,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0005-P13"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0005",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 413.7200244031957,
+        "y": 522.714397999539,
+        "w": 1098.2255521598838,
+        "h": 496.5212376013425
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0005"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0005-P14": {
+    "map_target": {
+      "object_id": "T0005-P14",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 910.9295252225519,
+        "y": 714.9774677146331,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0005-P14"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0005",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 413.7200244031957,
+        "y": 522.714397999539,
+        "w": 1098.2255521598838,
+        "h": 496.5212376013425
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0005"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0005-P15": {
+    "map_target": {
+      "object_id": "T0005-P15",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1097.436042814752,
+        "y": 635.9995394753009,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0005-P15"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0005",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 413.7200244031957,
+        "y": 522.714397999539,
+        "w": 1098.2255521598838,
+        "h": 496.5212376013425
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0005"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0005-P16": {
+    "map_target": {
+      "object_id": "T0005-P16",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1103.001202048463,
+        "y": 632.7359197124026,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0005-P16"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0005",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 413.7200244031957,
+        "y": 522.714397999539,
+        "w": 1098.2255521598838,
+        "h": 496.5212376013425
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0005"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0005-P17": {
+    "map_target": {
+      "object_id": "T0005-P17",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1122.9076674438322,
+        "y": 625.0665630617136,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0005-P17"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0005",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 413.7200244031957,
+        "y": 522.714397999539,
+        "w": 1098.2255521598838,
+        "h": 496.5212376013425
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0005"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0006-P01": {
+    "map_target": {
+      "object_id": "T0006-P01",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1300.7809453158118,
+        "y": 982.5891252246854,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0006-P01"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0006",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1119.071435608971,
+        "y": 841.277304035093,
+        "w": 661.3489162805678,
+        "h": 301.5646872454735
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0006"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0006-P02": {
+    "map_target": {
+      "object_id": "T0006-P02",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1306.4885936961834,
+        "y": 980.1087589069639,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0006-P02"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0006",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1119.071435608971,
+        "y": 841.277304035093,
+        "w": 661.3489162805678,
+        "h": 301.5646872454735
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0006"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0006-P03": {
+    "map_target": {
+      "object_id": "T0006-P03",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1724.5945315811784,
+        "y": 794.3472776418678,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0006-P03"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0006",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1119.071435608971,
+        "y": 841.277304035093,
+        "w": 661.3489162805678,
+        "h": 301.5646872454735
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0006"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0006-P04": {
+    "map_target": {
+      "object_id": "T0006-P04",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1730.3024586689276,
+        "y": 792.2585380467345,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0006-P04"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0006",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1119.071435608971,
+        "y": 841.277304035093,
+        "w": 661.3489162805678,
+        "h": 301.5646872454735
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0006"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0008-P01": {
+    "map_target": {
+      "object_id": "T0008-P01",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 309.3139753353803,
+        "y": 815.65823472139,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0008-P01"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0008",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 355.7340139119794,
+        "y": 388.71680345758125,
+        "w": 1069.8918466345644,
+        "h": 483.8772527055872
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0008"
+      ]
+    },
+    "block_target": {
+      "object_id": "B5",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 292.4626132759718,
+        "y": 362.44012484084783,
+        "w": 1164.6758377443891,
+        "h": 600.9535346559738
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B5"
+      ]
+    }
+  },
+  "T0008-P02": {
+    "map_target": {
+      "object_id": "T0008-P02",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1120.1250529885544,
+        "y": 458.98410151203353,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0008-P02"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0008",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 355.7340139119794,
+        "y": 388.71680345758125,
+        "w": 1069.8918466345644,
+        "h": 483.8772527055872
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0008"
+      ]
+    },
+    "block_target": {
+      "object_id": "B4",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 405.7200244031957,
+        "y": 469.215423364565,
+        "w": 1146.0620171650835,
+        "h": 594.2988443437488
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B4"
+      ]
+    }
+  },
+  "T0008-P03": {
+    "map_target": {
+      "object_id": "T0008-P03",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1125.6902818991098,
+        "y": 455.7206092317923,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0008-P03"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0008",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 355.7340139119794,
+        "y": 388.71680345758125,
+        "w": 1069.8918466345644,
+        "h": 483.8772527055872
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0008"
+      ]
+    },
+    "block_target": {
+      "object_id": "B4",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 405.7200244031957,
+        "y": 469.215423364565,
+        "w": 1146.0620171650835,
+        "h": 594.2988443437488
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B4"
+      ]
+    }
+  },
+  "T0008-P04": {
+    "map_target": {
+      "object_id": "T0008-P04",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1272.526706231454,
+        "y": 386.2721052221226,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0008-P04"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0008",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 355.7340139119794,
+        "y": 388.71680345758125,
+        "w": 1069.8918466345644,
+        "h": 483.8772527055872
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0008"
+      ]
+    },
+    "block_target": {
+      "object_id": "B5",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 292.4626132759718,
+        "y": 362.44012484084783,
+        "w": 1164.6758377443891,
+        "h": 600.9535346559738
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B5"
+      ]
+    }
+  },
+  "T0008-P05": {
+    "map_target": {
+      "object_id": "T0008-P05",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1278.234633319203,
+        "y": 383.1390914414156,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0008-P05"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0008",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 355.7340139119794,
+        "y": 388.71680345758125,
+        "w": 1069.8918466345644,
+        "h": 483.8772527055872
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0008"
+      ]
+    },
+    "block_target": {
+      "object_id": "B5",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 292.4626132759718,
+        "y": 362.44012484084783,
+        "w": 1164.6758377443891,
+        "h": 600.9535346559738
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B5"
+      ]
+    }
+  },
+  "T0008-P06": {
+    "map_target": {
+      "object_id": "T0008-P06",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1297.9268424182485,
+        "y": 374.0665013134444,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0008-P06"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0008",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 355.7340139119794,
+        "y": 388.71680345758125,
+        "w": 1069.8918466345644,
+        "h": 483.8772527055872
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0008"
+      ]
+    },
+    "block_target": {
+      "object_id": "B5",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 292.4626132759718,
+        "y": 362.44012484084783,
+        "w": 1164.6758377443891,
+        "h": 600.9535346559738
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B5"
+      ]
+    }
+  },
+  "T0009-P01": {
+    "map_target": {
+      "object_id": "T0009-P01",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 464.56962696057656,
+        "y": 1003.9980527261835,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0009-P01"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0009",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 517.7893590987765,
+        "y": 756.5089860279593,
+        "w": 667.0954791784994,
+        "h": 304.1291921168762
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0009"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0009-P02": {
+    "map_target": {
+      "object_id": "T0009-P02",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 478.8394446799491,
+        "y": 999.9185439578926,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0009-P02"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0009",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 517.7893590987765,
+        "y": 756.5089860279593,
+        "w": 667.0954791784994,
+        "h": 304.1291921168762
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0009"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0009-P03": {
+    "map_target": {
+      "object_id": "T0009-P03",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 498.5317582942612,
+        "y": 992.2491235658749,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0009-P03"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0009",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 517.7893590987765,
+        "y": 756.5089860279593,
+        "w": 667.0954791784994,
+        "h": 304.1291921168762
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0009"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0009-P04": {
+    "map_target": {
+      "object_id": "T0009-P04",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 504.2396853820102,
+        "y": 989.1161735264966,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0009-P04"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0009",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 517.7893590987765,
+        "y": 756.5089860279593,
+        "w": 667.0954791784994,
+        "h": 304.1291921168762
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0009"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0010-P01": {
+    "map_target": {
+      "object_id": "T0010-P01",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1606.012346333192,
+        "y": 722.4183117024837,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0010-P01"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0010",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 680.7715456688894,
+        "y": 723.5916891400867,
+        "w": 1083.1505836658228,
+        "h": 489.79410526922464
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0010"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0010-P02": {
+    "map_target": {
+      "object_id": "T0010-P02",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1611.5775752437473,
+        "y": 719.154883163571,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0010-P02"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0010",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 680.7715456688894,
+        "y": 723.5916891400867,
+        "w": 1083.1505836658228,
+        "h": 489.79410526922464
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0010"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0010-P03": {
+    "map_target": {
+      "object_id": "T0010-P03",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1684.9244383213227,
+        "y": 683.1252246854403,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0010-P03"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0010",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 680.7715456688894,
+        "y": 723.5916891400867,
+        "w": 1083.1505836658228,
+        "h": 489.79410526922464
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0010"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0011-P01": {
+    "map_target": {
+      "object_id": "T0011-P01",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 673.7651547265791,
+        "y": 890.29582467602,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0011-P01"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0011",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 567.4411480472269,
+        "y": 807.6599998771252,
+        "w": 448.79778652991615,
+        "h": 206.71370214755981
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0011"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0011-P02": {
+    "map_target": {
+      "object_id": "T0011-P02",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 679.4730818143281,
+        "y": 887.0322049131216,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0011-P02"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0011",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 567.4411480472269,
+        "y": 807.6599998771252,
+        "w": 448.79778652991615,
+        "h": 206.71370214755981
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0011"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0011-P03": {
+    "map_target": {
+      "object_id": "T0011-P03",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 696.3113970463435,
+        "y": 877.1109308662209,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0011-P03"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0011",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 567.4411480472269,
+        "y": 807.6599998771252,
+        "w": 448.79778652991615,
+        "h": 206.71370214755981
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0011"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0011-P04": {
+    "map_target": {
+      "object_id": "T0011-P04",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 702.0193938109369,
+        "y": 873.8474385859796,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0011-P04"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0011",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 567.4411480472269,
+        "y": 807.6599998771252,
+        "w": 448.79778652991615,
+        "h": 206.71370214755981
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0011"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0012-P01": {
+    "map_target": {
+      "object_id": "T0012-P01",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 492.82386604493433,
+        "y": 1298.2402636309166,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0012-P01"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0012",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 546.8441154476747,
+        "y": 800.6176029340173,
+        "w": 1223.756818123721,
+        "h": 552.5396667809598
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0012"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0012-P02": {
+    "map_target": {
+      "object_id": "T0012-P02",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 498.53179313268333,
+        "y": 1294.846037885827,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0012-P02"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0012",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 546.8441154476747,
+        "y": 800.6176029340173,
+        "w": 1223.756818123721,
+        "h": 552.5396667809598
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0012"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0012-P03": {
+    "map_target": {
+      "object_id": "T0012-P03",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1001.4001695633742,
+        "y": 1071.7493482513153,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0012-P03"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0012",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 546.8441154476747,
+        "y": 800.6176029340173,
+        "w": 1223.756818123721,
+        "h": 552.5396667809598
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0012"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0012-P04": {
+    "map_target": {
+      "object_id": "T0012-P04",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1007.1080966511233,
+        "y": 1069.2691731575794,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0012-P04"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0012",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 546.8441154476747,
+        "y": 800.6176029340173,
+        "w": 1223.756818123721,
+        "h": 552.5396667809598
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0012"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0012-P05": {
+    "map_target": {
+      "object_id": "T0012-P05",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1303.6349088596862,
+        "y": 936.9973750860124,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0012-P05"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0012",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 546.8441154476747,
+        "y": 800.6176029340173,
+        "w": 1223.756818123721,
+        "h": 552.5396667809598
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0012"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0013-P01": {
+    "map_target": {
+      "object_id": "T0013-P01",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1724.5945315811784,
+        "y": 887.5545013592299,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0013-P01"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0013",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 928.8961534552677,
+        "y": 910.6422750337028,
+        "w": 903.0042381011717,
+        "h": 409.4035417066498
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0013"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0013-P02": {
+    "map_target": {
+      "object_id": "T0013-P02",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1733.0137240356082,
+        "y": 880.831448472139,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0013-P02"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0013",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 928.8961534552677,
+        "y": 910.6422750337028,
+        "w": 903.0042381011717,
+        "h": 409.4035417066498
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0013"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0013-P03": {
+    "map_target": {
+      "object_id": "T0013-P03",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1741.4329164900382,
+        "y": 878.677501497903,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0013-P03"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0013",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 928.8961534552677,
+        "y": 910.6422750337028,
+        "w": 903.0042381011717,
+        "h": 409.4035417066498
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0013"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0013-P04": {
+    "map_target": {
+      "object_id": "T0013-P04",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1752.8487706655362,
+        "y": 874.891776512882,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0013-P04"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0013",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 928.8961534552677,
+        "y": 910.6422750337028,
+        "w": 903.0042381011717,
+        "h": 409.4035417066498
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0013"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0013-P05": {
+    "map_target": {
+      "object_id": "T0013-P05",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1758.5566977532853,
+        "y": 872.9335791586116,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0013-P05"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0013",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 928.8961534552677,
+        "y": 910.6422750337028,
+        "w": 903.0042381011717,
+        "h": 409.4035417066498
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0013"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0013-P06": {
+    "map_target": {
+      "object_id": "T0013-P06",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1769.6870162207072,
+        "y": 869.0173756740563,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0013-P06"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0013",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 928.8961534552677,
+        "y": 910.6422750337028,
+        "w": 903.0042381011717,
+        "h": 409.4035417066498
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0013"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0013-P07": {
+    "map_target": {
+      "object_id": "T0013-P07",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1775.3949433084563,
+        "y": 867.1897205606487,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0013-P07"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0013",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 928.8961534552677,
+        "y": 910.6422750337028,
+        "w": 903.0042381011717,
+        "h": 409.4035417066498
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0013"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0014-P01": {
+    "map_target": {
+      "object_id": "T0014-P01",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 312.167973717677,
+        "y": 897.9977531455962,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0014-P01"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0014",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 362.72092915430267,
+        "y": 464.14179004374347,
+        "w": 1086.4175218660582,
+        "h": 491.2518694530782
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0014"
+      ]
+    },
+    "block_target": {
+      "object_id": "B5",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 292.4626132759718,
+        "y": 362.44012484084783,
+        "w": 1164.6758377443891,
+        "h": 600.9535346559738
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B5"
+      ]
+    }
+  },
+  "T0014-P02": {
+    "map_target": {
+      "object_id": "T0014-P02",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 498.53179313268333,
+        "y": 820.7166828134947,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0014-P02"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0014",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 362.72092915430267,
+        "y": 464.14179004374347,
+        "w": 1086.4175218660582,
+        "h": 491.2518694530782
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0014"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0014-P03": {
+    "map_target": {
+      "object_id": "T0014-P03",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 504.23972022043233,
+        "y": 817.4531905332534,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0014-P03"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0014",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 362.72092915430267,
+        "y": 464.14179004374347,
+        "w": 1086.4175218660582,
+        "h": 491.2518694530782
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0014"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0014-P04": {
+    "map_target": {
+      "object_id": "T0014-P04",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 676.6191182704536,
+        "y": 737.8876309860531,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0014-P04"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0014",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 362.72092915430267,
+        "y": 464.14179004374347,
+        "w": 1086.4175218660582,
+        "h": 491.2518694530782
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0014"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0014-P05": {
+    "map_target": {
+      "object_id": "T0014-P05",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 696.3114667231878,
+        "y": 731.1647693229479,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0014-P05"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0014",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 362.72092915430267,
+        "y": 464.14179004374347,
+        "w": 1086.4175218660582,
+        "h": 491.2518694530782
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0014"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0014-P06": {
+    "map_target": {
+      "object_id": "T0014-P06",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 702.0193938109369,
+        "y": 727.7706710605153,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0014-P06"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0014",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 362.72092915430267,
+        "y": 464.14179004374347,
+        "w": 1086.4175218660582,
+        "h": 491.2518694530782
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0014"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0014-P07": {
+    "map_target": {
+      "object_id": "T0014-P07",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 882.6752861381941,
+        "y": 643.1792352400975,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0014-P07"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0014",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 362.72092915430267,
+        "y": 464.14179004374347,
+        "w": 1086.4175218660582,
+        "h": 491.2518694530782
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0014"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0014-P08": {
+    "map_target": {
+      "object_id": "T0014-P08",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 888.6686095803307,
+        "y": 639.5241162372678,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0014-P08"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0014",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 362.72092915430267,
+        "y": 464.14179004374347,
+        "w": 1086.4175218660582,
+        "h": 491.2518694530782
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0014"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0014-P09": {
+    "map_target": {
+      "object_id": "T0014-P09",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 906.220485375159,
+        "y": 640.4379756646359,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0014-P09"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0014",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 362.72092915430267,
+        "y": 464.14179004374347,
+        "w": 1086.4175218660582,
+        "h": 491.2518694530782
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0014"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0014-P10": {
+    "map_target": {
+      "object_id": "T0014-P10",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 911.2149215769393,
+        "y": 637.0438136608748,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0014-P10"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0014",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 362.72092915430267,
+        "y": 464.14179004374347,
+        "w": 1086.4175218660582,
+        "h": 491.2518694530782
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0014"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0014-P11": {
+    "map_target": {
+      "object_id": "T0014-P11",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1097.2933446375582,
+        "y": 548.7971950962988,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0014-P11"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0014",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 362.72092915430267,
+        "y": 464.14179004374347,
+        "w": 1086.4175218660582,
+        "h": 491.2518694530782
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0014"
+      ]
+    },
+    "block_target": {
+      "object_id": "B3",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 711.3415809104179,
+        "y": 583.5146208272286,
+        "w": 987.4629221645741,
+        "h": 473.048081331156
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B3"
+      ]
+    }
+  },
+  "T0014-P12": {
+    "map_target": {
+      "object_id": "T0014-P12",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1103.0012717253073,
+        "y": 545.5337028160575,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0014-P12"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0014",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 362.72092915430267,
+        "y": 464.14179004374347,
+        "w": 1086.4175218660582,
+        "h": 491.2518694530782
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0014"
+      ]
+    },
+    "block_target": {
+      "object_id": "B3",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 711.3415809104179,
+        "y": 583.5146208272286,
+        "w": 987.4629221645741,
+        "h": 473.048081331156
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B3"
+      ]
+    }
+  },
+  "T0014-P13": {
+    "map_target": {
+      "object_id": "T0014-P13",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1122.8719928995338,
+        "y": 538.3865151288196,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0014-P13"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0014",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 362.72092915430267,
+        "y": 464.14179004374347,
+        "w": 1086.4175218660582,
+        "h": 491.2518694530782
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0014"
+      ]
+    },
+    "block_target": {
+      "object_id": "B3",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 711.3415809104179,
+        "y": 583.5146208272286,
+        "w": 987.4629221645741,
+        "h": 473.048081331156
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B3"
+      ]
+    }
+  },
+  "T0014-P14": {
+    "map_target": {
+      "object_id": "T0014-P14",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1272.526706231454,
+        "y": 475.0408290088212,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0014-P14"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0014",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 362.72092915430267,
+        "y": 464.14179004374347,
+        "w": 1086.4175218660582,
+        "h": 491.2518694530782
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0014"
+      ]
+    },
+    "block_target": {
+      "object_id": "B4",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 405.7200244031957,
+        "y": 469.215423364565,
+        "w": 1146.0620171650835,
+        "h": 594.2988443437488
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B4"
+      ]
+    }
+  },
+  "T0014-P15": {
+    "map_target": {
+      "object_id": "T0014-P15",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1278.2344939655145,
+        "y": 471.6467944877172,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0014-P15"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0014",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 362.72092915430267,
+        "y": 464.14179004374347,
+        "w": 1086.4175218660582,
+        "h": 491.2518694530782
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0014"
+      ]
+    },
+    "block_target": {
+      "object_id": "B4",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 405.7200244031957,
+        "y": 469.215423364565,
+        "w": 1146.0620171650835,
+        "h": 594.2988443437488
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B4"
+      ]
+    }
+  },
+  "T0014-P16": {
+    "map_target": {
+      "object_id": "T0014-P16",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1295.072878874374,
+        "y": 459.63687645767607,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0014-P16"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0014",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 362.72092915430267,
+        "y": 464.14179004374347,
+        "w": 1086.4175218660582,
+        "h": 491.2518694530782
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0014"
+      ]
+    },
+    "block_target": {
+      "object_id": "B4",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 405.7200244031957,
+        "y": 469.215423364565,
+        "w": 1146.0620171650835,
+        "h": 594.2988443437488
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B4"
+      ]
+    }
+  },
+  "T0014-P17": {
+    "map_target": {
+      "object_id": "T0014-P17",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1300.7809453158118,
+        "y": 456.50386267696905,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0014-P17"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0014",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 362.72092915430267,
+        "y": 464.14179004374347,
+        "w": 1086.4175218660582,
+        "h": 491.2518694530782
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0014"
+      ]
+    },
+    "block_target": {
+      "object_id": "B4",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 405.7200244031957,
+        "y": 469.215423364565,
+        "w": 1146.0620171650835,
+        "h": 594.2988443437488
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B4"
+      ]
+    }
+  },
+  "T0014-P18": {
+    "map_target": {
+      "object_id": "T0014-P18",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1379.835735481136,
+        "y": 421.77962660746635,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0014-P18"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0014",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 362.72092915430267,
+        "y": 464.14179004374347,
+        "w": 1086.4175218660582,
+        "h": 491.2518694530782
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0014"
+      ]
+    },
+    "block_target": {
+      "object_id": "B4",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 405.7200244031957,
+        "y": 469.215423364565,
+        "w": 1146.0620171650835,
+        "h": 594.2988443437488
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B4"
+      ]
+    }
+  },
+  "T0014-P19": {
+    "map_target": {
+      "object_id": "T0014-P19",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1385.543662568885,
+        "y": 418.64661282675934,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0014-P19"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0014",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 362.72092915430267,
+        "y": 464.14179004374347,
+        "w": 1086.4175218660582,
+        "h": 491.2518694530782
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0014"
+      ]
+    },
+    "block_target": {
+      "object_id": "B4",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 405.7200244031957,
+        "y": 469.215423364565,
+        "w": 1146.0620171650835,
+        "h": 594.2988443437488
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B4"
+      ]
+    }
+  },
+  "T0014-P20": {
+    "map_target": {
+      "object_id": "T0014-P20",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1396.959516744383,
+        "y": 417.6023067705213,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0014-P20"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0014",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 362.72092915430267,
+        "y": 464.14179004374347,
+        "w": 1086.4175218660582,
+        "h": 491.2518694530782
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0014"
+      ]
+    },
+    "block_target": {
+      "object_id": "B4",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 405.7200244031957,
+        "y": 469.215423364565,
+        "w": 1146.0620171650835,
+        "h": 594.2988443437488
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B4"
+      ]
+    }
+  },
+  "T0015-P01": {
+    "map_target": {
+      "object_id": "T0015-P01",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1837.6114879186096,
+        "y": 1099.0328040742959,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0015-P01"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0015",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 928.0927097632654,
+        "y": 1143.529760215581,
+        "w": 966.8804154664897,
+        "h": 437.9084088672343
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0015"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0015-P02": {
+    "map_target": {
+      "object_id": "T0015-P02",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1843.3194150063587,
+        "y": 1096.9441282204914,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0015-P02"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0015",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 928.0927097632654,
+        "y": 1143.529760215581,
+        "w": 966.8804154664897,
+        "h": 437.9084088672343
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0015"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0018-P01": {
+    "map_target": {
+      "object_id": "T0018-P01",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 368.67645188639256,
+        "y": 999.6900950363827,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0018-P01"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0018",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 420.13147858817376,
+        "y": 576.8311046419778,
+        "w": 1058.2522949503357,
+        "h": 478.683163066336
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0018"
+      ]
+    },
+    "block_target": {
+      "object_id": "B4",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 405.7200244031957,
+        "y": 469.215423364565,
+        "w": 1146.0620171650835,
+        "h": 594.2988443437488
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B4"
+      ]
+    }
+  },
+  "T0018-P02": {
+    "map_target": {
+      "object_id": "T0018-P02",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 459.004363211599,
+        "y": 957.5249512377009,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0018-P02"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0018",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 420.13147858817376,
+        "y": 576.8311046419778,
+        "w": 1058.2522949503357,
+        "h": 478.683163066336
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0018"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0018-P03": {
+    "map_target": {
+      "object_id": "T0018-P03",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 464.56962696057656,
+        "y": 954.3919374569938,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0018-P03"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0018",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 420.13147858817376,
+        "y": 576.8311046419778,
+        "w": 1058.2522949503357,
+        "h": 478.683163066336
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0018"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0018-P04": {
+    "map_target": {
+      "object_id": "T0018-P04",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 478.83947951837126,
+        "y": 951.9116986219293,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0018-P04"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0018",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 420.13147858817376,
+        "y": 576.8311046419778,
+        "w": 1058.2522949503357,
+        "h": 478.683163066336
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0018"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0018-P05": {
+    "map_target": {
+      "object_id": "T0018-P05",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 481.6933733854015,
+        "y": 944.7317478918186,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0018-P05"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0018",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 420.13147858817376,
+        "y": 576.8311046419778,
+        "w": 1058.2522949503357,
+        "h": 478.683163066336
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0018"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0018-P06": {
+    "map_target": {
+      "object_id": "T0018-P06",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 498.5317582942612,
+        "y": 945.7762133013781,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0018-P06"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0018",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 420.13147858817376,
+        "y": 576.8311046419778,
+        "w": 1058.2522949503357,
+        "h": 478.683163066336
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0018"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0018-P07": {
+    "map_target": {
+      "object_id": "T0018-P07",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 504.23972022043233,
+        "y": 942.3821150389455,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0018-P07"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0018",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 420.13147858817376,
+        "y": 576.8311046419778,
+        "w": 1058.2522949503357,
+        "h": 478.683163066336
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0018"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0018-P08": {
+    "map_target": {
+      "object_id": "T0018-P08",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 673.7651547265791,
+        "y": 863.7955585568875,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0018-P08"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0018",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 420.13147858817376,
+        "y": 576.8311046419778,
+        "w": 1058.2522949503357,
+        "h": 478.683163066336
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0018"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0018-P09": {
+    "map_target": {
+      "object_id": "T0018-P09",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 679.4730818143281,
+        "y": 860.662608517509,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0018-P09"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0018",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 420.13147858817376,
+        "y": 576.8311046419778,
+        "w": 1058.2522949503357,
+        "h": 478.683163066336
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0018"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0018-P10": {
+    "map_target": {
+      "object_id": "T0018-P10",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 699.1654302670623,
+        "y": 853.7438697517811,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0018-P10"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0018",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 420.13147858817376,
+        "y": 576.8311046419778,
+        "w": 1058.2522949503357,
+        "h": 478.683163066336
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0018"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0018-P11": {
+    "map_target": {
+      "object_id": "T0018-P11",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 882.6752164613498,
+        "y": 768.7608072087748,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0018-P11"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0018",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 420.13147858817376,
+        "y": 576.8311046419778,
+        "w": 1058.2522949503357,
+        "h": 478.683163066336
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0018"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0018-P12": {
+    "map_target": {
+      "object_id": "T0018-P12",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 888.3832132259432,
+        "y": 765.3668364289994,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0018-P12"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0018",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 420.13147858817376,
+        "y": 576.8311046419778,
+        "w": 1058.2522949503357,
+        "h": 478.683163066336
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0018"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0018-P13": {
+    "map_target": {
+      "object_id": "T0018-P13",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 905.2215981348029,
+        "y": 755.4456261234272,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0018-P13"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0018",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 420.13147858817376,
+        "y": 576.8311046419778,
+        "w": 1058.2522949503357,
+        "h": 478.683163066336
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0018"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0019-P01": {
+    "map_target": {
+      "object_id": "T0019-P01",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 312.16790404083264,
+        "y": 789.1254605246991,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0019-P01"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0019",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 364.82516985315544,
+        "y": 370.44012484084783,
+        "w": 1035.873242218548,
+        "h": 468.6964904163468
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0019"
+      ]
+    },
+    "block_target": {
+      "object_id": "B5",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 292.4626132759718,
+        "y": 362.44012484084783,
+        "w": 1164.6758377443891,
+        "h": 600.9535346559738
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B5"
+      ]
+    }
+  },
+  "T0019-P02": {
+    "map_target": {
+      "object_id": "T0019-P02",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1272.526706231454,
+        "y": 357.4223337327741,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0019-P02"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0019",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 364.82516985315544,
+        "y": 370.44012484084783,
+        "w": 1035.873242218548,
+        "h": 468.6964904163468
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0019"
+      ]
+    },
+    "block_target": {
+      "object_id": "B5",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 292.4626132759718,
+        "y": 362.44012484084783,
+        "w": 1164.6758377443891,
+        "h": 600.9535346559738
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B5"
+      ]
+    }
+  },
+  "T0019-P03": {
+    "map_target": {
+      "object_id": "T0019-P03",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1278.2344939655145,
+        "y": 354.1588095818686,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0019-P03"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0019",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 364.82516985315544,
+        "y": 370.44012484084783,
+        "w": 1035.873242218548,
+        "h": 468.6964904163468
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0019"
+      ]
+    },
+    "block_target": {
+      "object_id": "B5",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 292.4626132759718,
+        "y": 362.44012484084783,
+        "w": 1164.6758377443891,
+        "h": 600.9535346559738
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B5"
+      ]
+    }
+  },
+  "T0019-P04": {
+    "map_target": {
+      "object_id": "T0019-P04",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1303.6349088596862,
+        "y": 341.10455362492513,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0019-P04"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0019",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 364.82516985315544,
+        "y": 370.44012484084783,
+        "w": 1035.873242218548,
+        "h": 468.6964904163468
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0019"
+      ]
+    },
+    "block_target": {
+      "object_id": "B5",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 292.4626132759718,
+        "y": 362.44012484084783,
+        "w": 1164.6758377443891,
+        "h": 600.9535346559738
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B5"
+      ]
+    }
+  },
+  "T0019-P05": {
+    "map_target": {
+      "object_id": "T0019-P05",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1329.0351844001696,
+        "y": 330.1389735217863,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0019-P05"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0019",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 364.82516985315544,
+        "y": 370.44012484084783,
+        "w": 1035.873242218548,
+        "h": 468.6964904163468
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0019"
+      ]
+    },
+    "block_target": {
+      "object_id": "B5",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 292.4626132759718,
+        "y": 362.44012484084783,
+        "w": 1164.6758377443891,
+        "h": 600.9535346559738
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B5"
+      ]
+    }
+  },
+  "T0019-P06": {
+    "map_target": {
+      "object_id": "T0019-P06",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1334.74297213423,
+        "y": 327.00602348240784,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0019-P06"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0019",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 364.82516985315544,
+        "y": 370.44012484084783,
+        "w": 1035.873242218548,
+        "h": 468.6964904163468
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0019"
+      ]
+    },
+    "block_target": {
+      "object_id": "B5",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 292.4626132759718,
+        "y": 362.44012484084783,
+        "w": 1164.6758377443891,
+        "h": 600.9535346559738
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B5"
+      ]
+    }
+  },
+  "T0021-P01": {
+    "map_target": {
+      "object_id": "T0021-P01",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1306.488872403561,
+        "y": 1029.0620354891823,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0021-P01"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0021",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1360.026783851407,
+        "y": 895.8312761913594,
+        "w": 403.6459023805936,
+        "h": 186.56468574610778
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0021"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0022-P01": {
+    "map_target": {
+      "object_id": "T0022-P01",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1001.4001695633742,
+        "y": 1157.1241012582384,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0022-P01"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0022",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 920.6377054807139,
+        "y": 948.9358980191404,
+        "w": 701.0746813390456,
+        "h": 319.2924255407664
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0022"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0022-P02": {
+    "map_target": {
+      "object_id": "T0022-P02",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1007.1794457397202,
+        "y": 1150.335777250716,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0022-P02"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0022",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 920.6377054807139,
+        "y": 948.9358980191404,
+        "w": 701.0746813390456,
+        "h": 319.2924255407664
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0022"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0022-P03": {
+    "map_target": {
+      "object_id": "T0022-P03",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1300.7809453158118,
+        "y": 1022.2739664469743,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0022-P03"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0022",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 920.6377054807139,
+        "y": 948.9358980191404,
+        "w": 701.0746813390456,
+        "h": 319.2924255407664
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0022"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0022-P04": {
+    "map_target": {
+      "object_id": "T0022-P04",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1306.4887330498723,
+        "y": 1019.7935363879242,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0022-P04"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0022",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 920.6377054807139,
+        "y": 948.9358980191404,
+        "w": 701.0746813390456,
+        "h": 319.2924255407664
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0022"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0027-P01": {
+    "map_target": {
+      "object_id": "T0027-P01",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1837.6114879186096,
+        "y": 1147.3331782282148,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0027-P01"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0027",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1632.2607642833132,
+        "y": 1194.8244470192901,
+        "w": 254.7515027740336,
+        "h": 120.12040616281737
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0027"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0028-P01": {
+    "map_target": {
+      "object_id": "T0028-P01",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1837.6114879186096,
+        "y": 1058.5645819241734,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0028-P01"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0028",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1479.7665801911396,
+        "y": 1107.629114186428,
+        "w": 407.60424390714417,
+        "h": 188.33114918411098
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0028"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  },
+  "T0029-P01": {
+    "map_target": {
+      "object_id": "T0029-P01",
+      "object_type": "pier",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1837.6114879186096,
+        "y": 1176.8359796285201,
+        "w": 103.42475625264943,
+        "h": 103.13301378070702
+      },
+      "padding": 30,
+      "preferred_zoom": 3.5,
+      "overlay_ids": [
+        "T0029-P01"
+      ]
+    },
+    "row_target": {
+      "object_id": "T0029",
+      "object_type": "tracker",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 1620.6992855031594,
+        "y": 1226.9764655166362,
+        "w": 266.9253016621847,
+        "h": 125.55295211216017
+      },
+      "padding": 40,
+      "preferred_zoom": 2.4,
+      "overlay_ids": [
+        "T0029"
+      ]
+    },
+    "block_target": {
+      "object_id": "B1",
+      "object_type": "block",
+      "sheet_id": "site-plan",
+      "bbox": {
+        "x": 509.78935909877646,
+        "y": 676.711837156009,
+        "w": 1393.1837661309787,
+        "h": 912.7263319268064
+      },
+      "padding": 60,
+      "preferred_zoom": 1.8,
+      "overlay_ids": [
+        "B1"
+      ]
+    }
+  }
+}

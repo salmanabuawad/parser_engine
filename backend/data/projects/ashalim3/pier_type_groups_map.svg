@@ -1,0 +1,367 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='1000' viewBox='0 0 1600 1000'>
+  <rect width='100%' height='100%' fill='#f7f1e3' />
+  <text x='44' y='30' font-family='Segoe UI, Arial, sans-serif' font-size='22' fill='#1d2a33'>Pier Type Group Map</text>
+  <text x='44' y='52' font-family='Segoe UI, Arial, sans-serif' font-size='12' fill='#4a5a68'>North-south grouped sets with estimated pier-type mix per set.</text>
+  <rect x='155.38' y='44.00' width='1289.23' height='912.00' fill='#fffdf8' stroke='#c8bba8' stroke-width='1.5' />
+  <rect x='305.95' y='473.90' width='10.00' height='49.39' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='308.68' y='474.52' width='10.00' height='49.46' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='316.81' y='469.46' width='10.00' height='72.14' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='319.48' y='467.76' width='10.00' height='72.07' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='324.94' y='464.20' width='10.00' height='94.75' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='327.67' y='462.50' width='10.00' height='94.68' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='335.73' y='547.89' width='10.00' height='16.00' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='335.73' y='560.46' width='10.00' height='16.05' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='343.93' y='544.40' width='10.00' height='49.39' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='346.53' y='542.70' width='10.00' height='49.46' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='351.99' y='539.28' width='10.00' height='72.07' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='354.66' y='537.57' width='10.00' height='72.07' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='381.71' y='661.50' width='10.00' height='26.85' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='384.44' y='660.33' width='10.00' height='26.98' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='389.84' y='658.22' width='10.00' height='49.39' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='392.57' y='657.12' width='10.00' height='49.39' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='397.97' y='509.84' width='10.00' height='94.75' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='397.97' y='657.53' width='10.00' height='72.07' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='400.63' y='508.20' width='10.00' height='94.75' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='400.63' y='657.47' width='10.00' height='72.14' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='403.37' y='657.53' width='10.00' height='94.75' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='405.96' y='504.92' width='10.00' height='94.68' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='406.10' y='601.58' width='10.00' height='26.92' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='406.10' y='657.40' width='10.00' height='94.75' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='408.76' y='532.72' width='10.00' height='93.45' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='408.83' y='503.14' width='10.00' height='28.90' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='411.49' y='597.55' width='10.00' height='49.39' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='411.49' y='749.89' width='10.00' height='26.92' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='414.16' y='595.71' width='10.00' height='94.82' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='414.16' y='688.07' width='10.00' height='94.82' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='416.82' y='498.02' width='10.00' height='94.68' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='416.89' y='594.00' width='10.00' height='94.62' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='416.89' y='686.36' width='10.00' height='94.75' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='419.62' y='496.31' width='10.00' height='94.75' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='419.62' y='776.88' width='10.00' height='26.92' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='422.29' y='775.17' width='10.00' height='26.92' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='427.69' y='771.62' width='10.00' height='49.39' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='430.42' y='769.98' width='10.00' height='49.39' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='433.15' y='768.20' width='10.00' height='72.07' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='435.81' y='766.50' width='10.00' height='72.07' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='438.48' y='764.79' width='10.00' height='94.75' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='441.21' y='763.08' width='10.00' height='94.68' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='443.94' y='853.46' width='10.00' height='26.98' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='446.68' y='759.60' width='10.00' height='28.90' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='446.68' y='789.18' width='10.00' height='89.77' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='449.34' y='757.48' width='10.00' height='54.24' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='449.34' y='812.40' width='10.00' height='86.90' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='452.21' y='810.93' width='10.00' height='72.04' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='454.74' y='810.76' width='10.00' height='94.68' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='457.47' y='810.97' width='10.00' height='94.75' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='473.73' y='742.72' width='10.00' height='72.07' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='476.39' y='742.65' width='10.00' height='72.07' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='500.71' y='489.27' width='10.00' height='50.07' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='500.78' y='442.82' width='10.00' height='49.66' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='506.11' y='721.82' width='10.00' height='94.82' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='508.84' y='722.02' width='10.00' height='94.75' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='511.51' y='437.70' width='10.00' height='94.75' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='514.17' y='435.99' width='10.00' height='94.75' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='549.42' y='699.14' width='10.00' height='23.91' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='552.15' y='699.27' width='10.00' height='24.05' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='579.21' y='679.67' width='10.00' height='49.39' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='581.87' y='679.80' width='10.00' height='49.39' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='600.79' y='381.00' width='10.00' height='94.75' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='603.53' y='379.22' width='10.00' height='94.75' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='611.59' y='374.10' width='10.00' height='94.68' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='614.32' y='372.39' width='10.00' height='94.75' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='657.63' y='629.39' width='10.00' height='72.07' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='660.36' y='628.09' width='10.00' height='72.00' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='703.47' y='315.62' width='10.00' height='94.68' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='706.27' y='313.91' width='10.00' height='94.75' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='714.40' y='308.72' width='10.00' height='94.75' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='717.07' y='307.01' width='10.00' height='94.68' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='787.43' y='169.84' width='10.00' height='94.68' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='787.43' y='262.20' width='10.00' height='94.68' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='790.16' y='168.13' width='10.00' height='94.75' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='790.16' y='260.49' width='10.00' height='94.75' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='798.22' y='254.20' width='10.00' height='94.75' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='800.89' y='252.50' width='10.00' height='94.68' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='800.96' y='182.75' width='10.00' height='72.07' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='800.96' y='538.05' width='10.00' height='94.68' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='803.69' y='181.11' width='10.00' height='72.07' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='803.69' y='536.75' width='10.00' height='94.75' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='812.98' y='147.43' width='10.00' height='22.54' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='814.48' y='195.11' width='10.00' height='16.00' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='814.48' y='204.54' width='10.00' height='41.67' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='824.05' y='163.28' width='14.07' height='28.83' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='825.28' y='210.89' width='10.00' height='16.00' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='825.28' y='224.62' width='10.00' height='16.00' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='838.80' y='229.47' width='10.00' height='94.75' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='841.54' y='227.83' width='10.00' height='94.68' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='846.93' y='270.80' width='10.00' height='48.23' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='847.00' y='245.19' width='10.00' height='28.90' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='847.14' y='195.93' width='10.00' height='16.00' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='855.06' y='264.52' width='10.00' height='49.39' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='857.79' y='262.81' width='10.00' height='49.39' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='859.57' y='157.27' width='10.00' height='16.00' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='862.30' y='184.04' width='19.95' height='37.98' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='865.86' y='169.43' width='14.89' height='17.76' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='873.98' y='270.87' width='10.00' height='29.72' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='883.07' y='193.27' width='43.99' height='16.00' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='883.62' y='203.17' width='43.58' height='16.00' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='884.44' y='170.59' width='19.26' height='16.00' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='885.19' y='180.36' width='29.10' height='16.00' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='887.17' y='368.49' width='23.09' height='21.38' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='887.37' y='185.07' width='34.23' height='16.00' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='887.51' y='330.85' width='44.47' height='16.33' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='887.58' y='294.71' width='44.40' height='16.00' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='887.58' y='306.46' width='44.40' height='16.00' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='887.58' y='317.40' width='44.40' height='16.74' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='887.58' y='342.53' width='44.40' height='16.00' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='887.58' y='354.56' width='44.40' height='17.35' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='888.81' y='212.74' width='40.72' height='16.00' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='890.18' y='282.83' width='41.74' height='16.00' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='896.73' y='222.85' width='36.75' height='22.27' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='947.01' y='300.52' width='10.00' height='16.00' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='947.01' y='309.95' width='10.00' height='41.74' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='947.01' y='450.47' width='10.00' height='22.82' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='947.08' y='444.19' width='10.00' height='16.00' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='957.81' y='316.78' width='10.00' height='23.84' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='960.54' y='316.30' width='10.00' height='26.71' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='965.94' y='337.14' width='10.00' height='94.75' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='968.60' y='335.50' width='10.00' height='94.62' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='971.33' y='356.27' width='10.00' height='72.07' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='974.07' y='354.49' width='10.00' height='72.07' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='976.80' y='358.25' width='10.00' height='72.07' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='979.46' y='373.82' width='10.00' height='49.46' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='982.13' y='375.33' width='10.00' height='49.32' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='984.86' y='381.47' width='10.00' height='49.46' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='987.59' y='390.70' width='10.00' height='26.98' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='990.32' y='397.60' width='10.00' height='26.92' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='995.65' y='428.54' width='10.00' height='26.71' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='998.39' y='427.59' width='10.00' height='26.71' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='1003.85' y='449.72' width='10.00' height='94.75' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='1006.52' y='448.70' width='10.00' height='94.82' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='1009.18' y='470.35' width='10.00' height='72.07' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='1011.91' y='469.40' width='10.00' height='72.07' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='1017.38' y='490.03' width='10.00' height='49.39' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='1020.04' y='489.00' width='10.00' height='49.46' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='1025.44' y='509.70' width='10.00' height='26.71' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='1028.17' y='508.74' width='10.00' height='26.71' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='1030.90' y='531.83' width='10.00' height='94.75' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='1033.57' y='530.81' width='10.00' height='94.82' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='1038.96' y='551.51' width='10.00' height='72.07' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='1041.70' y='550.55' width='10.00' height='72.07' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='1044.36' y='572.21' width='10.00' height='49.39' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='1049.76' y='592.91' width='10.00' height='26.95' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='1052.49' y='591.95' width='10.00' height='26.88' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='1057.89' y='614.02' width='10.00' height='94.75' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='1060.62' y='612.99' width='10.00' height='94.75' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='1066.02' y='633.49' width='10.00' height='72.07' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='1068.75' y='632.53' width='10.00' height='72.07' rx='5' fill='#f3c677' fill-opacity='0.26' stroke='#9a6b2f' stroke-width='1.1' />
+  <rect x='1071.41' y='653.84' width='10.00' height='49.39' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='1074.15' y='674.34' width='10.00' height='23.84' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='1076.81' y='674.61' width='10.00' height='26.71' rx='5' fill='#9fd3b0' fill-opacity='0.22' stroke='#4e7a5d' stroke-width='1.1' />
+  <rect x='280.95' y='482.92' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='288.87' y='498.43' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='297.14' y='514.76' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='305.61' y='531.36' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='313.80' y='547.41' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='321.80' y='454.09' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='321.87' y='563.33' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='330.13' y='579.59' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='336.96' y='444.67' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='338.33' y='595.71' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='378.70' y='692.72' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='385.33' y='710.00' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='396.16' y='744.33' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='398.17' y='626.79' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='404.19' y='640.83' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='407.19' y='779.48' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='433.94' y='865.14' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='439.30' y='882.29' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='502.90' y='341.72' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='549.97' y='723.32' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='552.70' y='723.53' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='689.26' y='225.85' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='704.15' y='215.40' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='710.37' y='386.73' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='792.96' y='152.89' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='809.15' y='151.60' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='811.34' y='150.30' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='821.45' y='159.72' width='8.00' height='12.91' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='837.91' y='129.87' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='836.82' y='181.59' width='8.00' height='11.75' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='842.49' y='133.08' width='8.00' height='8.33' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='842.08' y='189.10' width='8.00' height='8.33' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='845.22' y='137.11' width='8.00' height='8.27' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='844.81' y='193.06' width='8.00' height='8.33' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='848.09' y='141.14' width='8.00' height='12.84' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='854.11' y='149.75' width='8.00' height='8.88' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='857.38' y='154.40' width='8.00' height='8.20' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='880.95' y='142.78' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='880.88' y='197.23' width='8.00' height='8.27' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='932.39' y='233.23' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='934.85' y='236.65' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='948.65' y='253.56' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='958.35' y='341.17' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='1058.64' y='577.47' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <rect x='1074.76' y='698.45' width='8.00' height='8.00' rx='4' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' stroke-width='0.9' />
+  <text x='817.72' y='141.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S083  9p  SAP 4  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='864.27' y='157.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S096  5p  SAP 0  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='831.05' y='173.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S086  13p  SAP 8  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='792.08' y='189.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S075  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='873.61' y='205.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S098  9p  SAP 4  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='789.34' y='221.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S073  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='895.74' y='189.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S102  5p  SAP 0  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='901.60' y='205.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S103  9p  SAP 4  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='805.60' y='237.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S081  15p  SAP 10  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='802.87' y='253.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S079  15p  SAP 10  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='874.08' y='269.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S097  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='904.21' y='221.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S105  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='910.06' y='237.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S100  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='818.04' y='285.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S084  5p  SAP 0  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='850.96' y='301.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S093  5p  SAP 0  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='908.00' y='253.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S101  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='817.68' y='317.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S085  17p  SAP 12  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='828.58' y='333.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S087  6p  SAP 1  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='912.23' y='269.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S112  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='919.91' y='285.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S114  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='828.56' y='349.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S088  6p  SAP 1  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='843.45' y='365.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S090  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='840.72' y='381.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S089  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='850.34' y='397.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S092  11p  SAP 6  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='802.87' y='413.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S078  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='800.14' y='429.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S077  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='792.08' y='445.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S076  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='789.34' y='461.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S074  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='859.71' y='477.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S095  11p  SAP 6  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='856.97' y='493.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S094  11p  SAP 6  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='850.16' y='509.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S091  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='877.37' y='525.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S099  13p  SAP 8  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='907.54' y='413.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S113  13p  SAP 8  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='907.11' y='429.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S107  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='950.57' y='301.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S115  5p  SAP 0  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='907.38' y='445.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S108  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='719.03' y='301.01' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S072  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='716.38' y='317.01' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S071  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='950.21' y='317.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S116  17p  SAP 12  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='708.19' y='333.01' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S070  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='705.49' y='349.01' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S069  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='962.45' y='333.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S120  6p  SAP 1  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='959.73' y='349.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S119  6p  SAP 1  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='905.68' y='461.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S109  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='907.24' y='477.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S106  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='970.58' y='365.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S122  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='967.91' y='381.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S121  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='907.81' y='493.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S110  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='975.98' y='397.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S124  15p  SAP 10  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='905.82' y='509.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S111  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='973.25' y='413.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S123  15p  SAP 10  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='978.71' y='429.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S125  15p  SAP 10  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='896.98' y='525.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S104  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='616.24' y='366.39' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S066  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='981.43' y='445.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S126  11p  SAP 6  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='613.53' y='382.39' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S065  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='984.10' y='461.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S127  11p  SAP 6  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='605.45' y='398.39' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S064  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='602.71' y='414.39' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S063  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='986.78' y='477.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S128  11p  SAP 6  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='989.50' y='493.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S129  6p  SAP 1  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='992.24' y='509.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S130  6p  SAP 1  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='1000.31' y='525.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S132  6p  SAP 1  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='997.61' y='541.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S131  6p  SAP 1  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='516.21' y='430.39' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S058  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='513.48' y='446.39' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S057  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='504.13' y='462.39' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S054  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='950.59' y='557.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S118  5p  SAP 0  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='1008.49' y='573.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S134  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='1005.76' y='589.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S133  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='950.14' y='605.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S117  9p  SAP 4  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='329.59' y='456.50' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S006  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='326.85' y='472.50' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S005  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='321.45' y='488.50' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S004  15p  SAP 10  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='1013.83' y='621.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S136  15p  SAP 10  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='318.79' y='504.50' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S003  15p  SAP 10  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='1011.11' y='637.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S135  15p  SAP 10  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='307.90' y='520.50' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S001  11p  SAP 6  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='310.60' y='536.50' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S002  11p  SAP 6  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='1022.02' y='653.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S138  11p  SAP 6  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='503.99' y='483.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S053  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='1019.29' y='669.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S137  11p  SAP 6  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='421.54' y='499.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S034  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='418.80' y='515.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S031  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='410.74' y='531.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S026  6p  SAP 1  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='408.00' y='547.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S022  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='402.55' y='563.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S019  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='1030.09' y='685.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S140  6p  SAP 1  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='1027.36' y='701.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S139  6p  SAP 1  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='399.90' y='579.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S017  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='1035.55' y='717.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S142  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='1032.82' y='733.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S141  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='410.74' y='595.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S025  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='805.60' y='541.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S082  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='356.63' y='611.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S012  15p  SAP 10  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='802.87' y='557.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S080  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='353.91' y='627.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S011  15p  SAP 10  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='348.45' y='643.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S010  11p  SAP 6  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='345.84' y='659.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S009  11p  SAP 6  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='339.01' y='675.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S007  6p  SAP 1  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='1043.61' y='557.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S144  15p  SAP 10  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='1040.88' y='749.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S143  15p  SAP 10  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='339.02' y='691.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S008  6p  SAP 1  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='1046.34' y='605.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S145  11p  SAP 6  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='1054.43' y='621.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S147  6p  SAP 1  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='1051.69' y='637.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S146  6p  SAP 1  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='418.80' y='707.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S032  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='416.08' y='723.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S029  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='413.41' y='739.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S027  11p  SAP 6  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='408.01' y='755.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S023  6p  SAP 1  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='1062.59' y='765.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S149  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='1059.87' y='781.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S148  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='662.28' y='622.09' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S068  15p  SAP 10  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='659.55' y='638.09' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S067  15p  SAP 10  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='1070.66' y='797.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S151  15p  SAP 10  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='1067.93' y='813.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S150  15p  SAP 10  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='1073.39' y='829.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S152  11p  SAP 6  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='394.48' y='771.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S016  11p  SAP 6  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='408.01' y='787.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S024  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='402.55' y='803.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S020  15p  SAP 10  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='399.90' y='819.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S018  15p  SAP 10  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='405.28' y='835.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S021  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='391.75' y='851.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S015  11p  SAP 6  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='386.41' y='867.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S014  6p  SAP 1  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='383.68' y='883.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S013  6p  SAP 1  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='1076.11' y='845.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S153  6p  SAP 1  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='1078.72' y='861.43' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S154  6p  SAP 1  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='581.12' y='673.67' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S061  11p  SAP 6  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='583.85' y='689.67' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S062  11p  SAP 6  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='418.80' y='899.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S033  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='416.08' y='915.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S030  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='551.33' y='705.67' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S059  6p  SAP 1  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='554.07' y='721.67' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S060  6p  SAP 1  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='508.03' y='739.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S055  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='510.76' y='755.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S056  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='478.37' y='883.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S052  15p  SAP 10  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='475.64' y='931.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S051  15p  SAP 10  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='413.41' y='947.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S028  6p  SAP 1  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='451.32' y='963.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S046  11p  SAP 6  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='448.59' y='979.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S044  6p  SAP 1  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='443.13' y='995.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S042  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='440.46' y='1011.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S041  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='437.79' y='1027.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S040  15p  SAP 10  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='435.06' y='1043.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S039  15p  SAP 10  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='432.33' y='1059.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S038  11p  SAP 6  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='429.60' y='1075.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S037  11p  SAP 6  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='424.26' y='1091.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S036  6p  SAP 1  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='421.54' y='1107.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S035  6p  SAP 1  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='448.59' y='1123.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S045  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='456.65' y='1139.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S049  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='454.13' y='1155.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S048  15p  SAP 10  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='459.38' y='1171.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S050  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='451.32' y='1187.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S047  19p  SAP 14  SAPE 2  SAPEND 2  SMP 1</text>
+  <text x='445.86' y='1203.27' text-anchor='middle' font-family='Segoe UI, Arial, sans-serif' font-size='10' fill='#1d2a33'>S043  6p  SAP 1  SAPE 2  SAPEND 2  SMP 1</text>
+  <rect x='1282' y='32' width='258' height='100' rx='8' fill='#fffdf8' stroke='#c8bba8' stroke-width='1' />
+  <rect x='1296' y='48' width='20' height='12' rx='3' fill='#f3c677' fill-opacity='0.35' stroke='#9a6b2f' />
+  <text x='1326' y='58' font-family='Segoe UI, Arial, sans-serif' font-size='12' fill='#1d2a33'>Larger north-south set</text>
+  <rect x='1296' y='72' width='20' height='12' rx='3' fill='#9fd3b0' fill-opacity='0.3' stroke='#4e7a5d' />
+  <text x='1326' y='82' font-family='Segoe UI, Arial, sans-serif' font-size='12' fill='#1d2a33'>Smaller north-south set</text>
+  <rect x='1296' y='96' width='20' height='12' rx='3' fill='#d7d3cf' fill-opacity='0.15' stroke='#877f76' stroke-dasharray='4 3' />
+  <text x='1326' y='106' font-family='Segoe UI, Arial, sans-serif' font-size='12' fill='#1d2a33'>Unresolved partial group</text>
+  <text x='1296' y='124' font-family='Segoe UI, Arial, sans-serif' font-size='11' fill='#4a5a68'>154 complete sets, 67 unresolved symbols</text>
+</svg>

@@ -1,0 +1,834 @@
+import cv2
+import fitz
+import numpy as np
+from shapely.geometry import Polygon, box, Point
+from shapely.ops import unary_union
+from sklearn.cluster import DBSCAN
+from app.utils import polygon_to_points, bbox_from_polygon, ensure_dir, save_json, save_image
+
+TRACKER_TYPE_BY_PIER_COUNT = {
+    19: "112-EXT",
+    17: "112-EDGE-INT-HYBRID",
+    15: "84-EXT",
+    13: "84-EDGE-INT-HYBRID",
+    11: "56-EXT",
+    9: "56-EDGE-HYBRID",
+    6: "28-EXT",
+    5: "28-EDGE",
+}
+
+def render_pdf_page(pdf_path, page_index, zoom=2.5):
+    doc = fitz.open(pdf_path)
+    page = doc.load_page(page_index)
+    pix = page.get_pixmap(matrix=fitz.Matrix(zoom, zoom), alpha=False)
+    arr = np.frombuffer(pix.samples, dtype=np.uint8).reshape(pix.height, pix.width, 3)
+    doc.close()
+    return cv2.cvtColor(arr, cv2.COLOR_RGB2BGR)
+
+def _make_kernel(size, shape):
+    return cv2.getStructuringElement(shape, tuple(int(v) for v in size))
+
+def _candidate_pages(doc, selection):
+    pages = selection.get("candidate_pages")
+    if not pages:
+        return list(range(doc.page_count))
+    return [idx for idx in pages if 0 <= idx < doc.page_count]
+
+def _page_text_score(text, keywords):
+    haystack = " ".join(text.lower().split())
+    return sum(1 for keyword in keywords if keyword.lower() in haystack)
+
+def pick_pdf_page(pdf_path, selection):
+    zoom = selection.get("zoom", 2.5)
+    keywords = selection.get("keywords", [])
+    doc = fitz.open(pdf_path)
+    best_idx = None
+    best_score = (-1, -1)
+
+    try:
+        for idx in _candidate_pages(doc, selection):
+            try:
+                page = doc.load_page(idx)
+                text_score = _page_text_score(page.get_text("text"), keywords)
+                pix = page.get_pixmap(matrix=fitz.Matrix(zoom, zoom), alpha=False)
+                arr = np.frombuffer(pix.samples, dtype=np.uint8).reshape(pix.height, pix.width, 3)
+                img = cv2.cvtColor(arr, cv2.COLOR_RGB2BGR)
+            except Exception:
+                continue
+            edge_score = int(cv2.Canny(cv2.cvtColor(img, cv2.COLOR_BGR2GRAY), 80, 180).sum())
+            score = (text_score, edge_score)
+            if score > best_score:
+                best_idx = idx
+                best_score = score
+        if best_idx is None:
+            for idx in selection.get("fallback_pages", [0]):
+                if 0 <= idx < doc.page_count:
+                    best_idx = idx
+                    break
+        if best_idx is None:
+            raise RuntimeError(f"Could not select a page from {pdf_path}")
+    finally:
+        doc.close()
+
+    return best_idx, render_pdf_page(pdf_path, best_idx, zoom)
+
+def pick_site_page(construction_pdf, profile):
+    return pick_pdf_page(construction_pdf, profile["construction"])
+
+def pick_ramming_page(ramming_pdf, profile):
+    return pick_pdf_page(ramming_pdf, profile["ramming"])
+
+def load_overlay_source(overlay_source, profile):
+    if overlay_source.lower().endswith(".pdf"):
+        page_idx, img = pick_pdf_page(overlay_source, profile["overlay"])
+        return {"kind": "pdf", "page_index": page_idx}, img
+    img = cv2.imread(overlay_source, cv2.IMREAD_COLOR)
+    if img is None:
+        raise RuntimeError("Could not load overlay source")
+    return {"kind": "image", "page_index": None}, img
+
+def align_image_to_base(base_img, source_img):
+    h, w = source_img.shape[:2]
+    source_img = source_img.copy()
+    scale = base_img.shape[1] / max(w, 1)
+    source_img = cv2.resize(source_img, (base_img.shape[1], max(1, int(h * scale))))
+    a = cv2.cvtColor(base_img, cv2.COLOR_BGR2GRAY)
+    b = cv2.cvtColor(source_img, cv2.COLOR_BGR2GRAY)
+    orb = cv2.ORB_create(12000)
+    kpa, desa = orb.detectAndCompute(a, None)
+    kpb, desb = orb.detectAndCompute(b, None)
+    if desa is None or desb is None:
+        raise RuntimeError("Alignment descriptors missing")
+    bf = cv2.BFMatcher(cv2.NORM_HAMMING)
+    knn = bf.knnMatch(desb, desa, k=2)
+    good = []
+    for pair in knn:
+        if len(pair) < 2:
+            continue
+        m, n = pair
+        if m.distance < 0.8 * n.distance:
+            good.append(m)
+    if len(good) < 20:
+        raise RuntimeError(f"Alignment poor: {len(good)} matches")
+    src = np.float32([kpb[m.queryIdx].pt for m in good]).reshape(-1, 1, 2)
+    dst = np.float32([kpa[m.trainIdx].pt for m in good]).reshape(-1, 1, 2)
+    H, _ = cv2.findHomography(src, dst, cv2.RANSAC, 5.0)
+    if H is None:
+        raise RuntimeError("Homography failed")
+    return cv2.warpPerspective(source_img, H, (base_img.shape[1], base_img.shape[0])), H
+
+def align_overlay_to_base(base_img, overlay_img):
+    return align_image_to_base(base_img, overlay_img)
+
+def align_ramming_to_base(base_img, ramming_img):
+    return align_image_to_base(base_img, ramming_img)
+
+def resize_to_base(base_img, source_img):
+    resized = cv2.resize(source_img, (base_img.shape[1], base_img.shape[0]))
+    return resized, np.eye(3, dtype=np.float32)
+
+def alignment_is_usable(base_img, aligned_img, homography):
+    if homography is None or not np.isfinite(homography).all():
+        return False
+    if aligned_img.shape[:2] != base_img.shape[:2]:
+        return False
+    black_ratio = float(np.mean(np.all(aligned_img < 5, axis=2)))
+    if black_ratio > 0.03:
+        return False
+    return True
+
+def remove_handwritten_numbers(img):
+    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    mask_dark = cv2.inRange(hsv, (0, 0, 0), (180, 120, 120))
+    return cv2.inpaint(img, mask_dark, 5, cv2.INPAINT_TELEA)
+
+def extract_block_labels_from_pdf(pdf_path, page_index, rendered_shape, homography=None):
+    doc = fitz.open(pdf_path)
+    try:
+        page = doc.load_page(page_index)
+        page_rect = page.rect
+        words = page.get_text("words")
+    finally:
+        doc.close()
+
+    rendered_h, rendered_w = rendered_shape[:2]
+    sx = rendered_w / max(float(page_rect.width), 1.0)
+    sy = rendered_h / max(float(page_rect.height), 1.0)
+    labels = []
+
+    for idx in range(len(words) - 1):
+        word = str(words[idx][4]).strip().upper()
+        nxt = str(words[idx + 1][4]).strip()
+        if word != "BLOCK" or not nxt.isdigit():
+            continue
+        cx = ((float(words[idx][0]) + float(words[idx + 1][2])) / 2.0) * sx
+        cy = ((float(words[idx][1]) + float(words[idx + 1][3])) / 2.0) * sy
+        labels.append({
+            "block_id": int(nxt),
+            "block_code": f"B{int(nxt)}",
+            "label": nxt,
+            "x": float(cx),
+            "y": float(cy),
+        })
+
+    deduped = {}
+    for item in labels:
+        prev = deduped.get(item["block_id"])
+        if prev is None or item["y"] < prev["y"]:
+            deduped[item["block_id"]] = item
+
+    labels = [deduped[key] for key in sorted(deduped)]
+    if homography is not None and labels:
+        pts = np.float32([[[item["x"], item["y"]]] for item in labels])
+        transformed = cv2.perspectiveTransform(pts, homography).reshape(-1, 2)
+        for item, (tx, ty) in zip(labels, transformed):
+            item["x"] = float(tx)
+            item["y"] = float(ty)
+    return labels
+
+def build_initial_blocks(aligned_overlay, profile):
+    settings = profile["heuristics"]["blocks"]
+    color_ranges = settings["color_ranges"]
+    cleaned = remove_handwritten_numbers(aligned_overlay)
+    hsv = cv2.cvtColor(cleaned, cv2.COLOR_BGR2HSV)
+    regions = []
+    for color, ranges in color_ranges.items():
+        mask = np.zeros(hsv.shape[:2], dtype=np.uint8)
+        for lo, hi in ranges:
+            mask |= cv2.inRange(hsv, np.array(lo), np.array(hi))
+        mask = cv2.morphologyEx(
+            mask,
+            cv2.MORPH_CLOSE,
+            _make_kernel(settings["close_kernel"], cv2.MORPH_RECT),
+            iterations=settings["close_iterations"],
+        )
+        contours, _ = cv2.findContours(mask, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+        for cnt in contours:
+            if cv2.contourArea(cnt) < settings["contour_area_min"]:
+                continue
+            eps = settings["approx_epsilon_ratio"] * cv2.arcLength(cnt, True)
+            approx = cv2.approxPolyDP(cnt, eps, True)
+            pts = approx.reshape(-1, 2)
+            if len(pts) < 3:
+                continue
+            poly = Polygon(pts)
+            if poly.area < settings["polygon_area_min"] or not poly.is_valid:
+                continue
+            regions.append({"color": color, "polygon": poly})
+    regions = sorted(
+        regions,
+        key=lambda r: (
+            round(r["polygon"].centroid.y / settings["row_bucket_height"]),
+            r["polygon"].centroid.x,
+        ),
+    )
+    blocks = []
+    for i, r in enumerate(regions, start=1):
+        poly = r["polygon"]
+        capped_idx = min(i, settings["sheet_cap"])
+        blocks.append({
+            "block_id": i,
+            "block_code": f"B{i}",
+            "label": str(i),
+            "color": r["color"],
+            "polygon": poly,
+            "points": polygon_to_points(poly),
+            "bbox": bbox_from_polygon(poly),
+            "centroid": {"x": float(poly.centroid.x), "y": float(poly.centroid.y)},
+            "original_block_id": str(capped_idx),
+            "block_pier_plan_sheet": f"S-{settings['sheet_base'] + capped_idx}",
+        })
+    return blocks, cleaned
+
+def build_blocks_from_labels(block_labels, trackers, profile):
+    settings = profile["heuristics"]["blocks"]
+    if not block_labels or not trackers:
+        return []
+
+    by_block = {item["block_id"]: [] for item in block_labels}
+    for tracker in trackers:
+        center = tracker["polygon"].centroid
+        target = min(
+            block_labels,
+            key=lambda item: ((item["x"] - center.x) ** 2 + (item["y"] - center.y) ** 2),
+        )
+        by_block[target["block_id"]].append(tracker["polygon"])
+
+    blocks = []
+    for item in block_labels:
+        polys = by_block.get(item["block_id"], [])
+        if not polys:
+            continue
+        union = unary_union([poly.buffer(20) for poly in polys])
+        poly = union.convex_hull.buffer(10)
+        poly = poly.simplify(2.0)
+        blocks.append({
+            "block_id": item["block_id"],
+            "block_code": item["block_code"],
+            "label": item["label"],
+            "color": "derived",
+            "polygon": poly,
+            "points": polygon_to_points(poly),
+            "bbox": bbox_from_polygon(poly),
+            "centroid": {"x": float(poly.centroid.x), "y": float(poly.centroid.y)},
+            "original_block_id": item["label"],
+            "block_pier_plan_sheet": f"S-{settings['sheet_base'] + item['block_id']}",
+        })
+    return blocks
+
+def scale_detected_layout(trackers, piers, source_shape, target_shape):
+    src_h, src_w = source_shape[:2]
+    dst_h, dst_w = target_shape[:2]
+    sx = dst_w / max(float(src_w), 1.0)
+    sy = dst_h / max(float(src_h), 1.0)
+
+    for tracker in trackers:
+        bbox = tracker["bbox"]
+        bbox["x"] = float(bbox["x"] * sx)
+        bbox["y"] = float(bbox["y"] * sy)
+        bbox["w"] = float(bbox["w"] * sx)
+        bbox["h"] = float(bbox["h"] * sy)
+        tracker["polygon"] = box(bbox["x"], bbox["y"], bbox["x"] + bbox["w"], bbox["y"] + bbox["h"])
+
+    for pier in piers:
+        pier["x"] = float(pier["x"] * sx)
+        pier["y"] = float(pier["y"] * sy)
+        bbox = pier.get("bbox")
+        if bbox:
+            bbox["x"] = float(bbox["x"] * sx)
+            bbox["y"] = float(bbox["y"] * sy)
+            bbox["w"] = float(bbox["w"] * sx)
+            bbox["h"] = float(bbox["h"] * sy)
+
+def extract_trackers(ramming_img, profile):
+    settings = profile["heuristics"]["trackers"]
+    gray = cv2.cvtColor(ramming_img, cv2.COLOR_BGR2GRAY)
+    bw = cv2.threshold(gray, settings["binary_threshold"], 255, cv2.THRESH_BINARY_INV)[1]
+    kernel = _make_kernel(settings["open_kernel"], cv2.MORPH_RECT)
+    vertical = cv2.morphologyEx(bw, cv2.MORPH_OPEN, kernel)
+    vertical = cv2.dilate(vertical, _make_kernel(settings["dilate_kernel"], cv2.MORPH_RECT), iterations=1)
+    contours, _ = cv2.findContours(vertical, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    frags = []
+    for cnt in contours:
+        x, y, w, h = cv2.boundingRect(cnt)
+        if h < settings["fragment_min_height"] or w > settings["fragment_max_width"]:
+            continue
+        frags.append({"x": x, "y": y, "w": w, "h": h, "xc": x + w/2.0})
+    if not frags:
+        return []
+    X = np.array([[f["xc"]] for f in frags], dtype=np.float32)
+    labels = DBSCAN(eps=settings["cluster_eps"], min_samples=settings["cluster_min_samples"]).fit_predict(X)
+    groups = {}
+    for f, lab in zip(frags, labels):
+        if lab == -1:
+            continue
+        groups.setdefault(int(lab), []).append(f)
+    trackers = []
+    for i, group in enumerate(sorted(groups.values(), key=lambda g: min(x["xc"] for x in g)), start=1):
+        xs = [f["x"] for f in group]
+        ys = [f["y"] for f in group]
+        xe = [f["x"] + f["w"] for f in group]
+        ye = [f["y"] + f["h"] for f in group]
+        pad = settings["bbox_padding"]
+        x = min(xs) - pad
+        y = min(ys) - pad
+        w = max(xe) - min(xs) + 2 * pad
+        h = max(ye) - min(ys) + 2 * pad
+        if h < settings["tracker_min_height"]:
+            continue
+        trackers.append({
+            "tracker_id": f"T{i:04d}",
+            "tracker_code": f"T{i:04d}",
+            "bbox": {"x": float(x), "y": float(y), "w": float(w), "h": float(h)},
+            "polygon": box(x, y, x+w, y+h),
+            "orientation": "north_south",
+        })
+    return trackers
+
+def detect_piers_in_tracker(ramming_img, tracker, profile):
+    settings = profile["heuristics"]["piers"]
+    x = int(max(0, tracker["bbox"]["x"]))
+    y = int(max(0, tracker["bbox"]["y"]))
+    w = int(tracker["bbox"]["w"])
+    h = int(tracker["bbox"]["h"])
+    roi = ramming_img[y:y+h, x:x+w].copy()
+    if roi.size == 0:
+        return []
+    hsv = cv2.cvtColor(roi, cv2.COLOR_BGR2HSV)
+    mask = np.zeros(hsv.shape[:2], dtype=np.uint8)
+    for lo, hi in settings["primary_color_ranges"]:
+        mask |= cv2.inRange(hsv, np.array(lo), np.array(hi))
+    mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, _make_kernel(settings["primary_open_kernel"], cv2.MORPH_ELLIPSE))
+    mask = cv2.dilate(mask, _make_kernel(settings["primary_dilate_kernel"], cv2.MORPH_ELLIPSE), iterations=1)
+    pts = []
+    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    for cnt in contours:
+        area = cv2.contourArea(cnt)
+        if area < settings["primary_area_min"] or area > settings["primary_area_max"]:
+            continue
+        rx, ry, rw, rh = cv2.boundingRect(cnt)
+        pts.append((x + rx + rw/2.0, y + ry + rh/2.0, rw, rh))
+    if len(pts) < settings["min_points_before_fallback"]:
+        gray = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
+        bw = cv2.threshold(gray, settings["fallback_threshold"], 255, cv2.THRESH_BINARY_INV)[1]
+        small = cv2.morphologyEx(bw, cv2.MORPH_OPEN, _make_kernel(settings["fallback_open_kernel"], cv2.MORPH_RECT))
+        contours, _ = cv2.findContours(small, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        pts = []
+        for cnt in contours:
+            area = cv2.contourArea(cnt)
+            if area < settings["fallback_area_min"] or area > settings["fallback_area_max"]:
+                continue
+            rx, ry, rw, rh = cv2.boundingRect(cnt)
+            if rh < settings["fallback_min_height"] or rw > settings["fallback_max_width"]:
+                continue
+            pts.append((x + rx + rw/2.0, y + ry + rh/2.0, rw, rh))
+    pts = sorted(pts, key=lambda p: p[1])
+    merged = []
+    for p in pts:
+        if not merged or abs(p[1] - merged[-1][1]) > settings["merge_gap"]:
+            merged.append(p)
+    out = []
+    for i, (cx, cy, rw, rh) in enumerate(merged, start=1):
+        out.append({
+            "pier_id": f"{tracker['tracker_id']}-P{i:02d}",
+            "pier_code": f"{tracker['tracker_id']}-P{i:02d}",
+            "tracker_id": tracker["tracker_id"],
+            "tracker_code": tracker["tracker_code"],
+            "row_index": i,
+            "x": float(cx),
+            "y": float(cy),
+            "bbox": {"x": float(cx-rw/2), "y": float(cy-rh/2), "w": float(rw), "h": float(rh)}
+        })
+    return out
+
+def extract_trackers_from_rows(ramming_img):
+    hsv = cv2.cvtColor(ramming_img, cv2.COLOR_BGR2HSV)
+    cyan = cv2.inRange(hsv, (75, 30, 80), (110, 255, 255))
+    lines = cv2.HoughLinesP(cyan, 1, np.pi / 180, threshold=80, minLineLength=220, maxLineGap=20)
+    if lines is None:
+        return [], None
+
+    selected = []
+    for line in lines[:, 0, :]:
+        x1, y1, x2, y2 = line
+        angle = float(np.degrees(np.arctan2(y2 - y1, x2 - x1)))
+        length = float(np.hypot(x2 - x1, y2 - y1))
+        if -40 < angle < -15 and length > 220:
+            selected.append((x1, y1, x2, y2, angle, length))
+    if not selected:
+        return [], None
+
+    angle = float(np.median([item[4] for item in selected]))
+    rad = np.radians(-angle)
+    rot = np.array([[np.cos(rad), -np.sin(rad)], [np.sin(rad), np.cos(rad)]], dtype=np.float32)
+    inv = np.array([[np.cos(-rad), -np.sin(-rad)], [np.sin(-rad), np.cos(-rad)]], dtype=np.float32)
+
+    rows = []
+    for x1, y1, x2, y2, _, length in selected:
+        p1 = np.dot(np.array([x1, y1], dtype=np.float32), rot.T)
+        p2 = np.dot(np.array([x2, y2], dtype=np.float32), rot.T)
+        rows.append({
+            "y": float((p1[1] + p2[1]) / 2.0),
+            "xmin": float(min(p1[0], p2[0])),
+            "xmax": float(max(p1[0], p2[0])),
+            "length": length,
+        })
+
+    labels = DBSCAN(eps=18, min_samples=2).fit_predict(np.array([[row["y"]] for row in rows], dtype=np.float32))
+    trackers = []
+    tracker_meta = {}
+
+    for label in sorted(set(labels)):
+        if label == -1:
+            continue
+        group = [rows[idx] for idx, lab in enumerate(labels) if lab == label]
+        if len(group) < 4:
+            continue
+        xmin = min(item["xmin"] for item in group)
+        xmax = max(item["xmax"] for item in group)
+        ymid = float(np.mean([item["y"] for item in group]))
+        total_length = sum(item["length"] for item in group)
+        if xmax - xmin < 300 or total_length < 1000:
+            continue
+
+        half_h = 18.0
+        rotated_rect = np.array([
+            [xmin, ymid - half_h],
+            [xmax, ymid - half_h],
+            [xmax, ymid + half_h],
+            [xmin, ymid + half_h],
+        ], dtype=np.float32)
+        original = np.dot(rotated_rect, inv.T)
+        poly = Polygon(original)
+        bbox = bbox_from_polygon(poly)
+        tracker_id = f"T{len(trackers) + 1:04d}"
+        trackers.append({
+            "tracker_id": tracker_id,
+            "tracker_code": tracker_id,
+            "bbox": bbox,
+            "polygon": box(bbox["x"], bbox["y"], bbox["x"] + bbox["w"], bbox["y"] + bbox["h"]),
+            "orientation": "row_fallback",
+        })
+        tracker_meta[tracker_id] = {"xmin": xmin, "xmax": xmax, "y": ymid}
+
+    return trackers, {"angle": angle, "rotation": rot, "inverse_rotation": inv, "rows": tracker_meta}
+
+def detect_piers_by_rows(ramming_img, trackers, row_model):
+    if not trackers or not row_model:
+        return []
+
+    hsv = cv2.cvtColor(ramming_img, cv2.COLOR_BGR2HSV)
+    mask = cv2.inRange(hsv, (0, 80, 80), (12, 255, 255)) | cv2.inRange(hsv, (170, 80, 80), (179, 255, 255))
+    mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3)))
+    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+    points = []
+    rot = row_model["rotation"]
+    inv = row_model["inverse_rotation"]
+    for cnt in contours:
+        area = cv2.contourArea(cnt)
+        if area < 8 or area > 400:
+            continue
+        x, y, w, h = cv2.boundingRect(cnt)
+        orig = np.array([x + w / 2.0, y + h / 2.0], dtype=np.float32)
+        rotated = np.dot(orig, rot.T)
+        points.append((float(rotated[0]), float(rotated[1])))
+
+    out = []
+    for tracker in trackers:
+        meta = row_model["rows"].get(tracker["tracker_id"])
+        if not meta:
+            continue
+        row_points = [
+            point for point in points
+            if meta["xmin"] - 20 <= point[0] <= meta["xmax"] + 20 and abs(point[1] - meta["y"]) <= 20
+        ]
+        if not row_points:
+            continue
+        x_labels = DBSCAN(eps=18, min_samples=1).fit_predict(np.array([[point[0]] for point in row_points], dtype=np.float32))
+        grouped = []
+        for label in sorted(set(x_labels)):
+            group = [row_points[idx] for idx, lab in enumerate(x_labels) if lab == label]
+            grouped.append((float(np.mean([point[0] for point in group])), float(np.mean([point[1] for point in group]))))
+        grouped.sort(key=lambda item: item[0])
+
+        for idx, (rx, ry) in enumerate(grouped, start=1):
+            original = np.dot(np.array([rx, ry], dtype=np.float32), inv.T)
+            cx, cy = float(original[0]), float(original[1])
+            out.append({
+                "pier_id": f"{tracker['tracker_id']}-P{idx:02d}",
+                "pier_code": f"{tracker['tracker_id']}-P{idx:02d}",
+                "tracker_id": tracker["tracker_id"],
+                "tracker_code": tracker["tracker_code"],
+                "row_index": idx,
+                "x": cx,
+                "y": cy,
+                "bbox": {"x": cx - 6.0, "y": cy - 6.0, "w": 12.0, "h": 12.0},
+            })
+    return out
+
+def classify_trackers_and_piers(trackers, all_piers):
+    def _tracker_sheet(code):
+        return {
+            "112-EXT": "S-401", "112-EDGE-INT-HYBRID": "S-403", "84-EXT": "S-405", "84-EDGE-INT-HYBRID": "S-407",
+            "56-EXT": "S-409", "56-EDGE-HYBRID": "S-410", "28-EXT": "S-412", "28-EDGE": "S-413"
+        }.get(code, "S-401")
+    def _infer_pier_type(row_index, row_len):
+        if row_index == 1 or row_index == row_len:
+            return "SAPEND"
+        if row_index == 2 or row_index == row_len - 1:
+            return "SAPE"
+        motor_idx = (row_len + 1) // 2
+        if row_index == motor_idx:
+            return "SMP"
+        return "SAP"
+    by_tracker = {}
+    for p in all_piers:
+        by_tracker.setdefault(p["tracker_id"], []).append(p)
+    for t in trackers:
+        plist = sorted(by_tracker.get(t["tracker_id"], []), key=lambda p: p["row_index"])
+        cnt = len(plist)
+        t["pier_count"] = cnt
+        t["tracker_type_code"] = TRACKER_TYPE_BY_PIER_COUNT.get(cnt, f"UNKNOWN-{cnt}")
+        t["tracker_sheet"] = _tracker_sheet(t["tracker_type_code"])
+        t["piers"] = plist
+        for p in plist:
+            p["row_pier_count"] = cnt
+            p["tracker_type_code"] = t["tracker_type_code"]
+            p["tracker_sheet"] = t["tracker_sheet"]
+            p["pier_type"] = _infer_pier_type(p["row_index"], cnt)
+            p["structure_code"] = p["pier_type"]
+            p["structure_sheet"] = "S-201..S-213"
+            p["pier_type_sheet"] = "S-201..S-213"
+            p["slope_band"] = "0-6.1%"
+            p["slope_sheet"] = "S-601"
+
+def assign_trackers_to_blocks(trackers, blocks):
+    for t in trackers:
+        rect = t["polygon"]
+        best_block = None
+        best_ratio = -1.0
+        for b in blocks:
+            inter = rect.intersection(b["polygon"])
+            if inter.is_empty:
+                continue
+            ratio = inter.area / max(rect.area, 1e-9)
+            if ratio > best_ratio:
+                best_ratio = ratio
+                best_block = b
+        method = "rectangle_overlap"
+        if best_block is None or best_ratio < 0.05:
+            center = rect.centroid
+            for b in blocks:
+                if b["polygon"].buffer(2).contains(center):
+                    best_block = b
+                    method = "rectangle_center_fallback"
+                    best_ratio = 0.0
+                    break
+        t["block_id"] = best_block["block_id"] if best_block else None
+        t["block_code"] = best_block["block_code"] if best_block else None
+        t["assignment_method"] = method
+        t["assignment_confidence"] = "high" if best_ratio >= 0.60 else ("medium" if best_ratio >= 0.45 else "low")
+
+def refine_blocks_from_trackers(blocks, trackers):
+    by_block = {}
+    for t in trackers:
+        if t.get("block_id") is not None:
+            by_block.setdefault(int(t["block_id"]), []).append(t["polygon"])
+    refined = []
+    for b in blocks:
+        polys = by_block.get(int(b["block_id"]), [])
+        if not polys:
+            refined.append(b)
+            continue
+        union = unary_union(polys)
+        poly = max(union.geoms, key=lambda g: g.area) if hasattr(union, "geoms") else union
+        mix = poly.buffer(8).intersection(b["polygon"].buffer(12))
+        final_poly = mix if not mix.is_empty else poly
+        refined.append({
+            **b,
+            "polygon": final_poly,
+            "points": polygon_to_points(final_poly),
+            "bbox": bbox_from_polygon(final_poly),
+            "centroid": {"x": float(final_poly.centroid.x), "y": float(final_poly.centroid.y)}
+        })
+    return refined
+
+def assign_piers_to_blocks(trackers, blocks):
+    out = []
+    for t in trackers:
+        inherited, inherited_code = t.get("block_id"), t.get("block_code")
+        for p in t.get("piers", []):
+            pt = Point(p["x"], p["y"])
+            point_match = None
+            point_code = None
+            for b in blocks:
+                if b["polygon"].buffer(2).contains(pt):
+                    point_match, point_code = b["block_id"], b["block_code"]
+                    break
+            if point_match is not None:
+                block_id, block_code, method = point_match, point_code, "point_in_polygon"
+            else:
+                block_id, block_code, method = inherited, inherited_code, "inherit_tracker"
+            out.append({**p, "block_id": block_id, "block_code": block_code, "assignment_method": method})
+    return out
+
+def add_relative_coordinates(blocks, trackers, piers):
+    if not trackers or not piers:
+        return None
+    ranked = []
+    for t in trackers:
+        b = t["bbox"]
+        ranked.append((b["x"] + b["w"]/2.0, b["y"] + b["h"], t))
+    ranked.sort(key=lambda item: (item[0], -item[1]))
+    ref_tracker = None
+    ref_pier = None
+    for _, _, t in ranked:
+        row_piers = sorted([p for p in piers if p["tracker_id"] == t["tracker_id"]], key=lambda p: (p.get("row_index", 999999), p["y"], p["x"]))
+        ref_pier = next((p for p in row_piers if p.get("row_index") == 1), row_piers[0] if row_piers else None)
+        if ref_pier:
+            ref_tracker = t
+            break
+    if not ref_pier:
+        return None
+    x0, y0 = float(ref_pier["x"]), float(ref_pier["y"])
+    by_tracker_p1 = {}
+    for t in trackers:
+        tp = sorted([p for p in piers if p["tracker_id"] == t["tracker_id"]], key=lambda p: p.get("row_index", 999999))
+        if tp:
+            by_tracker_p1[t["tracker_id"]] = tp[0]
+    for p in piers:
+        p["x_local"] = float(p["x"] - x0)
+        p["y_local"] = float(p["y"] - y0)
+        p1 = by_tracker_p1.get(p["tracker_id"])
+        if p1:
+            p["x_tracker_local"] = float(p["x"] - p1["x"])
+            p["y_tracker_local"] = float(p["y"] - p1["y"])
+    for t in trackers:
+        b = t["bbox"]
+        cx = b["x"] + b["w"]/2.0
+        cy = b["y"] + b["h"]/2.0
+        t["center_local"] = {"x": float(cx - x0), "y": float(cy - y0)}
+        t["bbox_local"] = {"x": float(b["x"] - x0), "y": float(b["y"] - y0), "w": float(b["w"]), "h": float(b["h"])}
+    for b in blocks:
+        c = b["centroid"]
+        b["centroid_local"] = {"x": float(c["x"] - x0), "y": float(c["y"] - y0)}
+        b["polygon_local"] = [{"x": float(pt["x"] - x0), "y": float(pt["y"] - y0)} for pt in b["points"]]
+        bb = b["bbox"]
+        b["bbox_local"] = {"x": float(bb["x"] - x0), "y": float(bb["y"] - y0), "w": float(bb["w"]), "h": float(bb["h"])}
+    return {"origin_rule": "P1 of lowest-leftmost valid tracker", "origin_pier_id": ref_pier["pier_id"], "origin_tracker_id": ref_tracker["tracker_id"], "origin_x": x0, "origin_y": y0}
+
+def build_zoom_targets(blocks, trackers, piers):
+    tracker_by = {t["tracker_id"]: t for t in trackers}
+    block_by = {b["block_id"]: b for b in blocks}
+    out = {}
+    for p in piers:
+        tracker = tracker_by.get(p["tracker_id"])
+        block = block_by.get(p["block_id"])
+        pb = p.get("bbox") or {"x": p["x"] - 8, "y": p["y"] - 16, "w": 16, "h": 32}
+        out[p["pier_id"]] = {
+            "map_target": {"object_id": p["pier_id"], "object_type": "pier", "sheet_id": "site-plan", "bbox": {"x": max(0, pb["x"]-50), "y": max(0, pb["y"]-50), "w": pb["w"]+100, "h": pb["h"]+100}, "padding": 30, "preferred_zoom": 3.5, "overlay_ids": [p["pier_id"]]},
+            "row_target": {"object_id": tracker["tracker_id"], "object_type": "tracker", "sheet_id": "site-plan", "bbox": tracker["bbox"], "padding": 40, "preferred_zoom": 2.4, "overlay_ids": [tracker["tracker_id"]]} if tracker else None,
+            "block_target": {"object_id": block["block_code"], "object_type": "block", "sheet_id": "site-plan", "bbox": block["bbox"], "padding": 60, "preferred_zoom": 1.8, "overlay_ids": [block["block_code"]]} if block else None,
+        }
+    return out
+
+def build_drawing_bundles(blocks, trackers, piers):
+    block_by = {b["block_id"]: b for b in blocks}
+    out = {}
+    for p in piers:
+        block = block_by.get(p["block_id"])
+        orig = int(block["original_block_id"]) if block else 1
+        out[p["pier_id"]] = {
+            "pier_id": p["pier_id"],
+            "block_pier_plan": {"sheet_no": f"S-{200 + orig}"},
+            "tracker_typical": {"sheet_no": p.get("tracker_sheet", "S-401")},
+            "pier_tolerances": {"sheet_no": "S-501"},
+            "slope_detail": {"sheet_no": "S-601"},
+            "crops": {"block_plan": {"x":100,"y":100,"w":2400,"h":1600}, "tracker_typical": {"x":200,"y":250,"w":2200,"h":700}},
+            "highlights": {"tracker_typical": {"row_index": p.get("row_index"), "row_pier_count": p.get("row_pier_count"), "pier_type": p.get("pier_type")}}
+        }
+    return out
+
+def _draw_text(img, txt, xy, color=(0,0,255), scale=0.5, thickness=1):
+    cv2.putText(img, txt, xy, cv2.FONT_HERSHEY_SIMPLEX, scale, (255,255,255), thickness+2, cv2.LINE_AA)
+    cv2.putText(img, txt, xy, cv2.FONT_HERSHEY_SIMPLEX, scale, color, thickness, cv2.LINE_AA)
+
+def draw_blocks(img, blocks):
+    out = img.copy()
+    for b in blocks:
+        pts = np.array([[int(p["x"]), int(p["y"])] for p in b["points"]], dtype=np.int32)
+        cv2.polylines(out, [pts], True, (255,0,0), 2)
+        _draw_text(out, b["block_code"], (int(b["centroid"]["x"]), int(b["centroid"]["y"])), (0,0,255), 0.8, 2)
+    return out
+
+def draw_trackers(img, trackers):
+    out = img.copy()
+    for t in trackers:
+        b = t["bbox"]
+        x,y,w,h = int(b["x"]), int(b["y"]), int(b["w"]), int(b["h"])
+        cv2.rectangle(out, (x,y), (x+w,y+h), (0,180,0), 2)
+        _draw_text(out, f'{t["tracker_id"]}:{t.get("pier_count",0)}', (x+4, y+18), (0,128,255), 0.45, 1)
+        for p in t.get("piers", []):
+            cv2.circle(out, (int(p["x"]), int(p["y"])), 4, (0,0,255), -1)
+    return out
+
+def draw_assignment(img, blocks, trackers, piers):
+    out = draw_blocks(img, blocks)
+    for t in trackers:
+        b = t["bbox"]
+        x,y,w,h = int(b["x"]), int(b["y"]), int(b["w"]), int(b["h"])
+        cv2.rectangle(out, (x,y), (x+w,y+h), (0,180,0), 1)
+        _draw_text(out, f'{t["tracker_id"]}/B{t.get("block_id")}', (x+4, y+18), (0,180,0), 0.45, 1)
+    for p in piers:
+        cv2.circle(out, (int(p["x"]), int(p["y"])), 3, (0,0,255), -1)
+    return out
+
+def run_pipeline(construction_pdf, ramming_pdf, overlay_source, out_dir, profile):
+    out = ensure_dir(out_dir)
+    site_page_idx, base_site = pick_site_page(construction_pdf, profile)
+    ramming_page_idx, ramming_img_raw = pick_ramming_page(ramming_pdf, profile)
+    overlay_meta, overlay = load_overlay_source(overlay_source, profile)
+    try:
+        aligned_overlay, H = align_overlay_to_base(base_site, overlay)
+    except Exception:
+        aligned_overlay, H = resize_to_base(base_site, overlay)
+    if not alignment_is_usable(base_site, aligned_overlay, H):
+        aligned_overlay, H = resize_to_base(base_site, overlay)
+    try:
+        aligned_ramming, ramming_H = align_ramming_to_base(base_site, ramming_img_raw)
+    except Exception:
+        aligned_ramming, ramming_H = resize_to_base(base_site, ramming_img_raw)
+    if not alignment_is_usable(base_site, aligned_ramming, ramming_H):
+        aligned_ramming, ramming_H = resize_to_base(base_site, ramming_img_raw)
+    trackers = extract_trackers(ramming_img_raw, profile)
+    row_model = None
+    blocks, cleaned_overlay = build_initial_blocks(aligned_overlay, profile)
+    block_labels = []
+    if overlay_meta["kind"] == "pdf" and overlay_meta.get("page_index") is not None:
+        block_labels = extract_block_labels_from_pdf(overlay_source, overlay_meta["page_index"], overlay.shape, H)
+    all_piers = []
+    if trackers:
+        for t in trackers:
+            all_piers.extend(detect_piers_in_tracker(ramming_img_raw, t, profile))
+    else:
+        trackers, row_model = extract_trackers_from_rows(ramming_img_raw)
+        all_piers = detect_piers_by_rows(ramming_img_raw, trackers, row_model)
+    classify_trackers_and_piers(trackers, all_piers)
+    scale_detected_layout(trackers, all_piers, ramming_img_raw.shape, base_site.shape)
+    if len(blocks) < max(3, len(block_labels) // 2) and block_labels:
+        blocks = build_blocks_from_labels(block_labels, trackers, profile)
+        cleaned_overlay = aligned_overlay.copy()
+    assign_trackers_to_blocks(trackers, blocks)
+    blocks = refine_blocks_from_trackers(blocks, trackers)
+    assign_trackers_to_blocks(trackers, blocks)
+    piers = assign_piers_to_blocks(trackers, blocks)
+    coord = add_relative_coordinates(blocks, trackers, piers)
+    zoom_targets = build_zoom_targets(blocks, trackers, piers)
+    drawing_bundles = build_drawing_bundles(blocks, trackers, piers)
+    save_image(out / "base_site.png", base_site)
+    save_image(out / "ramming_page_001.png", aligned_ramming)
+    save_image(out / "aligned_overlay.png", aligned_overlay)
+    save_image(out / "cleaned_overlay.png", cleaned_overlay)
+    save_image(out / "debug_blocks.png", draw_blocks(base_site, blocks))
+    save_image(out / "debug_trackers.png", draw_trackers(aligned_ramming, trackers))
+    save_image(out / "final_assignment.png", draw_assignment(base_site, blocks, trackers, piers))
+    blocks_json = [{
+        "block_id": b["block_id"], "block_code": b["block_code"], "label": b["label"], "color": b["color"],
+        "original_block_id": b["original_block_id"], "block_pier_plan_sheet": b["block_pier_plan_sheet"],
+        "bbox": b["bbox"], "bbox_local": b.get("bbox_local"), "centroid": b["centroid"], "centroid_local": b.get("centroid_local"),
+        "polygon": b["points"], "polygon_local": b.get("polygon_local")
+    } for b in blocks]
+    trackers_json = [{
+        "tracker_id": t["tracker_id"], "tracker_code": t["tracker_code"], "block_id": t.get("block_id"), "block_code": t.get("block_code"),
+        "tracker_type_code": t.get("tracker_type_code"), "tracker_sheet": t.get("tracker_sheet"), "orientation": t["orientation"],
+        "pier_count": t.get("pier_count"), "bbox": t["bbox"], "bbox_local": t.get("bbox_local"), "center_local": t.get("center_local"),
+        "assignment_method": t.get("assignment_method"), "assignment_confidence": t.get("assignment_confidence"),
+        "piers": [p["pier_id"] for p in t.get("piers", [])]
+    } for t in trackers]
+    summary = {
+        "artifacts_version": "1.0.0",
+        "site_profile": profile["name"],
+        "detected_site_profile": profile.get("detected_name"),
+        "construction_page_index_used": site_page_idx,
+        "ramming_page_index_used": ramming_page_idx,
+        "overlay_source": overlay_meta,
+        "base_image": {
+            "width": int(base_site.shape[1]),
+            "height": int(base_site.shape[0]),
+        },
+        "overlay_homography": H.tolist(),
+        "ramming_homography": ramming_H.tolist(),
+        "block_label_count": len(block_labels),
+        "block_count": len(blocks_json),
+        "tracker_count": len(trackers_json),
+        "pier_count": len(piers),
+        "coordinate_system": coord,
+    }
+    save_json(out / "blocks.json", blocks_json)
+    save_json(out / "trackers.json", trackers_json)
+    save_json(out / "piers.json", piers)
+    save_json(out / "zoom_targets.json", zoom_targets)
+    save_json(out / "drawing_bundles.json", drawing_bundles)
+    save_json(out / "summary.json", summary)
+    return {"blocks": blocks_json, "trackers": trackers_json, "piers": piers, "zoom_targets": zoom_targets, "drawing_bundles": drawing_bundles, "summary": summary}

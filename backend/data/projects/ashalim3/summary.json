@@ -1,0 +1,60 @@
+{
+  "artifacts_version": "1.0.0",
+  "site_profile": "ashalim3",
+  "detected_site_profile": "ashalim3",
+  "construction_page_index_used": 1,
+  "ramming_page_index_used": 0,
+  "overlay_source": {
+    "kind": "pdf",
+    "page_index": 0
+  },
+  "base_image": {
+    "width": 2693,
+    "height": 1743
+  },
+  "overlay_homography": [
+    [
+      0.9826863677553288,
+      -0.00024419312729931044,
+      22.503993706699575
+    ],
+    [
+      -0.002873892615680028,
+      0.9913635293620537,
+      7.363827907766325
+    ],
+    [
+      -3.328187040633311e-06,
+      -9.420371825842353e-08,
+      1.0
+    ]
+  ],
+  "ramming_homography": [
+    [
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      1.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "block_label_count": 13,
+  "block_count": 5,
+  "tracker_count": 30,
+  "pier_count": 147,
+  "coordinate_system": {
+    "origin_rule": "P1 of lowest-leftmost valid tracker",
+    "origin_pier_id": "T0011-P01",
+    "origin_tracker_id": "T0011",
+    "origin_x": 725.4775328529038,
+    "origin_y": 941.8623315663735
+  }
+}

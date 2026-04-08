@@ -1,0 +1,1040 @@
+[
+  {
+    "tracker_id": "T0001",
+    "tracker_code": "T0001",
+    "block_id": 1,
+    "block_code": "B1",
+    "tracker_type_code": "28-EXT",
+    "tracker_sheet": "S-412",
+    "orientation": "row_fallback",
+    "pier_count": 6,
+    "bbox": {
+      "x": 930.6615556601298,
+      "y": 1064.1613525975743,
+      "w": 955.9380851250778,
+      "h": 433.0253131699605
+    },
+    "bbox_local": {
+      "x": 205.18402280722603,
+      "y": 122.29902103120071,
+      "w": 955.9380851250778,
+      "h": 433.0253131699605
+    },
+    "center_local": {
+      "x": 683.1530653697648,
+      "y": 338.811677616181
+    },
+    "assignment_method": "rectangle_overlap",
+    "assignment_confidence": "high",
+    "piers": [
+      "T0001-P01",
+      "T0001-P02",
+      "T0001-P03",
+      "T0001-P04",
+      "T0001-P05",
+      "T0001-P06"
+    ]
+  },
+  {
+    "tracker_id": "T0002",
+    "tracker_code": "T0002",
+    "block_id": 4,
+    "block_code": "B4",
+    "tracker_type_code": "UNKNOWN-31",
+    "tracker_sheet": "S-401",
+    "orientation": "row_fallback",
+    "pier_count": 31,
+    "bbox": {
+      "x": 415.4402063360857,
+      "y": 477.215423364565,
+      "w": 1128.3418352321933,
+      "h": 509.96061866536263
+    },
+    "bbox_local": {
+      "x": -310.0373265168181,
+      "y": -464.6469082018085,
+      "w": 1128.3418352321933,
+      "h": 509.96061866536263
+    },
+    "center_local": {
+      "x": 254.13359109927853,
+      "y": -209.66659886912726
+    },
+    "assignment_method": "rectangle_overlap",
+    "assignment_confidence": "high",
+    "piers": [
+      "T0002-P01",
+      "T0002-P02",
+      "T0002-P03",
+      "T0002-P04",
+      "T0002-P05",
+      "T0002-P06",
+      "T0002-P07",
+      "T0002-P08",
+      "T0002-P09",
+      "T0002-P10",
+      "T0002-P11",
+      "T0002-P12",
+      "T0002-P13",
+      "T0002-P14",
+      "T0002-P15",
+      "T0002-P16",
+      "T0002-P17",
+      "T0002-P18",
+      "T0002-P19",
+      "T0002-P20",
+      "T0002-P21",
+      "T0002-P22",
+      "T0002-P23",
+      "T0002-P24",
+      "T0002-P25",
+      "T0002-P26",
+      "T0002-P27",
+      "T0002-P28",
+      "T0002-P29",
+      "T0002-P30",
+      "T0002-P31"
+    ]
+  },
+  {
+    "tracker_id": "T0003",
+    "tracker_code": "T0003",
+    "block_id": 1,
+    "block_code": "B1",
+    "tracker_type_code": "28-EXT",
+    "tracker_sheet": "S-412",
+    "orientation": "row_fallback",
+    "pier_count": 6,
+    "bbox": {
+      "x": 544.5357215949265,
+      "y": 758.5459676643129,
+      "w": 1233.5631371951295,
+      "h": 556.9157002096479
+    },
+    "bbox_local": {
+      "x": -180.9418112579773,
+      "y": -183.31636390206063,
+      "w": 1233.5631371951295,
+      "h": 556.9157002096479
+    },
+    "center_local": {
+      "x": 435.83975733958755,
+      "y": 95.14148620276319
+    },
+    "assignment_method": "rectangle_overlap",
+    "assignment_confidence": "high",
+    "piers": [
+      "T0003-P01",
+      "T0003-P02",
+      "T0003-P03",
+      "T0003-P04",
+      "T0003-P05",
+      "T0003-P06"
+    ]
+  },
+  {
+    "tracker_id": "T0004",
+    "tracker_code": "T0004",
+    "block_id": 1,
+    "block_code": "B1",
+    "tracker_type_code": "28-EDGE",
+    "tracker_sheet": "S-413",
+    "orientation": "row_fallback",
+    "pier_count": 5,
+    "bbox": {
+      "x": 543.5196590124424,
+      "y": 684.711837156009,
+      "w": 1171.3119283549206,
+      "h": 529.136081885263
+    },
+    "bbox_local": {
+      "x": -181.9578738404614,
+      "y": -257.15049441036456,
+      "w": 1171.3119283549206,
+      "h": 529.136081885263
+    },
+    "center_local": {
+      "x": 403.6980903369988,
+      "y": 7.417546532266897
+    },
+    "assignment_method": "rectangle_overlap",
+    "assignment_confidence": "high",
+    "piers": [
+      "T0004-P01",
+      "T0004-P02",
+      "T0004-P03",
+      "T0004-P04",
+      "T0004-P05"
+    ]
+  },
+  {
+    "tracker_id": "T0005",
+    "tracker_code": "T0005",
+    "block_id": 4,
+    "block_code": "B4",
+    "tracker_type_code": "112-EDGE-INT-HYBRID",
+    "tracker_sheet": "S-403",
+    "orientation": "row_fallback",
+    "pier_count": 17,
+    "bbox": {
+      "x": 413.7200244031957,
+      "y": 522.714397999539,
+      "w": 1098.2255521598838,
+      "h": 496.5212376013425
+    },
+    "bbox_local": {
+      "x": -311.7575084497081,
+      "y": -419.1479335668346,
+      "w": 1098.2255521598838,
+      "h": 496.5212376013425
+    },
+    "center_local": {
+      "x": 237.3552676302338,
+      "y": -170.8873147661634
+    },
+    "assignment_method": "rectangle_overlap",
+    "assignment_confidence": "high",
+    "piers": [
+      "T0005-P01",
+      "T0005-P02",
+      "T0005-P03",
+      "T0005-P04",
+      "T0005-P05",
+      "T0005-P06",
+      "T0005-P07",
+      "T0005-P08",
+      "T0005-P09",
+      "T0005-P10",
+      "T0005-P11",
+      "T0005-P12",
+      "T0005-P13",
+      "T0005-P14",
+      "T0005-P15",
+      "T0005-P16",
+      "T0005-P17"
+    ]
+  },
+  {
+    "tracker_id": "T0006",
+    "tracker_code": "T0006",
+    "block_id": 1,
+    "block_code": "B1",
+    "tracker_type_code": "UNKNOWN-4",
+    "tracker_sheet": "S-401",
+    "orientation": "row_fallback",
+    "pier_count": 4,
+    "bbox": {
+      "x": 1119.071435608971,
+      "y": 841.277304035093,
+      "w": 661.3489162805678,
+      "h": 301.5646872454735
+    },
+    "bbox_local": {
+      "x": 393.5939027560671,
+      "y": -100.5850275312805,
+      "w": 661.3489162805678,
+      "h": 301.5646872454735
+    },
+    "center_local": {
+      "x": 724.2683608963509,
+      "y": 50.19731609145629
+    },
+    "assignment_method": "rectangle_overlap",
+    "assignment_confidence": "high",
+    "piers": [
+      "T0006-P01",
+      "T0006-P02",
+      "T0006-P03",
+      "T0006-P04"
+    ]
+  },
+  {
+    "tracker_id": "T0007",
+    "tracker_code": "T0007",
+    "block_id": 1,
+    "block_code": "B1",
+    "tracker_type_code": "UNKNOWN-0",
+    "tracker_sheet": "S-401",
+    "orientation": "row_fallback",
+    "pier_count": 0,
+    "bbox": {
+      "x": 929.6224648805936,
+      "y": 1002.0635304665266,
+      "w": 898.4158785481633,
+      "h": 407.35604275108597
+    },
+    "bbox_local": {
+      "x": 204.14493202768983,
+      "y": 60.20119890015303,
+      "w": 898.4158785481633,
+      "h": 407.35604275108597
+    },
+    "center_local": {
+      "x": 653.3528713017715,
+      "y": 263.87922027569607
+    },
+    "assignment_method": "rectangle_overlap",
+    "assignment_confidence": "high",
+    "piers": []
+  },
+  {
+    "tracker_id": "T0008",
+    "tracker_code": "T0008",
+    "block_id": 5,
+    "block_code": "B5",
+    "tracker_type_code": "28-EXT",
+    "tracker_sheet": "S-412",
+    "orientation": "row_fallback",
+    "pier_count": 6,
+    "bbox": {
+      "x": 355.7340139119794,
+      "y": 388.71680345758125,
+      "w": 1069.8918466345644,
+      "h": 483.8772527055872
+    },
+    "bbox_local": {
+      "x": -369.7435189409244,
+      "y": -553.1455281087923,
+      "w": 1069.8918466345644,
+      "h": 483.8772527055872
+    },
+    "center_local": {
+      "x": 165.2024043763579,
+      "y": -311.20690175599873
+    },
+    "assignment_method": "rectangle_overlap",
+    "assignment_confidence": "high",
+    "piers": [
+      "T0008-P01",
+      "T0008-P02",
+      "T0008-P03",
+      "T0008-P04",
+      "T0008-P05",
+      "T0008-P06"
+    ]
+  },
+  {
+    "tracker_id": "T0009",
+    "tracker_code": "T0009",
+    "block_id": 1,
+    "block_code": "B1",
+    "tracker_type_code": "UNKNOWN-4",
+    "tracker_sheet": "S-401",
+    "orientation": "row_fallback",
+    "pier_count": 4,
+    "bbox": {
+      "x": 517.7893590987765,
+      "y": 756.5089860279593,
+      "w": 667.0954791784994,
+      "h": 304.1291921168762
+    },
+    "bbox_local": {
+      "x": -207.68817375412732,
+      "y": -185.35334553841426,
+      "w": 667.0954791784994,
+      "h": 304.1291921168762
+    },
+    "center_local": {
+      "x": 125.85956583512234,
+      "y": -33.288749479976104
+    },
+    "assignment_method": "rectangle_overlap",
+    "assignment_confidence": "high",
+    "piers": [
+      "T0009-P01",
+      "T0009-P02",
+      "T0009-P03",
+      "T0009-P04"
+    ]
+  },
+  {
+    "tracker_id": "T0010",
+    "tracker_code": "T0010",
+    "block_id": 1,
+    "block_code": "B1",
+    "tracker_type_code": "UNKNOWN-3",
+    "tracker_sheet": "S-401",
+    "orientation": "row_fallback",
+    "pier_count": 3,
+    "bbox": {
+      "x": 680.7715456688894,
+      "y": 723.5916891400867,
+      "w": 1083.1505836658228,
+      "h": 489.79410526922464
+    },
+    "bbox_local": {
+      "x": -44.70598718401436,
+      "y": -218.27064242628683,
+      "w": 1083.1505836658228,
+      "h": 489.79410526922464
+    },
+    "center_local": {
+      "x": 496.869304648897,
+      "y": 26.626410208325524
+    },
+    "assignment_method": "rectangle_overlap",
+    "assignment_confidence": "high",
+    "piers": [
+      "T0010-P01",
+      "T0010-P02",
+      "T0010-P03"
+    ]
+  },
+  {
+    "tracker_id": "T0011",
+    "tracker_code": "T0011",
+    "block_id": 1,
+    "block_code": "B1",
+    "tracker_type_code": "UNKNOWN-4",
+    "tracker_sheet": "S-401",
+    "orientation": "row_fallback",
+    "pier_count": 4,
+    "bbox": {
+      "x": 567.4411480472269,
+      "y": 807.6599998771252,
+      "w": 448.79778652991615,
+      "h": 206.71370214755981
+    },
+    "bbox_local": {
+      "x": -158.0363848056769,
+      "y": -134.20233168924835,
+      "w": 448.79778652991615,
+      "h": 206.71370214755981
+    },
+    "center_local": {
+      "x": 66.36250845928112,
+      "y": -30.845480615468432
+    },
+    "assignment_method": "rectangle_overlap",
+    "assignment_confidence": "high",
+    "piers": [
+      "T0011-P01",
+      "T0011-P02",
+      "T0011-P03",
+      "T0011-P04"
+    ]
+  },
+  {
+    "tracker_id": "T0012",
+    "tracker_code": "T0012",
+    "block_id": 1,
+    "block_code": "B1",
+    "tracker_type_code": "28-EDGE",
+    "tracker_sheet": "S-413",
+    "orientation": "row_fallback",
+    "pier_count": 5,
+    "bbox": {
+      "x": 546.8441154476747,
+      "y": 800.6176029340173,
+      "w": 1223.756818123721,
+      "h": 552.5396667809598
+    },
+    "bbox_local": {
+      "x": -178.63341740522912,
+      "y": -141.2447286323562,
+      "w": 1223.756818123721,
+      "h": 552.5396667809598
+    },
+    "center_local": {
+      "x": 433.2449916566313,
+      "y": 135.0251047581237
+    },
+    "assignment_method": "rectangle_overlap",
+    "assignment_confidence": "high",
+    "piers": [
+      "T0012-P01",
+      "T0012-P02",
+      "T0012-P03",
+      "T0012-P04",
+      "T0012-P05"
+    ]
+  },
+  {
+    "tracker_id": "T0013",
+    "tracker_code": "T0013",
+    "block_id": 1,
+    "block_code": "B1",
+    "tracker_type_code": "UNKNOWN-7",
+    "tracker_sheet": "S-401",
+    "orientation": "row_fallback",
+    "pier_count": 7,
+    "bbox": {
+      "x": 928.8961534552677,
+      "y": 910.6422750337028,
+      "w": 903.0042381011717,
+      "h": 409.4035417066498
+    },
+    "bbox_local": {
+      "x": 203.41862060236394,
+      "y": -31.220056532670696,
+      "w": 903.0042381011717,
+      "h": 409.4035417066498
+    },
+    "center_local": {
+      "x": 654.9207396529498,
+      "y": 173.4817143206542
+    },
+    "assignment_method": "rectangle_overlap",
+    "assignment_confidence": "high",
+    "piers": [
+      "T0013-P01",
+      "T0013-P02",
+      "T0013-P03",
+      "T0013-P04",
+      "T0013-P05",
+      "T0013-P06",
+      "T0013-P07"
+    ]
+  },
+  {
+    "tracker_id": "T0014",
+    "tracker_code": "T0014",
+    "block_id": 5,
+    "block_code": "B5",
+    "tracker_type_code": "UNKNOWN-20",
+    "tracker_sheet": "S-401",
+    "orientation": "row_fallback",
+    "pier_count": 20,
+    "bbox": {
+      "x": 362.72092915430267,
+      "y": 464.14179004374347,
+      "w": 1086.4175218660582,
+      "h": 491.2518694530782
+    },
+    "bbox_local": {
+      "x": -362.7566036986011,
+      "y": -477.72054152263007,
+      "w": 1086.4175218660582,
+      "h": 491.2518694530782
+    },
+    "center_local": {
+      "x": 180.452157234428,
+      "y": -232.09460679609094
+    },
+    "assignment_method": "rectangle_overlap",
+    "assignment_confidence": "high",
+    "piers": [
+      "T0014-P01",
+      "T0014-P02",
+      "T0014-P03",
+      "T0014-P04",
+      "T0014-P05",
+      "T0014-P06",
+      "T0014-P07",
+      "T0014-P08",
+      "T0014-P09",
+      "T0014-P10",
+      "T0014-P11",
+      "T0014-P12",
+      "T0014-P13",
+      "T0014-P14",
+      "T0014-P15",
+      "T0014-P16",
+      "T0014-P17",
+      "T0014-P18",
+      "T0014-P19",
+      "T0014-P20"
+    ]
+  },
+  {
+    "tracker_id": "T0015",
+    "tracker_code": "T0015",
+    "block_id": 1,
+    "block_code": "B1",
+    "tracker_type_code": "UNKNOWN-2",
+    "tracker_sheet": "S-401",
+    "orientation": "row_fallback",
+    "pier_count": 2,
+    "bbox": {
+      "x": 928.0927097632654,
+      "y": 1143.529760215581,
+      "w": 966.8804154664897,
+      "h": 437.9084088672343
+    },
+    "bbox_local": {
+      "x": 202.61517691036158,
+      "y": 201.66742864920752,
+      "w": 966.8804154664897,
+      "h": 437.9084088672343
+    },
+    "center_local": {
+      "x": 686.0553846436064,
+      "y": 420.6216330828247
+    },
+    "assignment_method": "rectangle_overlap",
+    "assignment_confidence": "high",
+    "piers": [
+      "T0015-P01",
+      "T0015-P02"
+    ]
+  },
+  {
+    "tracker_id": "T0016",
+    "tracker_code": "T0016",
+    "block_id": 5,
+    "block_code": "B5",
+    "tracker_type_code": "UNKNOWN-0",
+    "tracker_sheet": "S-401",
+    "orientation": "row_fallback",
+    "pier_count": 0,
+    "bbox": {
+      "x": 300.4626132759718,
+      "y": 419.4070739380395,
+      "w": 884.5947448678722,
+      "h": 401.1883361889546
+    },
+    "bbox_local": {
+      "x": -425.01491957693196,
+      "y": -522.455257628334,
+      "w": 884.5947448678722,
+      "h": 401.1883361889546
+    },
+    "center_local": {
+      "x": 17.28245285700416,
+      "y": -321.8610895338568
+    },
+    "assignment_method": "rectangle_overlap",
+    "assignment_confidence": "high",
+    "piers": []
+  },
+  {
+    "tracker_id": "T0017",
+    "tracker_code": "T0017",
+    "block_id": 5,
+    "block_code": "B5",
+    "tracker_type_code": "UNKNOWN-0",
+    "tracker_sheet": "S-401",
+    "orientation": "row_fallback",
+    "pier_count": 0,
+    "bbox": {
+      "x": 736.4236954207539,
+      "y": 436.5608853111016,
+      "w": 456.94527412987,
+      "h": 210.3495393985042
+    },
+    "bbox_local": {
+      "x": 10.946162567850138,
+      "y": -505.30144625527197,
+      "w": 456.94527412987,
+      "h": 210.3495393985042
+    },
+    "center_local": {
+      "x": 239.41879963278507,
+      "y": -400.1266765560199
+    },
+    "assignment_method": "rectangle_overlap",
+    "assignment_confidence": "high",
+    "piers": []
+  },
+  {
+    "tracker_id": "T0018",
+    "tracker_code": "T0018",
+    "block_id": 4,
+    "block_code": "B4",
+    "tracker_type_code": "84-EDGE-INT-HYBRID",
+    "tracker_sheet": "S-407",
+    "orientation": "row_fallback",
+    "pier_count": 13,
+    "bbox": {
+      "x": 420.13147858817376,
+      "y": 576.8311046419778,
+      "w": 1058.2522949503357,
+      "h": 478.683163066336
+    },
+    "bbox_local": {
+      "x": -305.34605426473,
+      "y": -365.0312269243957,
+      "w": 1058.2522949503357,
+      "h": 478.683163066336
+    },
+    "center_local": {
+      "x": 223.78009321043783,
+      "y": -125.68964539122771
+    },
+    "assignment_method": "rectangle_overlap",
+    "assignment_confidence": "high",
+    "piers": [
+      "T0018-P01",
+      "T0018-P02",
+      "T0018-P03",
+      "T0018-P04",
+      "T0018-P05",
+      "T0018-P06",
+      "T0018-P07",
+      "T0018-P08",
+      "T0018-P09",
+      "T0018-P10",
+      "T0018-P11",
+      "T0018-P12",
+      "T0018-P13"
+    ]
+  },
+  {
+    "tracker_id": "T0019",
+    "tracker_code": "T0019",
+    "block_id": 5,
+    "block_code": "B5",
+    "tracker_type_code": "28-EXT",
+    "tracker_sheet": "S-412",
+    "orientation": "row_fallback",
+    "pier_count": 6,
+    "bbox": {
+      "x": 364.82516985315544,
+      "y": 370.44012484084783,
+      "w": 1035.873242218548,
+      "h": 468.6964904163468
+    },
+    "bbox_local": {
+      "x": -360.65236299974833,
+      "y": -571.4222067255257,
+      "w": 1035.873242218548,
+      "h": 468.6964904163468
+    },
+    "center_local": {
+      "x": 157.2842581095257,
+      "y": -337.07396151735225
+    },
+    "assignment_method": "rectangle_overlap",
+    "assignment_confidence": "high",
+    "piers": [
+      "T0019-P01",
+      "T0019-P02",
+      "T0019-P03",
+      "T0019-P04",
+      "T0019-P05",
+      "T0019-P06"
+    ]
+  },
+  {
+    "tracker_id": "T0020",
+    "tracker_code": "T0020",
+    "block_id": 3,
+    "block_code": "B3",
+    "tracker_type_code": "UNKNOWN-0",
+    "tracker_sheet": "S-401",
+    "orientation": "row_fallback",
+    "pier_count": 0,
+    "bbox": {
+      "x": 767.2874716790666,
+      "y": 591.5146208272286,
+      "w": 918.4389829809456,
+      "h": 416.2913659280328
+    },
+    "bbox_local": {
+      "x": 41.809938826162806,
+      "y": -350.347710739145,
+      "w": 918.4389829809456,
+      "h": 416.2913659280328
+    },
+    "center_local": {
+      "x": 501.0294303166356,
+      "y": -142.2020277751286
+    },
+    "assignment_method": "rectangle_overlap",
+    "assignment_confidence": "high",
+    "piers": []
+  },
+  {
+    "tracker_id": "T0021",
+    "tracker_code": "T0021",
+    "block_id": 1,
+    "block_code": "B1",
+    "tracker_type_code": "UNKNOWN-1",
+    "tracker_sheet": "S-401",
+    "orientation": "row_fallback",
+    "pier_count": 1,
+    "bbox": {
+      "x": 1360.026783851407,
+      "y": 895.8312761913594,
+      "w": 403.6459023805936,
+      "h": 186.56468574610778
+    },
+    "bbox_local": {
+      "x": 634.5492509985031,
+      "y": -46.03105537501415,
+      "w": 403.6459023805936,
+      "h": 186.56468574610778
+    },
+    "center_local": {
+      "x": 836.3722021888,
+      "y": 47.2512874980398
+    },
+    "assignment_method": "rectangle_overlap",
+    "assignment_confidence": "high",
+    "piers": [
+      "T0021-P01"
+    ]
+  },
+  {
+    "tracker_id": "T0022",
+    "tracker_code": "T0022",
+    "block_id": 1,
+    "block_code": "B1",
+    "tracker_type_code": "UNKNOWN-4",
+    "tracker_sheet": "S-401",
+    "orientation": "row_fallback",
+    "pier_count": 4,
+    "bbox": {
+      "x": 920.6377054807139,
+      "y": 948.9358980191404,
+      "w": 701.0746813390456,
+      "h": 319.2924255407664
+    },
+    "bbox_local": {
+      "x": 195.16017262781008,
+      "y": 7.0735664527668405,
+      "w": 701.0746813390456,
+      "h": 319.2924255407664
+    },
+    "center_local": {
+      "x": 545.6975132973328,
+      "y": 166.71977922315
+    },
+    "assignment_method": "rectangle_overlap",
+    "assignment_confidence": "high",
+    "piers": [
+      "T0022-P01",
+      "T0022-P02",
+      "T0022-P03",
+      "T0022-P04"
+    ]
+  },
+  {
+    "tracker_id": "T0023",
+    "tracker_code": "T0023",
+    "block_id": 3,
+    "block_code": "B3",
+    "tracker_type_code": "UNKNOWN-0",
+    "tracker_sheet": "S-401",
+    "orientation": "row_fallback",
+    "pier_count": 0,
+    "bbox": {
+      "x": 719.3415809104179,
+      "y": 608.6093439887283,
+      "w": 971.4629221645741,
+      "h": 439.9533581696562
+    },
+    "bbox_local": {
+      "x": -6.135951942485917,
+      "y": -333.2529875776453,
+      "w": 971.4629221645741,
+      "h": 439.9533581696562
+    },
+    "center_local": {
+      "x": 479.59550913980115,
+      "y": -113.27630849281718
+    },
+    "assignment_method": "rectangle_overlap",
+    "assignment_confidence": "high",
+    "piers": []
+  },
+  {
+    "tracker_id": "T0024",
+    "tracker_code": "T0024",
+    "block_id": 1,
+    "block_code": "B1",
+    "tracker_type_code": "UNKNOWN-0",
+    "tracker_sheet": "S-401",
+    "orientation": "row_fallback",
+    "pier_count": 0,
+    "bbox": {
+      "x": 1373.8796553342916,
+      "y": 1078.295992202713,
+      "w": 189.09292205383636,
+      "h": 90.82030218728936
+    },
+    "bbox_local": {
+      "x": 648.4021224813878,
+      "y": 136.43366063633948,
+      "w": 189.09292205383636,
+      "h": 90.82030218728936
+    },
+    "center_local": {
+      "x": 742.948583508306,
+      "y": 181.84381172998405
+    },
+    "assignment_method": "rectangle_overlap",
+    "assignment_confidence": "high",
+    "piers": []
+  },
+  {
+    "tracker_id": "T0025",
+    "tracker_code": "T0025",
+    "block_id": 1,
+    "block_code": "B1",
+    "tracker_type_code": "UNKNOWN-0",
+    "tracker_sheet": "S-401",
+    "orientation": "row_fallback",
+    "pier_count": 0,
+    "bbox": {
+      "x": 1371.379232098562,
+      "y": 1079.8150755446281,
+      "w": 384.6631429105454,
+      "h": 178.09339944097795
+    },
+    "bbox_local": {
+      "x": 645.9016992456582,
+      "y": 137.9527439782546,
+      "w": 384.6631429105454,
+      "h": 178.09339944097795
+    },
+    "center_local": {
+      "x": 838.2332707009309,
+      "y": 226.99944369874356
+    },
+    "assignment_method": "rectangle_overlap",
+    "assignment_confidence": "high",
+    "piers": []
+  },
+  {
+    "tracker_id": "T0026",
+    "tracker_code": "T0026",
+    "block_id": 1,
+    "block_code": "B1",
+    "tracker_type_code": "UNKNOWN-0",
+    "tracker_sheet": "S-401",
+    "orientation": "row_fallback",
+    "pier_count": 0,
+    "bbox": {
+      "x": 1378.508845518079,
+      "y": 1014.4839745230701,
+      "w": 374.9747170597479,
+      "h": 173.77014383232614
+    },
+    "bbox_local": {
+      "x": 653.0313126651752,
+      "y": 72.62164295669652,
+      "w": 374.9747170597479,
+      "h": 173.77014383232614
+    },
+    "center_local": {
+      "x": 840.5186711950491,
+      "y": 159.50671487285967
+    },
+    "assignment_method": "rectangle_overlap",
+    "assignment_confidence": "high",
+    "piers": []
+  },
+  {
+    "tracker_id": "T0027",
+    "tracker_code": "T0027",
+    "block_id": 1,
+    "block_code": "B1",
+    "tracker_type_code": "UNKNOWN-1",
+    "tracker_sheet": "S-401",
+    "orientation": "row_fallback",
+    "pier_count": 1,
+    "bbox": {
+      "x": 1632.2607642833132,
+      "y": 1194.8244470192901,
+      "w": 254.7515027740336,
+      "h": 120.12040616281737
+    },
+    "bbox_local": {
+      "x": 906.7832314304094,
+      "y": 252.96211545291658,
+      "w": 254.7515027740336,
+      "h": 120.12040616281737
+    },
+    "center_local": {
+      "x": 1034.1589828174262,
+      "y": 313.0223185343252
+    },
+    "assignment_method": "rectangle_overlap",
+    "assignment_confidence": "high",
+    "piers": [
+      "T0027-P01"
+    ]
+  },
+  {
+    "tracker_id": "T0028",
+    "tracker_code": "T0028",
+    "block_id": 1,
+    "block_code": "B1",
+    "tracker_type_code": "UNKNOWN-1",
+    "tracker_sheet": "S-401",
+    "orientation": "row_fallback",
+    "pier_count": 1,
+    "bbox": {
+      "x": 1479.7665801911396,
+      "y": 1107.629114186428,
+      "w": 407.60424390714417,
+      "h": 188.33114918411098
+    },
+    "bbox_local": {
+      "x": 754.2890473382358,
+      "y": 165.76678262005453,
+      "w": 407.60424390714417,
+      "h": 188.33114918411098
+    },
+    "center_local": {
+      "x": 958.091169291808,
+      "y": 259.93235721211
+    },
+    "assignment_method": "rectangle_overlap",
+    "assignment_confidence": "high",
+    "piers": [
+      "T0028-P01"
+    ]
+  },
+  {
+    "tracker_id": "T0029",
+    "tracker_code": "T0029",
+    "block_id": 1,
+    "block_code": "B1",
+    "tracker_type_code": "UNKNOWN-1",
+    "tracker_sheet": "S-401",
+    "orientation": "row_fallback",
+    "pier_count": 1,
+    "bbox": {
+      "x": 1620.6992855031594,
+      "y": 1226.9764655166362,
+      "w": 266.9253016621847,
+      "h": 125.55295211216017
+    },
+    "bbox_local": {
+      "x": 895.2217526502557,
+      "y": 285.1141339502626,
+      "w": 266.9253016621847,
+      "h": 125.55295211216017
+    },
+    "center_local": {
+      "x": 1028.684403481348,
+      "y": 347.89061000634274
+    },
+    "assignment_method": "rectangle_overlap",
+    "assignment_confidence": "high",
+    "piers": [
+      "T0029-P01"
+    ]
+  },
+  {
+    "tracker_id": "T0030",
+    "tracker_code": "T0030",
+    "block_id": 1,
+    "block_code": "B1",
+    "tracker_type_code": "UNKNOWN-0",
+    "tracker_sheet": "S-401",
+    "orientation": "row_fallback",
+    "pier_count": 0,
+    "bbox": {
+      "x": 1605.8629950393606,
+      "y": 1177.0689175047512,
+      "w": 275.5170139831828,
+      "h": 129.3871205068763
+    },
+    "bbox_local": {
+      "x": 880.3854621864568,
+      "y": 235.20658593837766,
+      "w": 275.5170139831828,
+      "h": 129.3871205068763
+    },
+    "center_local": {
+      "x": 1018.1439691780481,
+      "y": 299.9001461918158
+    },
+    "assignment_method": "rectangle_overlap",
+    "assignment_confidence": "high",
+    "piers": []
+  }
+]
