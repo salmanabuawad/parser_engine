@@ -60,17 +60,21 @@ export default function SiteMap({
   );
 
   // Fit to canvas on mount / resize
+  // After rotation: display width = imageHeight, display height = imageWidth
+  const dispW = imageHeight;
+  const dispH = imageWidth;
+
   useEffect(() => {
-    if (!containerRef.current || !imageWidth || !imageHeight) return;
+    if (!containerRef.current || !dispW || !dispH) return;
     const cw = containerRef.current.clientWidth;
     const ch = containerRef.current.clientHeight;
-    const scale = Math.min(cw / imageWidth, ch / imageHeight) * 0.95;
+    const scale = Math.min(cw / dispW, ch / dispH) * 0.95;
     setView({
-      x: (cw - imageWidth * scale) / 2,
-      y: (ch - imageHeight * scale) / 2,
+      x: (cw - dispW * scale) / 2,
+      y: (ch - dispH * scale) / 2,
       scale,
     });
-  }, [imageWidth, imageHeight]);
+  }, [dispW, dispH]);
 
   // Draw
   useEffect(() => {
@@ -91,15 +95,19 @@ export default function SiteMap({
     ctx.fillStyle = "#f8fafc";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Helper: map image coords to canvas coords — flip both X and Y
-    const mapX = (ix: number) => ox + (imageWidth - ix) * s;
-    const mapY = (iy: number) => oy + (imageHeight - iy) * s;
+    // Helper: flip both X,Y then rotate 90° clockwise
+    // flip-both: (W-x, H-y) → rotate 90CW: new_x = H-y, new_y = x
+    // After rotation, canvas dimensions swap: width=imageHeight, height=imageWidth
+    const mapPt = (ix: number, iy: number): [number, number] => [
+      ox + (imageHeight - iy) * s,
+      oy + ix * s,
+    ];
 
-    // Draw subtle background rect for the site bounds
+    // Draw subtle background rect (rotated dimensions)
     ctx.save();
     ctx.strokeStyle = "#cbd5e1";
     ctx.lineWidth = 1;
-    ctx.strokeRect(ox, oy, imageWidth * s, imageHeight * s);
+    ctx.strokeRect(ox, oy, imageHeight * s, imageWidth * s);
     ctx.restore();
 
     // Blocks
@@ -108,9 +116,11 @@ export default function SiteMap({
         const pts = b.polygon;
         if (!pts || pts.length < 3) continue;
         ctx.beginPath();
-        ctx.moveTo(mapX(pts[0].x), mapY(pts[0].y));
+        const [mx0, my0] = mapPt(pts[0].x, pts[0].y);
+        ctx.moveTo(mx0, my0);
         for (let i = 1; i < pts.length; i++) {
-          ctx.lineTo(mapX(pts[i].x), mapY(pts[i].y));
+          const [mx, my] = mapPt(pts[i].x, pts[i].y);
+          ctx.lineTo(mx, my);
         }
         ctx.closePath();
         const isSel = selectedBlock?.block_code === b.block_code;
@@ -130,8 +140,7 @@ export default function SiteMap({
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       for (const b of blocks) {
-        const cx = mapX(b.centroid.x);
-        const cy = mapY(b.centroid.y);
+        const [cx, cy] = mapPt(b.centroid.x, b.centroid.y);
         ctx.fillStyle = "#1e3a5f";
         ctx.fillText(b.block_code, cx, cy);
       }
@@ -145,15 +154,25 @@ export default function SiteMap({
         const isSel = selectedTracker?.tracker_code === t.tracker_code;
         ctx.strokeStyle = isSel ? "#16a34a" : "rgba(22,163,74,0.4)";
         ctx.lineWidth = isSel ? 2 : 0.8;
-        ctx.strokeRect(mapX(bb.x + bb.w), mapY(bb.y + bb.h), bb.w * s, bb.h * s);
+        // Draw tracker as 4 corners mapped through mapPt
+        const [x0, y0] = mapPt(bb.x, bb.y);
+        const [x1, y1] = mapPt(bb.x + bb.w, bb.y);
+        const [x2, y2] = mapPt(bb.x + bb.w, bb.y + bb.h);
+        const [x3, y3] = mapPt(bb.x, bb.y + bb.h);
+        ctx.beginPath();
+        ctx.moveTo(x0, y0);
+        ctx.lineTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.lineTo(x3, y3);
+        ctx.closePath();
+        ctx.stroke();
       }
     }
 
     // Piers
     if (layerVisible("piers")) {
       for (const p of piers) {
-        const px = mapX(p.x);
-        const py = mapY(p.y);
+        const [px, py] = mapPt(p.x, p.y);
         const isSel = selectedPier?.pier_code === p.pier_code;
         const r = isSel ? SELECTED_RADIUS : PIER_RADIUS;
         ctx.beginPath();
@@ -210,13 +229,13 @@ export default function SiteMap({
   }
 
   function fitAll() {
-    if (!containerRef.current || !imageWidth || !imageHeight) return;
+    if (!containerRef.current || !dispW || !dispH) return;
     const cw = containerRef.current.clientWidth;
     const ch = containerRef.current.clientHeight;
-    const scale = Math.min(cw / imageWidth, ch / imageHeight) * 0.95;
+    const scale = Math.min(cw / dispW, ch / dispH) * 0.95;
     setView({
-      x: (cw - imageWidth * scale) / 2,
-      y: (ch - imageHeight * scale) / 2,
+      x: (cw - dispW * scale) / 2,
+      y: (ch - dispH * scale) / 2,
       scale,
     });
   }
@@ -303,9 +322,11 @@ export default function SiteMap({
     const mx = clientX - rect.left;
     const my = clientY - rect.top;
     const { x: ox, y: oy, scale: s } = view;
-    // Convert canvas coords back to image coords (reverse both flips)
-    const ix = imageWidth - (mx - ox) / s;
-    const iy = imageHeight - (my - oy) / s;
+    // Reverse the transform: canvas → image coords
+    // mapPt: ix → ox + (H-iy)*s, iy → oy + ix*s
+    // Inverse: ix = (my - oy)/s, iy = H - (mx - ox)/s
+    const ix = (my - oy) / s;
+    const iy = imageHeight - (mx - ox) / s;
 
     // Check piers first (smallest)
     if (layerVisible("piers")) {
