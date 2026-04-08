@@ -95,9 +95,7 @@ export default function SiteMap({
     ctx.fillStyle = "#f8fafc";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Helper: flip both X,Y then rotate 90° clockwise
-    // flip-both: (W-x, H-y) → rotate 90CW: new_x = H-y, new_y = x
-    // After rotation, canvas dimensions swap: width=imageHeight, height=imageWidth
+    // Rotate 90° clockwise only: (x,y) → (H-y, x)
     const mapPt = (ix: number, iy: number): [number, number] => [
       ox + (imageHeight - iy) * s,
       oy + ix * s,
