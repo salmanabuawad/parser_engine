@@ -548,6 +548,7 @@ def extract_trackers_from_pdf_vector(ramming_pdf, page_idx, base_shape, profile,
     import re
     from app.pier_scan import extract_vector_labeled_piers
     from app.system_artifacts import (
+        _word_center,
         _parse_row_trk_anchors,
         _parse_block_labels,
         _estimate_axis,
@@ -576,8 +577,23 @@ def extract_trackers_from_pdf_vector(ramming_pdf, page_idx, base_shape, profile,
     anchors = _parse_row_trk_anchors(words)     # list of {row, tracker, x, y}
     block_labels = _parse_block_labels(words)    # list of {block, x, y}
 
+    # If _parse_block_labels found nothing, try multi-word parsing
+    # (some PDFs have "BLOCK" and the number as separate words)
+    if not block_labels:
+        for idx, w in enumerate(words):
+            if str(w[4]).upper() == "BLOCK" and idx + 1 < len(words):
+                # Check next few words for a number
+                for j in range(1, min(4, len(words) - idx)):
+                    nxt = str(words[idx + j][4]).strip()
+                    # Skip Hebrew chars and separators
+                    m = re.match(r"(\d+)", nxt)
+                    if m:
+                        cx, cy = _word_center(w)
+                        block_labels.append({"block": m.group(1), "x": cx, "y": cy})
+                        break
+
     if not anchors or not raw_piers:
-        return [], []
+        return [], [], {"width": float(page_rect.width), "height": float(page_rect.height)}
 
     # --- Step 2: estimate pier axis ------------------------------------------
     p1_pts = [(p["x"], p["y"]) for p in raw_piers if str(p.get("label", "")).upper() == "P1"]
@@ -757,6 +773,66 @@ def extract_trackers_from_pdf_vector(ramming_pdf, page_idx, base_shape, profile,
 
     page_dims = {"width": float(page_rect.width), "height": float(page_rect.height)}
     return trackers_out, piers_out, page_dims
+
+
+def build_blocks_from_vector_piers(trackers, all_piers, profile):
+    """Build block polygons from pier positions grouped by block_id.
+
+    Used when vector extraction provides pier coordinates in ramming PDF
+    space so that block outlines match the pier layout exactly.
+    """
+    settings = profile["heuristics"]["blocks"]
+    by_block = {}
+
+    # Group piers by block_id from their tracker assignment
+    for t in trackers:
+        bid = t.get("block_id")
+        if bid is None:
+            continue
+        by_block.setdefault(bid, {"code": t.get("block_code", f"B{bid}"), "points": []})
+        # Add tracker bbox corners
+        bb = t["bbox"]
+        by_block[bid]["points"].extend([
+            (bb["x"], bb["y"]),
+            (bb["x"] + bb["w"], bb["y"]),
+            (bb["x"], bb["y"] + bb["h"]),
+            (bb["x"] + bb["w"], bb["y"] + bb["h"]),
+        ])
+
+    # Also add individual pier positions
+    for p in all_piers:
+        bid = p.get("block_id")
+        if bid is None:
+            # Inherit from tracker
+            for t in trackers:
+                if t["tracker_id"] == p.get("tracker_id"):
+                    bid = t.get("block_id")
+                    break
+        if bid is not None:
+            by_block.setdefault(bid, {"code": f"B{bid}", "points": []})
+            by_block[bid]["points"].append((p["x"], p["y"]))
+
+    blocks = []
+    for bid in sorted(by_block):
+        info = by_block[bid]
+        pts = info["points"]
+        if len(pts) < 3:
+            continue
+        from shapely.geometry import MultiPoint
+        hull = MultiPoint(pts).convex_hull.buffer(8).simplify(3.0)
+        blocks.append({
+            "block_id": bid,
+            "block_code": info["code"],
+            "label": str(bid),
+            "color": "derived",
+            "polygon": hull,
+            "points": polygon_to_points(hull),
+            "bbox": bbox_from_polygon(hull),
+            "centroid": {"x": float(hull.centroid.x), "y": float(hull.centroid.y)},
+            "original_block_id": str(bid),
+            "block_pier_plan_sheet": f"S-{settings['sheet_base'] + bid}",
+        })
+    return blocks
 
 
 def _infer_pier_type_from_position(row_index, row_count):
@@ -1044,13 +1120,19 @@ def run_pipeline(construction_pdf, ramming_pdf, overlay_source, out_dir, profile
             all_piers = detect_piers_by_rows(ramming_img_raw, trackers, row_model)
         classify_trackers_and_piers(trackers, all_piers)
         scale_detected_layout(trackers, all_piers, ramming_img_raw.shape, base_site.shape)
-    if len(blocks) < max(3, len(block_labels) // 2) and block_labels:
-        blocks = build_blocks_from_labels(block_labels, trackers, profile)
-        cleaned_overlay = aligned_overlay.copy()
-    assign_trackers_to_blocks(trackers, blocks)
-    blocks = refine_blocks_from_trackers(blocks, trackers)
-    assign_trackers_to_blocks(trackers, blocks)
-    piers = assign_piers_to_blocks(trackers, blocks)
+
+    if vector_ok:
+        # Build blocks from vector pier positions (same coordinate space)
+        blocks = build_blocks_from_vector_piers(trackers, all_piers, profile)
+        piers = assign_piers_to_blocks(trackers, blocks)
+    else:
+        if len(blocks) < max(3, len(block_labels) // 2) and block_labels:
+            blocks = build_blocks_from_labels(block_labels, trackers, profile)
+            cleaned_overlay = aligned_overlay.copy()
+        assign_trackers_to_blocks(trackers, blocks)
+        blocks = refine_blocks_from_trackers(blocks, trackers)
+        assign_trackers_to_blocks(trackers, blocks)
+        piers = assign_piers_to_blocks(trackers, blocks)
     coord = add_relative_coordinates(blocks, trackers, piers)
     zoom_targets = build_zoom_targets(blocks, trackers, piers)
     drawing_bundles = build_drawing_bundles(blocks, trackers, piers)
