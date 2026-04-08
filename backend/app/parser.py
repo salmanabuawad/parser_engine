@@ -660,54 +660,11 @@ def extract_trackers_from_pdf_vector(ramming_pdf, page_idx, base_shape, profile,
                 "label": label, "pier_type": None, "x": x, "y": y, "_label": label,
             })
 
-    # --- Step 4: coordinate mapping (PDF pts -> base image pixels) -----------
-    # Use matching block labels in both PDFs to compute an affine transform.
-    # This handles different scale, position, and rotation between the two PDFs.
-    base_h, base_w = base_shape[:2]
-
+    # --- Step 4: use raw PDF coordinates directly ----------------------------
+    # No transform needed — the map view renders in PDF space which matches
+    # the original ramming plan orientation and layout.
     def _map_coord(x_pdf, y_pdf):
-        """Transform a point from ramming PDF space to base image space."""
-        return _pdf_to_base_transform(x_pdf, y_pdf)
-
-    # Build correspondences: ramming PDF block positions <-> base image block positions
-    ramming_block_pts = {int(b["block"]): (b["x"], b["y"]) for b in block_labels}
-    base_block_pts = {}
-    if base_block_labels:
-        for bl in base_block_labels:
-            base_block_pts[bl["block_id"]] = (bl["x"], bl["y"])
-
-    matched_src = []
-    matched_dst = []
-    for bid in ramming_block_pts:
-        if bid in base_block_pts:
-            matched_src.append(ramming_block_pts[bid])
-            matched_dst.append(base_block_pts[bid])
-
-    if len(matched_src) >= 3:
-        # Compute affine transform from ramming PDF coords to base image coords
-        src = np.float32(matched_src)
-        dst = np.float32(matched_dst)
-        # Use least-squares affine fit
-        A = np.zeros((2 * len(src), 6), dtype=np.float64)
-        b_vec = np.zeros(2 * len(src), dtype=np.float64)
-        for i, ((sx_i, sy_i), (dx_i, dy_i)) in enumerate(zip(src, dst)):
-            A[2*i]   = [sx_i, sy_i, 1, 0, 0, 0]
-            A[2*i+1] = [0, 0, 0, sx_i, sy_i, 1]
-            b_vec[2*i]   = dx_i
-            b_vec[2*i+1] = dy_i
-        params, _, _, _ = np.linalg.lstsq(A, b_vec, rcond=None)
-        a11, a12, tx, a21, a22, ty = params
-
-        def _pdf_to_base_transform(x_pdf, y_pdf):
-            return (a11 * x_pdf + a12 * y_pdf + tx,
-                    a21 * x_pdf + a22 * y_pdf + ty)
-    else:
-        # Fallback: simple proportional scaling
-        s_x = base_w / max(float(page_rect.width), 1.0)
-        s_y = base_h / max(float(page_rect.height), 1.0)
-
-        def _pdf_to_base_transform(x_pdf, y_pdf):
-            return (x_pdf * s_x, y_pdf * s_y)
+        return (x_pdf, y_pdf)
 
     # --- Step 5: build output objects ----------------------------------------
     # Sort tracker anchors spatially for sequential T0001 numbering
@@ -798,7 +755,8 @@ def extract_trackers_from_pdf_vector(ramming_pdf, page_idx, base_shape, profile,
 
         trackers_out.append(tracker_obj)
 
-    return trackers_out, piers_out
+    page_dims = {"width": float(page_rect.width), "height": float(page_rect.height)}
+    return trackers_out, piers_out, page_dims
 
 
 def _infer_pier_type_from_position(row_index, row_count):
@@ -1064,9 +1022,10 @@ def run_pipeline(construction_pdf, ramming_pdf, overlay_source, out_dir, profile
 
     # --- Prefer vector-based PDF extraction; fall back to CV -----------------
     vector_ok = False
+    vector_page_dims = None
     trackers, all_piers = [], []
     try:
-        trackers, all_piers = extract_trackers_from_pdf_vector(
+        trackers, all_piers, vector_page_dims = extract_trackers_from_pdf_vector(
             ramming_pdf, ramming_page_idx, base_site.shape, profile,
             base_block_labels=block_labels,
         )
@@ -1122,7 +1081,7 @@ def run_pipeline(construction_pdf, ramming_pdf, overlay_source, out_dir, profile
         "construction_page_index_used": site_page_idx,
         "ramming_page_index_used": ramming_page_idx,
         "overlay_source": overlay_meta,
-        "base_image": {
+        "base_image": vector_page_dims if vector_ok and vector_page_dims else {
             "width": int(base_site.shape[1]),
             "height": int(base_site.shape[0]),
         },

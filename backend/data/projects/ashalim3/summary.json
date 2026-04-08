@@ -9,8 +9,8 @@
     "page_index": 0
   },
   "base_image": {
-    "width": 2693,
-    "height": 1743
+    "width": 3370.0,
+    "height": 2384.0
   },
   "overlay_homography": [
     [
@@ -55,7 +55,7 @@
     "origin_rule": "P1 of lowest-leftmost valid tracker",
     "origin_pier_id": "T0001-P01",
     "origin_tracker_id": "T0001",
-    "origin_x": 209.86114891799338,
-    "origin_y": 554.4709488913517
+    "origin_x": 262.61866760253906,
+    "origin_y": 758.3813781738281
   }
 }
