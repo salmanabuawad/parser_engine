@@ -4,6 +4,7 @@ import SimpleGrid from "./components/SimpleGrid";
 import LayerTogglePanel from "./components/LayerTogglePanel";
 import SiteMap from "./components/SiteMap";
 import PierDetailsPanel from "./components/PierDetailsPanel";
+import PierModal from "./components/PierModal";
 import SystemPanel from "./components/SystemPanel";
 
 const INITIAL_LAYERS = [
@@ -198,9 +199,7 @@ export default function App() {
             />
           </div>
           {selectedPierFull && (
-            <div style={{ marginTop: 8 }}>
-              <PierDetailsPanel selected={selectedPierFull} />
-            </div>
+            <PierModal selected={selectedPierFull} onClose={() => { setSelectedPier(null); setSelectedPierFull(null); }} />
           )}
         </div>
       ) : (
