@@ -164,35 +164,28 @@ export default function SiteMap({
       }
     }
 
-    // Trackers — straight line from P1 to last pier + row numbers
+    // Trackers — N-S lines through tracker center + row numbers
     if (layerVisible("trackers")) {
-      const piersByTracker: Record<string, any[]> = {};
-      for (const p of piers) {
-        const tid = p.tracker_code;
-        if (!tid) continue;
-        (piersByTracker[tid] ??= []).push(p);
-      }
       const showRowLabels = s > 0.25;
       if (showRowLabels) {
         ctx.font = `${Math.max(7, 8 * s)}px Arial`;
         ctx.textBaseline = "middle";
       }
       for (const t of trackers) {
-        const tPiers = piersByTracker[t.tracker_code];
-        if (!tPiers || tPiers.length < 2) continue;
-        const sorted = [...tPiers].sort((a: any, b: any) => (a.row_index || 0) - (b.row_index || 0));
-        const first = sorted[0];
-        const last = sorted[sorted.length - 1];
+        const bb = t.bbox;
+        if (!bb) continue;
         const isSel = selectedTracker?.tracker_code === t.tracker_code;
         ctx.strokeStyle = isSel ? "#16a34a" : "rgba(22,163,74,0.3)";
         ctx.lineWidth = isSel ? 2.5 : 1;
-        const [x1, y1] = mapPt(first.x, first.y);
-        const [x2, y2] = mapPt(last.x, last.y);
+        // Draw N-S line through center of bbox (top to bottom)
+        const cx = bb.x + bb.w / 2;
+        const [x1, y1] = mapPt(cx, bb.y);
+        const [x2, y2] = mapPt(cx, bb.y + bb.h);
         ctx.beginPath();
         ctx.moveTo(x1, y1);
         ctx.lineTo(x2, y2);
         ctx.stroke();
-        // Row number label at the start of the tracker
+        // Row number label
         if (showRowLabels && t.row) {
           ctx.fillStyle = "#64748b";
           ctx.textAlign = "right";
