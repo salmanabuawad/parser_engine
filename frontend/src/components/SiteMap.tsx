@@ -154,7 +154,7 @@ export default function SiteMap({
 
     // Block labels
     if (layerVisible("blockLabels")) {
-      ctx.font = `${Math.max(8, 9 * s)}px Arial`;
+      ctx.font = `${Math.max(4, 5 * s)}px Arial`;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       for (const b of blocks) {
@@ -172,7 +172,7 @@ export default function SiteMap({
       }
       const showRowLabels = s > 0.5;
       if (showRowLabels) {
-        ctx.font = `${Math.max(5, 6 * s)}px Arial`;
+        ctx.font = `${Math.max(4, 5 * s)}px Arial`;
         ctx.textBaseline = "middle";
       }
       for (const t of trackers) {
@@ -200,7 +200,7 @@ export default function SiteMap({
     if (layerVisible("piers")) {
       const showRowNums = s > 0.6;
       if (showRowNums) {
-        ctx.font = `${Math.max(5, 6 * s)}px Arial`;
+        ctx.font = `${Math.max(4, 5 * s)}px Arial`;
         ctx.textAlign = "left";
         ctx.textBaseline = "middle";
       }
