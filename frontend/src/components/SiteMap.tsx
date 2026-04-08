@@ -7,12 +7,12 @@ import { useCallback, useEffect, useRef, useState } from "react";
  */
 
 const PIER_COLORS: Record<string, string> = {
-  HAP: "#0ea5e9",
-  HMP: "#06b6d4",
-  SAP: "#7c3aed",
-  SAPE: "#f97316",
-  SAPEND: "#ef4444",
-  SMP: "#10b981",
+  HAP: "#ff0000",
+  HMP: "#ff0000",
+  SAP: "#00ffff",
+  SAPE: "#0000ff",
+  SAPEND: "#ff8c00",
+  SMP: "#00ff00",
   UNKNOWN: "#64748b",
 };
 
@@ -91,10 +91,9 @@ export default function SiteMap({
     ctx.fillStyle = "#f8fafc";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Helper: map image coords to canvas coords (flip Y to correct mirror)
-    const ih = imageHeight;
+    // Helper: map image coords to canvas coords
     const mapX = (ix: number) => ox + ix * s;
-    const mapY = (iy: number) => oy + (ih - iy) * s;
+    const mapY = (iy: number) => oy + iy * s;
 
     // Draw subtle background rect for the site bounds
     ctx.save();
@@ -146,8 +145,7 @@ export default function SiteMap({
         const isSel = selectedTracker?.tracker_code === t.tracker_code;
         ctx.strokeStyle = isSel ? "#16a34a" : "rgba(22,163,74,0.4)";
         ctx.lineWidth = isSel ? 2 : 0.8;
-        // Flip Y: top-left becomes (x, ih - (y+h))
-        ctx.strokeRect(mapX(bb.x), mapY(bb.y + bb.h), bb.w * s, bb.h * s);
+        ctx.strokeRect(mapX(bb.x), mapY(bb.y), bb.w * s, bb.h * s);
       }
     }
 
@@ -305,9 +303,9 @@ export default function SiteMap({
     const mx = clientX - rect.left;
     const my = clientY - rect.top;
     const { x: ox, y: oy, scale: s } = view;
-    // Convert to image coords (flip Y back)
+    // Convert to image coords
     const ix = (mx - ox) / s;
-    const iy = imageHeight - (my - oy) / s;
+    const iy = (my - oy) / s;
 
     // Check piers first (smallest)
     if (layerVisible("piers")) {
