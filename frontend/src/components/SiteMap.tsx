@@ -164,13 +164,18 @@ export default function SiteMap({
       }
     }
 
-    // Trackers — straight line from P1 to last pier
+    // Trackers — straight line from P1 to last pier + row numbers
     if (layerVisible("trackers")) {
       const piersByTracker: Record<string, any[]> = {};
       for (const p of piers) {
         const tid = p.tracker_code;
         if (!tid) continue;
         (piersByTracker[tid] ??= []).push(p);
+      }
+      const showRowLabels = s > 0.25;
+      if (showRowLabels) {
+        ctx.font = `${Math.max(7, 8 * s)}px Arial`;
+        ctx.textBaseline = "middle";
       }
       for (const t of trackers) {
         const tPiers = piersByTracker[t.tracker_code];
@@ -187,6 +192,12 @@ export default function SiteMap({
         ctx.moveTo(x1, y1);
         ctx.lineTo(x2, y2);
         ctx.stroke();
+        // Row number label at the start of the tracker
+        if (showRowLabels && t.row) {
+          ctx.fillStyle = "#64748b";
+          ctx.textAlign = "right";
+          ctx.fillText(t.row, x1 - 4, y1);
+        }
       }
     }
 

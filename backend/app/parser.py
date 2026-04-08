@@ -1165,6 +1165,7 @@ def run_pipeline(construction_pdf, ramming_pdf, overlay_source, out_dir, profile
     } for b in blocks]
     trackers_json = [{
         "tracker_id": t["tracker_id"], "tracker_code": t["tracker_code"], "block_id": t.get("block_id"), "block_code": t.get("block_code"),
+        "row": t.get("_original_row", ""), "trk": t.get("_original_trk", ""),
         "tracker_type_code": t.get("tracker_type_code"), "tracker_sheet": t.get("tracker_sheet"), "orientation": t["orientation"],
         "pier_count": t.get("pier_count"), "bbox": t["bbox"], "bbox_local": t.get("bbox_local"), "center_local": t.get("center_local"),
         "assignment_method": t.get("assignment_method"), "assignment_confidence": t.get("assignment_confidence"),
