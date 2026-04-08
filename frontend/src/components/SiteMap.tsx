@@ -164,32 +164,34 @@ export default function SiteMap({
       }
     }
 
-    // Trackers — N-S lines through tracker center + row numbers
+    // Trackers — line from first pier to last pier + row numbers
     if (layerVisible("trackers")) {
+      const piersByTracker: Record<string, any[]> = {};
+      for (const p of piers) {
+        if (p.tracker_code) (piersByTracker[p.tracker_code] ??= []).push(p);
+      }
       const showRowLabels = s > 0.25;
       if (showRowLabels) {
         ctx.font = `${Math.max(7, 8 * s)}px Arial`;
         ctx.textBaseline = "middle";
       }
       for (const t of trackers) {
-        const bb = t.bbox;
-        if (!bb) continue;
+        const tPiers = piersByTracker[t.tracker_code];
+        if (!tPiers || tPiers.length < 2) continue;
+        const sorted = [...tPiers].sort((a: any, b: any) => (a.row_index || 0) - (b.row_index || 0));
         const isSel = selectedTracker?.tracker_code === t.tracker_code;
         ctx.strokeStyle = isSel ? "#16a34a" : "rgba(22,163,74,0.3)";
         ctx.lineWidth = isSel ? 2.5 : 1;
-        // Draw N-S line (horizontal in PDF, becomes vertical after 90° CCW rotation)
-        const cy = bb.y + bb.h / 2;
-        const [x1, y1] = mapPt(bb.x, cy);
-        const [x2, y2] = mapPt(bb.x + bb.w, cy);
+        const [x1, y1] = mapPt(sorted[0].x, sorted[0].y);
+        const [x2, y2] = mapPt(sorted[sorted.length - 1].x, sorted[sorted.length - 1].y);
         ctx.beginPath();
         ctx.moveTo(x1, y1);
         ctx.lineTo(x2, y2);
         ctx.stroke();
-        // Row number label
         if (showRowLabels && t.row) {
           ctx.fillStyle = "#64748b";
           ctx.textAlign = "right";
-          ctx.fillText(t.row, x1 - 4, y1);
+          ctx.fillText(t.row, Math.min(x1, x2) - 4, (y1 + y2) / 2);
         }
       }
     }
