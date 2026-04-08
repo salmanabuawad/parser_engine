@@ -19,7 +19,7 @@ Push-Location (Join-Path $root "frontend")
 if (!(Test-Path "node_modules")) {
   npm install | Out-Host
 }
-$frontend = Start-Process -PassThru -WindowStyle Normal -FilePath "npm" -ArgumentList @("run","dev")
+$frontend = Start-Process -PassThru -WindowStyle Normal -FilePath "npm.cmd" -ArgumentList @("run","dev")
 Pop-Location
 
 Write-Host "Backend PID: $($backend.Id)  Frontend PID: $($frontend.Id)" -ForegroundColor Green
