@@ -7,10 +7,37 @@ const PIER_COLORS: Record<string, string> = {
   SMP: "#00ff00",
 };
 
-export default function PierModal({ selected, onClose }: { selected: any; onClose: () => void }) {
+const STATUSES = ["Not Started", "Implemented", "Approved", "Rejected", "Fixed"] as const;
+
+const STATUS_COLORS: Record<string, string> = {
+  "Not Started": "#94a3b8",
+  "Implemented": "#3b82f6",
+  "Approved": "#22c55e",
+  "Rejected": "#ef4444",
+  "Fixed": "#f59e0b",
+};
+
+const STATUS_ICONS: Record<string, string> = {
+  "Not Started": "\u25cb",   // ○
+  "Implemented": "\u25cf",   // ●
+  "Approved": "\u2714",      // ✔
+  "Rejected": "\u2718",      // ✘
+  "Fixed": "\u2692",         // ⚒
+};
+
+interface Props {
+  selected: any;
+  status: string;
+  onStatusChange: (pierId: string, status: string) => void;
+  onClose: () => void;
+}
+
+export default function PierModal({ selected, status, onStatusChange, onClose }: Props) {
   if (!selected?.pier) return null;
   const { pier, tracker, block, drawing_bundle } = selected;
   const color = PIER_COLORS[pier.pier_type] || "#888";
+  const currentStatus = status || "Not Started";
+  const statusColor = STATUS_COLORS[currentStatus] || "#94a3b8";
 
   return (
     <div
@@ -61,6 +88,29 @@ export default function PierModal({ selected, onClose }: { selected: any; onClos
           <span style={{ width: 14, height: 14, borderRadius: "50%", background: color, display: "inline-block", border: "2px solid #fff", boxShadow: "0 0 0 1px #ccc" }} />
           <h3 style={{ margin: 0, fontSize: 18 }}>{pier.pier_code}</h3>
           <span style={{ fontSize: 12, color: "#64748b", background: "#f1f5f9", padding: "2px 8px", borderRadius: 6 }}>{pier.pier_type}</span>
+        </div>
+
+        {/* Status */}
+        <div style={{ marginBottom: 14, display: "flex", alignItems: "center", gap: 10 }}>
+          <span style={{ fontSize: 16, color: statusColor }}>{STATUS_ICONS[currentStatus]}</span>
+          <select
+            value={currentStatus}
+            onChange={(e) => onStatusChange(pier.pier_code, e.target.value)}
+            style={{
+              padding: "6px 12px",
+              borderRadius: 8,
+              border: `2px solid ${statusColor}`,
+              fontSize: 13,
+              fontWeight: 600,
+              background: "#fff",
+              cursor: "pointer",
+              color: statusColor,
+            }}
+          >
+            {STATUSES.map((s) => (
+              <option key={s} value={s}>{STATUS_ICONS[s]} {s}</option>
+            ))}
+          </select>
         </div>
 
         {/* Pier details */}

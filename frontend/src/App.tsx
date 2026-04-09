@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { getProjects, getProject, getBlocks, getTrackers, getPiers, getPier } from "./api";
+import { getProjects, getProject, getBlocks, getTrackers, getPiers, getPier, getPierStatuses, updatePierStatus } from "./api";
 import SimpleGrid from "./components/SimpleGrid";
 import LayerTogglePanel from "./components/LayerTogglePanel";
 import SiteMap from "./components/SiteMap";
@@ -31,6 +31,7 @@ export default function App() {
   const [selectedPierFull, setSelectedPierFull] = useState<any>(null);
   const [filterBlock, setFilterBlock] = useState("");
   const [filterTracker, setFilterTracker] = useState("");
+  const [pierStatuses, setPierStatuses] = useState<Record<string, string>>({});
   const [layers, setLayers] = useState(INITIAL_LAYERS);
   const [error, setError] = useState("");
 
@@ -60,14 +61,16 @@ export default function App() {
     setSelectedPierFull(null);
     setFilterBlock("");
     setFilterTracker("");
+    setPierStatuses({});
 
-    Promise.all([getProject(projectId), getBlocks(projectId), getTrackers(projectId), getPiers(projectId)])
-      .then(([p, b, t, pi]: any[]) => {
+    Promise.all([getProject(projectId), getBlocks(projectId), getTrackers(projectId), getPiers(projectId), getPierStatuses(projectId)])
+      .then(([p, b, t, pi, st]: any[]) => {
         if (ignore) return;
         setProject(p);
         setBlocks(b);
         setTrackers(t);
         setPiers(pi);
+        setPierStatuses(st || {});
       })
       .catch((e: any) => { if (!ignore) setError(String(e.message || e)); });
 
@@ -76,6 +79,21 @@ export default function App() {
     window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
     return () => { ignore = true; };
   }, [projectId]);
+
+  async function handleStatusChange(pierId: string, status: string) {
+    if (!projectId) return;
+    try {
+      await updatePierStatus(projectId, pierId, status);
+      setPierStatuses((prev) => {
+        const next = { ...prev };
+        if (status === "Not Started") delete next[pierId];
+        else next[pierId] = status;
+        return next;
+      });
+    } catch (e: any) {
+      setError(String(e.message || e));
+    }
+  }
 
   async function handlePierClick(p: any) {
     if (!projectId) return;
@@ -199,7 +217,7 @@ export default function App() {
             />
           </div>
           {selectedPierFull && (
-            <PierModal selected={selectedPierFull} onClose={() => { setSelectedPier(null); setSelectedPierFull(null); }} />
+            <PierModal selected={selectedPierFull} status={pierStatuses[selectedPier?.pier_code] || ""} onStatusChange={handleStatusChange} onClose={() => { setSelectedPier(null); setSelectedPierFull(null); }} />
           )}
         </div>
       ) : (
@@ -260,7 +278,7 @@ export default function App() {
           />
 
           {selectedPierFull && (
-            <PierModal selected={selectedPierFull} onClose={() => { setSelectedPier(null); setSelectedPierFull(null); }} />
+            <PierModal selected={selectedPierFull} status={pierStatuses[selectedPier?.pier_code] || ""} onStatusChange={handleStatusChange} onClose={() => { setSelectedPier(null); setSelectedPierFull(null); }} />
           )}
         </div>
       )}
