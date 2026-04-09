@@ -1,26 +1,115 @@
 import { useEffect, useState } from "react";
-import { getProject, getPlantInfo, updatePlantInfo } from "../api";
+import {
+  getProject,
+  getPlantInfo,
+  updatePlantInfo,
+  createProject,
+  listProjectFiles,
+  uploadProjectFile,
+  clearProjectFiles,
+  parseProject,
+} from "../api";
 import { useResponsive } from "../hooks/useResponsive";
 
-export default function SystemPanel({ projectId }: { projectId: string }) {
+interface Props {
+  projectId: string;
+  onProjectChanged?: (projectId: string) => void;
+}
+
+export default function SystemPanel({ projectId, onProjectChanged }: Props) {
   const { isMobile } = useResponsive();
   const [error, setError] = useState("");
   const [project, setProject] = useState<any>(null);
   const [plantInfo, setPlantInfo] = useState<any>(null);
   const [editingPlant, setEditingPlant] = useState(false);
   const [plantDraft, setPlantDraft] = useState<any>({});
+  const [files, setFiles] = useState<any[]>([]);
+  const [parsing, setParsing] = useState(false);
+  const [parseMsg, setParseMsg] = useState("");
+  const [showNewProject, setShowNewProject] = useState(false);
+  const [newProjectId, setNewProjectId] = useState("");
+
+  async function refreshAll() {
+    if (!projectId) return;
+    try {
+      const [proj, pi, fl] = await Promise.all([
+        getProject(projectId).catch(() => null),
+        getPlantInfo(projectId).catch(() => ({})),
+        listProjectFiles(projectId).catch(() => []),
+      ]);
+      setProject(proj);
+      setPlantInfo(pi);
+      setFiles(fl);
+    } catch (e: any) {
+      setError(String(e.message || e));
+    }
+  }
 
   useEffect(() => {
-    if (!projectId) return;
     setError("");
+    setParseMsg("");
     setProject(null);
     setPlantInfo(null);
+    setFiles([]);
     setEditingPlant(false);
-
-    Promise.all([getProject(projectId), getPlantInfo(projectId)])
-      .then(([proj, pi]) => { setProject(proj); setPlantInfo(pi); })
-      .catch((e: any) => setError(String(e.message || e)));
+    if (projectId) refreshAll();
   }, [projectId]);
+
+  async function handleCreateProject() {
+    const id = newProjectId.trim();
+    if (!id) return;
+    try {
+      await createProject({ project_id: id });
+      setShowNewProject(false);
+      setNewProjectId("");
+      onProjectChanged?.(id);
+    } catch (e: any) {
+      setError(String(e.message || e));
+    }
+  }
+
+  async function handleFileUpload(kind: string, file: File) {
+    if (!projectId || !file) return;
+    try {
+      setParseMsg(`Uploading ${file.name}...`);
+      await uploadProjectFile(projectId, kind, file);
+      const fl = await listProjectFiles(projectId);
+      setFiles(fl);
+      setParseMsg(`Uploaded ${file.name}`);
+      setTimeout(() => setParseMsg(""), 2000);
+    } catch (e: any) {
+      setError(String(e.message || e));
+    }
+  }
+
+  async function handleClearFiles() {
+    if (!projectId) return;
+    if (!confirm("Delete all uploaded files for this project? (Parsed data will not be affected until you re-parse)")) return;
+    try {
+      await clearProjectFiles(projectId);
+      setFiles([]);
+    } catch (e: any) {
+      setError(String(e.message || e));
+    }
+  }
+
+  async function handleParse() {
+    if (!projectId) return;
+    if (!confirm("Parse will clear all existing project data and rebuild from uploaded files. Continue?")) return;
+    try {
+      setParsing(true);
+      setParseMsg("Parsing... this may take a minute or two");
+      const result = await parseProject(projectId);
+      setParseMsg(`Parsed: ${result.block_count} blocks, ${result.tracker_count} trackers, ${result.pier_count} piers`);
+      await refreshAll();
+      onProjectChanged?.(projectId);
+    } catch (e: any) {
+      setError(String(e.message || e));
+      setParseMsg("");
+    } finally {
+      setParsing(false);
+    }
+  }
 
   async function handlePlantSave() {
     if (!projectId) return;
@@ -40,6 +129,61 @@ export default function SystemPanel({ projectId }: { projectId: string }) {
 
   return (
     <div style={{ display: "grid", gap: 14 }}>
+      {/* New Project + Files */}
+      <div style={{ border: "1px solid #e2e8f0", borderRadius: 16, padding: isMobile ? 12 : 16, background: "#fff" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10, flexWrap: "wrap" }}>
+          <div style={{ fontWeight: 800, fontSize: 16 }}>Project Files</div>
+          <button
+            onClick={() => setShowNewProject(true)}
+            style={{ fontSize: 12, padding: "6px 12px", borderRadius: 6, border: "1px solid #d1d5db", background: "#fff", cursor: "pointer" }}
+          >
+            + New Project
+          </button>
+        </div>
+        {showNewProject && (
+          <div style={{ display: "flex", gap: 6, marginBottom: 10, flexWrap: "wrap" }}>
+            <input
+              value={newProjectId}
+              onChange={(e) => setNewProjectId(e.target.value)}
+              placeholder="project_id (e.g. ashalim4)"
+              style={{ flex: 1, minWidth: 180, padding: "6px 10px", borderRadius: 6, border: "1px solid #d1d5db", fontSize: 13 }}
+            />
+            <button onClick={handleCreateProject} style={{ fontSize: 12, padding: "6px 14px", borderRadius: 6, border: "none", background: "#0f172a", color: "#fff", cursor: "pointer" }}>Create</button>
+            <button onClick={() => { setShowNewProject(false); setNewProjectId(""); }} style={{ fontSize: 12, padding: "6px 14px", borderRadius: 6, border: "1px solid #d1d5db", background: "#fff", cursor: "pointer" }}>Cancel</button>
+          </div>
+        )}
+        {projectId ? (
+          <>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 10, marginBottom: 10 }}>
+              <FileUploadField label="Construction PDF" kind="construction_pdf" files={files} onUpload={handleFileUpload} />
+              <FileUploadField label="Ramming PDF" kind="ramming_pdf" files={files} onUpload={handleFileUpload} />
+            </div>
+            <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+              <button
+                onClick={handleParse}
+                disabled={parsing || files.length < 2}
+                style={{
+                  fontSize: 13, padding: "8px 16px", borderRadius: 6, border: "none",
+                  background: parsing || files.length < 2 ? "#cbd5e1" : "#0f172a",
+                  color: "#fff", fontWeight: 600,
+                  cursor: parsing || files.length < 2 ? "not-allowed" : "pointer",
+                }}
+              >
+                {parsing ? "Parsing..." : "Parse"}
+              </button>
+              {files.length > 0 && (
+                <button onClick={handleClearFiles} style={{ fontSize: 12, padding: "6px 10px", borderRadius: 6, border: "1px solid #d1d5db", background: "#fff", cursor: "pointer" }}>
+                  Clear Files
+                </button>
+              )}
+              {parseMsg && <span style={{ fontSize: 12, color: "#475569" }}>{parseMsg}</span>}
+            </div>
+          </>
+        ) : (
+          <div style={{ fontSize: 12, color: "#64748b" }}>Select or create a project to upload files.</div>
+        )}
+      </div>
+
       {/* Project Metadata Card */}
       {project && (
         <div style={{ border: "1px solid #e2e8f0", borderRadius: 16, padding: isMobile ? 12 : 16, background: "#f8fafc" }}>
@@ -192,6 +336,34 @@ function ValidationField({ label, actual, expected, tolerance }: { label: string
           {diffPct >= 0 ? "+" : ""}{(diffPct * 100).toFixed(1)}%
         </div>
       )}
+    </div>
+  );
+}
+
+function FileUploadField({ label, kind, files, onUpload }: { label: string; kind: string; files: any[]; onUpload: (kind: string, file: File) => void }) {
+  const existing = files.filter((f) => f.kind === kind);
+  return (
+    <div style={{ border: "1px dashed #cbd5e1", borderRadius: 8, padding: 10, background: "#f8fafc" }}>
+      <div style={{ fontSize: 11, color: "#64748b", marginBottom: 4, fontWeight: 600, textTransform: "uppercase", letterSpacing: 0.5 }}>{label}</div>
+      {existing.length > 0 && (
+        <div style={{ fontSize: 12, color: "#334155", marginBottom: 6 }}>
+          {existing.map((f) => (
+            <div key={f.id}>✓ {f.original_name || f.filename} ({(f.size_bytes / (1024 * 1024)).toFixed(1)} MB)</div>
+          ))}
+        </div>
+      )}
+      <input
+        type="file"
+        accept=".pdf,.png,.jpg,.jpeg"
+        onChange={(e) => {
+          const f = e.target.files?.[0];
+          if (f) {
+            onUpload(kind, f);
+            e.target.value = "";
+          }
+        }}
+        style={{ fontSize: 12 }}
+      />
     </div>
   );
 }

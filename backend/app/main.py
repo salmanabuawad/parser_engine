@@ -1,18 +1,29 @@
+"""
+Solarica Parsing Engine API.
+
+All project data (blocks, trackers, piers, pier statuses, metadata, uploaded files)
+is stored in Postgres. The parser still writes JSON artifacts to disk for debug,
+but all API reads/writes go through the DB.
+"""
+from __future__ import annotations
+
+import hashlib
 import json
-from fastapi import FastAPI, HTTPException
-from fastapi.responses import FileResponse
+import shutil
+import uuid
+from pathlib import Path
+from typing import Optional
+
+from fastapi import FastAPI, HTTPException, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
-from app.config import PROJECTS_ROOT
-from app.services.project_cache import ProjectCache
-from app.services.system_cache import SystemCache
-from app.services.system_cache_service import ensure_system_cache, export_system_excel_from_cache
-from pathlib import Path
 
-app = FastAPI(title="Solarica")
-cache = ProjectCache(PROJECTS_ROOT)
-system_cache = SystemCache(PROJECTS_ROOT)
+from app.config import PROJECTS_ROOT
+from app.services import db_store
+
+app = FastAPI(title="Solarica Parsing Engine")
 
 app.add_middleware(
     CORSMiddleware,
@@ -22,116 +33,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+PROJECTS_ROOT.mkdir(parents=True, exist_ok=True)
 app.mount("/projects", StaticFiles(directory=str(PROJECTS_ROOT)), name="projects")
 
-@app.get("/health")
-def health():
-    return {"ok": True}
 
-@app.get("/api/projects")
-def list_projects():
-    return cache.list_projects()
+# --- Constants ------------------------------------------------------------
 
-@app.get("/api/projects/{project_id}")
-def get_project(project_id: str):
-    try:
-        proj = cache.get_project(project_id)
-    except Exception:
-        raise HTTPException(status_code=404, detail="Project not found")
-    summary = dict(proj["summary"])
-    # Augment with row stats from trackers
-    trackers = proj.get("trackers", [])
-    rows = [t.get("row") for t in trackers if t.get("row")]
-    unique_rows = set(rows)
-    numeric_rows = [int(r) for r in rows if str(r).isdigit()]
-    summary["row_count"] = len(unique_rows)
-    summary["mean_row_num"] = round(sum(numeric_rows) / len(numeric_rows), 1) if numeric_rows else None
-    return summary
-
-@app.get("/api/projects/{project_id}/blocks")
-def get_blocks(project_id: str):
-    try:
-        return cache.get_project(project_id)["blocks"]
-    except Exception:
-        raise HTTPException(status_code=404, detail="Project not found")
-
-@app.get("/api/projects/{project_id}/trackers")
-def get_trackers(project_id: str):
-    try:
-        return cache.get_project(project_id)["trackers"]
-    except Exception:
-        raise HTTPException(status_code=404, detail="Project not found")
-
-@app.get("/api/projects/{project_id}/piers")
-def get_piers(project_id: str):
-    try:
-        return cache.get_project(project_id)["piers"]
-    except Exception:
-        raise HTTPException(status_code=404, detail="Project not found")
-
-@app.get("/api/projects/{project_id}/pier/{pier_id}")
-def get_pier(project_id: str, pier_id: str):
-    try:
-        project = cache.get_project(project_id)
-    except Exception:
-        raise HTTPException(status_code=404, detail="Project not found")
-    pier = next((p for p in project["piers"] if p["pier_id"] == pier_id), None)
-    if not pier:
-        raise HTTPException(status_code=404, detail="Pier not found")
-    tracker = next((t for t in project["trackers"] if t["tracker_id"] == pier["tracker_id"]), None)
-    block = next((b for b in project["blocks"] if b["block_id"] == pier["block_id"]), None)
-    return {"pier": pier, "tracker": tracker, "block": block, "drawing_bundle": project["drawing_bundles"].get(pier_id)}
-
-@app.get("/api/projects/{project_id}/pier/{pier_id}/zoom-target")
-def get_zoom(project_id: str, pier_id: str):
-    try:
-        z = cache.get_project(project_id)["zoom_targets"].get(pier_id)
-    except Exception:
-        raise HTTPException(status_code=404, detail="Project not found")
-    if not z:
-        raise HTTPException(status_code=404, detail="Zoom target not found")
-    return z
-
-
-# --- Pier statuses --------------------------------------------------------
-
-VALID_STATUSES = {"Not Started", "Implemented", "Approved", "Rejected", "Fixed"}
-
-def _statuses_path(project_id: str) -> Path:
-    return PROJECTS_ROOT / project_id / "pier_statuses.json"
-
-def _load_statuses(project_id: str) -> dict:
-    p = _statuses_path(project_id)
-    if p.exists():
-        return json.loads(p.read_text(encoding="utf-8"))
-    return {}
-
-def _save_statuses(project_id: str, data: dict):
-    p = _statuses_path(project_id)
-    p.parent.mkdir(parents=True, exist_ok=True)
-    p.write_text(json.dumps(data, indent=2), encoding="utf-8")
-
-class StatusUpdate(BaseModel):
-    status: str
-
-@app.get("/api/projects/{project_id}/pier-statuses")
-def get_pier_statuses(project_id: str):
-    return _load_statuses(project_id)
-
-@app.put("/api/projects/{project_id}/pier/{pier_id}/status")
-def update_pier_status(project_id: str, pier_id: str, body: StatusUpdate):
-    if body.status not in VALID_STATUSES:
-        raise HTTPException(status_code=400, detail=f"Invalid status. Must be one of: {VALID_STATUSES}")
-    statuses = _load_statuses(project_id)
-    if body.status == "Not Started":
-        statuses.pop(pier_id, None)
-    else:
-        statuses[pier_id] = body.status
-    _save_statuses(project_id, statuses)
-    return {"pier_id": pier_id, "status": body.status}
-
-
-# --- Plant info (editable project metadata) --------------------------------
+VALID_STATUSES = {"New", "In Progress", "Implemented", "Approved", "Rejected", "Fixed"}
 
 PLANT_INFO_DEFAULTS = {
     "total_output_mw": None,
@@ -168,183 +76,335 @@ ELECTRICAL_KEYS = (
     "snow_load", "wind_load", "issue_date",
     "expected_trackers", "expected_piers", "expected_modules_from_bom",
     "tracker_matrix", "bill_of_materials",
+    "pier_type_specs", "pier_spacing_m",
 )
 
-def _plant_info_path(project_id: str) -> Path:
-    return PROJECTS_ROOT / project_id / "plant_info.json"
-
-def _load_plant_info(project_id: str) -> dict:
-    p = _plant_info_path(project_id)
-    base = dict(PLANT_INFO_DEFAULTS)
-    # Fall back to electrical metadata extracted from PDFs (in summary.json)
-    try:
-        proj = cache.get_project(project_id)
-        elec = (proj.get("summary") or {}).get("electrical") or {}
-        for key in ELECTRICAL_KEYS:
-            if elec.get(key) is not None:
-                base[key] = elec[key]
-    except Exception:
-        pass
-    # User overrides win
-    if p.exists():
-        try:
-            user = json.loads(p.read_text(encoding="utf-8"))
-            for key, value in user.items():
-                if value is not None and value != "":
-                    base[key] = value
-        except Exception:
-            pass
-    return base
-
-def _save_plant_info(project_id: str, data: dict):
-    p = _plant_info_path(project_id)
-    p.parent.mkdir(parents=True, exist_ok=True)
-    p.write_text(json.dumps(data, indent=2), encoding="utf-8")
-
-@app.get("/api/projects/{project_id}/plant-info")
-def get_plant_info(project_id: str):
-    project_dir = PROJECTS_ROOT / project_id
-    if not project_dir.exists():
-        raise HTTPException(status_code=404, detail="Project not found")
-    return _load_plant_info(project_id)
-
-@app.post("/api/projects/{project_id}/plant-info/extract")
-def extract_plant_info(project_id: str):
-    """Re-extract electrical metadata from the construction PDF and merge into summary.json."""
-    project_dir = PROJECTS_ROOT / project_id
-    if not project_dir.exists():
-        raise HTTPException(status_code=404, detail="Project not found")
-    manifest_path = project_dir / "manifest.json"
-    if not manifest_path.exists():
-        raise HTTPException(status_code=400, detail="No manifest.json found for project")
-    summary_path = project_dir / "summary.json"
-    if not summary_path.exists():
-        raise HTTPException(status_code=400, detail="No summary.json found for project")
-    try:
-        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-        inputs = manifest.get("inputs") or {}
-        construction_pdf = inputs.get("construction_pdf")
-        ramming_pdf = inputs.get("ramming_pdf")
-        if not construction_pdf or not Path(construction_pdf).exists():
-            raise HTTPException(status_code=400, detail=f"Construction PDF not found at {construction_pdf}")
-        from app.electrical_metadata import extract_electrical_metadata
-        elec = extract_electrical_metadata(construction_pdf, ramming_pdf)
-        summary = json.loads(summary_path.read_text(encoding="utf-8"))
-        if elec.get("_extracted"):
-            summary["electrical"] = {k: elec.get(k) for k in ELECTRICAL_KEYS}
-            summary_path.write_text(json.dumps(summary, indent=2), encoding="utf-8")
-            cache.projects.pop(project_id, None)
-        return summary.get("electrical", {})
-    except HTTPException:
-        raise
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+# File upload kinds allowed
+FILE_KINDS = {"construction_pdf", "ramming_pdf", "overlay_image", "other"}
 
 
-@app.put("/api/projects/{project_id}/plant-info")
-def update_plant_info(project_id: str, body: dict):
-    project_dir = PROJECTS_ROOT / project_id
-    if not project_dir.exists():
-        raise HTTPException(status_code=404, detail="Project not found")
-    current = _load_plant_info(project_id)
-    for key in PLANT_INFO_DEFAULTS:
-        if key in body:
-            current[key] = body[key]
-    _save_plant_info(project_id, current)
-    return current
+# --- Health ---------------------------------------------------------------
+
+@app.get("/health")
+def health():
+    return {"ok": True}
 
 
-@app.post("/api/projects/{project_id}/system/ensure")
-def api_ensure_system(project_id: str, force: bool = False):
-    project_dir = PROJECTS_ROOT / project_id
-    if not project_dir.exists():
-        raise HTTPException(status_code=404, detail="Project not found")
-    try:
-        result = ensure_system_cache(project_dir=project_dir, force=force)
-        return result
-    except FileNotFoundError as e:
-        raise HTTPException(status_code=400, detail=str(e))
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+# --- Helpers --------------------------------------------------------------
+
+def _require_project_uuid(project_id: str) -> str:
+    u = db_store.get_project_uuid(project_id)
+    if not u:
+        raise HTTPException(status_code=404, detail=f"Project '{project_id}' not found")
+    return u
 
 
-@app.get("/api/projects/{project_id}/system/meta")
-def api_system_meta(project_id: str):
-    try:
-        return system_cache.get_system(project_id)["meta"]
-    except Exception:
-        raise HTTPException(status_code=404, detail="System cache not found. Call /system/ensure first.")
-
-
-@app.get("/api/projects/{project_id}/system/pier-type-counts")
-def api_system_pier_type_counts(project_id: str):
-    try:
-        return system_cache.get_system(project_id)["pier_type_counts"]
-    except Exception:
-        raise HTTPException(status_code=404, detail="System cache not found. Call /system/ensure first.")
-
-
-@app.get("/api/projects/{project_id}/system/pier-type-legend")
-def api_system_pier_type_legend(project_id: str):
-    try:
-        return system_cache.get_system(project_id)["pier_type_legend"]
-    except Exception:
-        raise HTTPException(status_code=404, detail="System cache not found. Call /system/ensure first.")
-
-
-@app.get("/api/projects/{project_id}/system/trackers")
-def api_system_trackers(project_id: str):
-    try:
-        return system_cache.get_system(project_id)["trackers"]
-    except Exception:
-        raise HTTPException(status_code=404, detail="System cache not found. Call /system/ensure first.")
-
-
-@app.get("/api/projects/{project_id}/system/piers")
-def api_system_piers(
-    project_id: str,
-    block: str = "",
-    row: str = "",
-    tracker: str = "",
-    pier_type: str = "",
-    limit: int = 5000,
-    offset: int = 0,
-):
-    try:
-        piers = system_cache.get_system(project_id)["piers"]
-    except Exception:
-        raise HTTPException(status_code=404, detail="System cache not found. Call /system/ensure first.")
-
-    def match(p):
-        if block and str(p.get("block", "")) != block:
-            return False
-        if row and str(p.get("row", "")) != row:
-            return False
-        if tracker and str(p.get("tracker", "")) != tracker:
-            return False
-        if pier_type and str(p.get("pier_type", "")).upper() != pier_type.upper():
-            return False
-        return True
-
-    # Filter then slice for simple paging.
-    filtered = [p for p in piers if match(p)]
-    limit = max(1, min(int(limit), 20000))
-    offset = max(0, int(offset))
+def _compute_row_stats(trackers: list) -> dict:
+    rows = [str(t.get("row", "")) for t in trackers if t.get("row")]
+    unique = set(rows)
+    numeric = [int(r) for r in rows if r.isdigit()]
     return {
-        "total": len(filtered),
-        "items": filtered[offset : offset + limit],
+        "row_count": len(unique),
+        "mean_row_num": round(sum(numeric) / len(numeric), 1) if numeric else None,
     }
 
 
-@app.post("/api/projects/{project_id}/system/export-excel")
-def api_system_export_excel(project_id: str, force: bool = False):
-    project_dir = PROJECTS_ROOT / project_id
-    if not project_dir.exists():
-        raise HTTPException(status_code=404, detail="Project not found")
+def _load_plant_info(project_uuid: str) -> dict:
+    """Merge defaults ← extracted electrical (summary.electrical) ← user plant_info overrides."""
+    meta = db_store.get_project_metadata(project_uuid)
+    base = dict(PLANT_INFO_DEFAULTS)
+    elec = (meta.get("summary") or {}).get("electrical") or {}
+    for key in ELECTRICAL_KEYS:
+        if elec.get(key) is not None:
+            base[key] = elec[key]
+    user = meta.get("plant_info") or {}
+    for key, value in user.items():
+        if value is not None and value != "":
+            base[key] = value
+    return base
+
+
+def _project_upload_dir(project_id: str) -> Path:
+    d = PROJECTS_ROOT / project_id / "uploads"
+    d.mkdir(parents=True, exist_ok=True)
+    return d
+
+
+# --- Project list / create / delete ---------------------------------------
+
+class ProjectCreate(BaseModel):
+    project_id: str
+    name: Optional[str] = None
+    site_profile: Optional[str] = None
+
+
+@app.get("/api/projects")
+def api_list_projects():
+    projects = db_store.list_projects()
+    # Compatibility: the old API returned [{project_id, summary}] rows
+    return [
+        {"project_id": p["project_id"], "summary": p.get("summary") or {}}
+        for p in projects
+    ]
+
+
+@app.post("/api/projects")
+def api_create_project(body: ProjectCreate):
+    pid = body.project_id.strip()
+    if not pid or not all(c.isalnum() or c in "-_" for c in pid):
+        raise HTTPException(status_code=400, detail="Invalid project_id (alphanumeric, '-', '_' only)")
+    uu = db_store.upsert_project(pid, name=body.name or pid, site_profile=body.site_profile, status="draft")
+    (PROJECTS_ROOT / pid).mkdir(parents=True, exist_ok=True)
+    _project_upload_dir(pid)
+    return {"project_id": pid, "id": uu, "status": "draft"}
+
+
+@app.get("/api/projects/{project_id}")
+def api_get_project(project_id: str):
+    uu = _require_project_uuid(project_id)
+    meta = db_store.get_project_metadata(uu)
+    summary = dict(meta.get("summary") or {})
+    trackers = db_store.get_trackers(uu)
+    summary.update(_compute_row_stats(trackers))
+    # Ensure counts reflect DB state
+    blocks = db_store.get_blocks(uu)
+    piers_count = len(db_store.get_piers(uu))
+    summary.setdefault("block_count", len(blocks))
+    summary.setdefault("tracker_count", len(trackers))
+    summary["block_count"] = len(blocks)
+    summary["tracker_count"] = len(trackers)
+    summary["pier_count"] = piers_count
+    return summary
+
+
+@app.get("/api/projects/{project_id}/blocks")
+def api_get_blocks(project_id: str):
+    uu = _require_project_uuid(project_id)
+    return db_store.get_blocks(uu)
+
+
+@app.get("/api/projects/{project_id}/trackers")
+def api_get_trackers(project_id: str):
+    uu = _require_project_uuid(project_id)
+    return db_store.get_trackers(uu)
+
+
+@app.get("/api/projects/{project_id}/piers")
+def api_get_piers(project_id: str):
+    uu = _require_project_uuid(project_id)
+    return db_store.get_piers(uu)
+
+
+@app.get("/api/projects/{project_id}/pier/{pier_id}")
+def api_get_pier(project_id: str, pier_id: str):
+    uu = _require_project_uuid(project_id)
+    pier = db_store.get_pier(uu, pier_id)
+    if not pier:
+        raise HTTPException(status_code=404, detail="Pier not found")
+    # Lookup tracker + block (cheap since already indexed)
+    trackers = db_store.get_trackers(uu)
+    blocks = db_store.get_blocks(uu)
+    tracker = next((t for t in trackers if t.get("tracker_id") == pier.get("tracker_id")), None)
+    block = next((b for b in blocks if b.get("block_id") == pier.get("block_id")), None)
+    bundles = db_store.get_drawing_bundles(uu)
+    return {"pier": pier, "tracker": tracker, "block": block, "drawing_bundle": bundles.get(pier_id)}
+
+
+@app.get("/api/projects/{project_id}/pier/{pier_id}/zoom-target")
+def api_get_zoom(project_id: str, pier_id: str):
+    uu = _require_project_uuid(project_id)
+    targets = db_store.get_zoom_targets(uu)
+    z = targets.get(pier_id)
+    if not z:
+        raise HTTPException(status_code=404, detail="Zoom target not found")
+    return z
+
+
+# --- Pier statuses --------------------------------------------------------
+
+class StatusUpdate(BaseModel):
+    status: str
+
+
+@app.get("/api/projects/{project_id}/pier-statuses")
+def api_get_pier_statuses(project_id: str):
+    uu = _require_project_uuid(project_id)
+    return db_store.get_pier_statuses(uu)
+
+
+@app.put("/api/projects/{project_id}/pier/{pier_id}/status")
+def api_update_pier_status(project_id: str, pier_id: str, body: StatusUpdate):
+    if body.status not in VALID_STATUSES:
+        raise HTTPException(status_code=400, detail=f"Invalid status. Must be one of: {sorted(VALID_STATUSES)}")
+    uu = _require_project_uuid(project_id)
+    db_store.set_pier_status(uu, pier_id, body.status)
+    return {"pier_id": pier_id, "status": body.status}
+
+
+# --- Plant info -----------------------------------------------------------
+
+@app.get("/api/projects/{project_id}/plant-info")
+def api_get_plant_info(project_id: str):
+    uu = _require_project_uuid(project_id)
+    return _load_plant_info(uu)
+
+
+@app.put("/api/projects/{project_id}/plant-info")
+def api_update_plant_info(project_id: str, body: dict):
+    uu = _require_project_uuid(project_id)
+    meta = db_store.get_project_metadata(uu)
+    current_user = dict(meta.get("plant_info") or {})
+    for key in PLANT_INFO_DEFAULTS:
+        if key in body:
+            current_user[key] = body[key]
+    db_store.update_plant_info(uu, current_user)
+    return _load_plant_info(uu)
+
+
+# --- File upload + parse --------------------------------------------------
+
+@app.get("/api/projects/{project_id}/files")
+def api_list_files(project_id: str):
+    uu = _require_project_uuid(project_id)
+    return db_store.list_project_files(uu)
+
+
+@app.post("/api/projects/{project_id}/files")
+async def api_upload_file(
+    project_id: str,
+    kind: str = Form(...),
+    file: UploadFile = File(...),
+):
+    if kind not in FILE_KINDS:
+        raise HTTPException(status_code=400, detail=f"Invalid kind. Must be one of {sorted(FILE_KINDS)}")
+    uu = _require_project_uuid(project_id)
+
+    upload_dir = _project_upload_dir(project_id)
+    safe_name = f"{kind}_{uuid.uuid4().hex[:8]}_{Path(file.filename).name}"
+    dest = upload_dir / safe_name
+
+    sha = hashlib.sha256()
+    size = 0
+    with dest.open("wb") as f:
+        while True:
+            chunk = await file.read(1024 * 1024)
+            if not chunk:
+                break
+            sha.update(chunk)
+            size += len(chunk)
+            f.write(chunk)
+
+    file_id = db_store.add_project_file(
+        project_uuid=uu,
+        kind=kind,
+        filename=safe_name,
+        storage_path=str(dest.resolve()),
+        original_name=file.filename,
+        size_bytes=size,
+        sha256=sha.hexdigest(),
+    )
+    return {"id": file_id, "filename": safe_name, "kind": kind, "size": size}
+
+
+@app.delete("/api/projects/{project_id}/files")
+def api_clear_files(project_id: str):
+    uu = _require_project_uuid(project_id)
+    # Delete physical files too
+    upload_dir = PROJECTS_ROOT / project_id / "uploads"
+    if upload_dir.exists():
+        shutil.rmtree(upload_dir, ignore_errors=True)
+        upload_dir.mkdir(parents=True, exist_ok=True)
+    db_store.clear_project_files(uu)
+    return {"ok": True}
+
+
+@app.post("/api/projects/{project_id}/parse")
+def api_parse_project(project_id: str):
+    """
+    Clear all existing artifacts for this project and re-run the parser using the
+    currently uploaded files. Returns the new summary.
+    """
+    uu = _require_project_uuid(project_id)
+    files = db_store.list_project_files(uu)
+    kinds = {f["kind"]: f for f in files}
+    construction = kinds.get("construction_pdf")
+    ramming = kinds.get("ramming_pdf")
+    overlay = kinds.get("overlay_image") or construction  # fall back to construction PDF
+    if not construction:
+        raise HTTPException(status_code=400, detail="Missing construction PDF. Upload a file with kind=construction_pdf first.")
+    if not ramming:
+        raise HTTPException(status_code=400, detail="Missing ramming PDF. Upload a file with kind=ramming_pdf first.")
+
+    # Clear old artifacts
+    db_store.delete_project_artifacts(uu)
+    db_store.upsert_project(project_id, status="parsing")
+
     try:
-        ensure_system_cache(project_dir=project_dir, force=force)
-        result = export_system_excel_from_cache(project_id=project_id, project_dir=project_dir)
-        url = f"/projects/{project_id}/{result['xlsx_filename']}"
-        return {"xlsx_path": result["xlsx_path"], "url": url}
+        # Run the parser
+        from app.parser import run_pipeline
+        from app.site_profiles import load_site_profile
+        from app.electrical_metadata import extract_electrical_metadata
+
+        out_dir = PROJECTS_ROOT / project_id
+        out_dir.mkdir(parents=True, exist_ok=True)
+
+        input_paths = [construction["storage_path"], ramming["storage_path"]]
+        profile = load_site_profile(profile_name="auto", input_paths=input_paths)
+
+        result = run_pipeline(
+            construction_pdf=construction["storage_path"],
+            ramming_pdf=ramming["storage_path"],
+            overlay_source=overlay["storage_path"],
+            out_dir=out_dir,
+            profile=profile,
+        )
+
+        # Persist into DB
+        db_store.insert_blocks(uu, result.get("blocks", []))
+        db_store.insert_trackers(uu, result.get("trackers", []))
+        db_store.insert_piers(uu, result.get("piers", []))
+        db_store.set_drawing_bundles(uu, result.get("drawing_bundles", {}))
+        db_store.set_zoom_targets(uu, result.get("zoom_targets", {}))
+
+        # Attach extracted electrical metadata to summary
+        summary = dict(result.get("summary") or {})
+        try:
+            elec = extract_electrical_metadata(
+                construction["storage_path"], ramming["storage_path"]
+            )
+            if elec.get("_extracted"):
+                summary["electrical"] = {k: v for k, v in elec.items() if not k.startswith("_")}
+        except Exception:
+            pass
+        db_store.set_project_metadata(uu, summary)
+        db_store.upsert_project(project_id, status="ready")
+
+        return {
+            "status": "ready",
+            "block_count": len(result.get("blocks", [])),
+            "tracker_count": len(result.get("trackers", [])),
+            "pier_count": len(result.get("piers", [])),
+        }
     except Exception as e:
+        db_store.upsert_project(project_id, status="error")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+# --- Aggregation endpoints (fast DB queries) ------------------------------
+
+@app.get("/api/projects/{project_id}/pier-type-counts")
+def api_pier_type_counts(project_id: str):
+    uu = _require_project_uuid(project_id)
+    return db_store.get_pier_type_counts(uu)
+
+
+@app.get("/api/projects/{project_id}/block-summary")
+def api_block_summary(project_id: str):
+    uu = _require_project_uuid(project_id)
+    return db_store.get_block_summary(uu)
+
+
+@app.get("/api/projects/{project_id}/row-summary")
+def api_row_summary(project_id: str):
+    uu = _require_project_uuid(project_id)
+    return db_store.get_row_summary(uu)

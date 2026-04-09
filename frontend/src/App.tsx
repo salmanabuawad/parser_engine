@@ -88,7 +88,7 @@ export default function App() {
       await updatePierStatus(projectId, pierId, status);
       setPierStatuses((prev) => {
         const next = { ...prev };
-        if (status === "Not Started") delete next[pierId];
+        if (status === "New") delete next[pierId];
         else next[pierId] = status;
         return next;
       });
@@ -133,16 +133,17 @@ export default function App() {
   const gridRows = useMemo(() => {
     return filteredPiers.map((p: any) => ({
       ...p,
-      status: pierStatuses[p.pier_code] || "Not Started",
+      status: pierStatuses[p.pier_code] || "New",
     }));
   }, [filteredPiers, pierStatuses]);
 
   const STATUS_BG: Record<string, string> = {
-    "Not Started": "#ffffff",
-    "Implemented": "#dbeafe",
-    "Approved": "#dcfce7",
-    "Rejected": "#fee2e2",
-    "Fixed": "#fef3c7",
+    "New": "#ffffff",
+    "In Progress": "#fef3c7",
+    "Implemented": "#d1fae5",
+    "Approved": "#86efac",
+    "Rejected": "#fecaca",
+    "Fixed": "#bfdbfe",
   };
   const getRowStyle = (p: any) => {
     const bg = STATUS_BG[p.data?.status] || "#ffffff";
@@ -198,7 +199,13 @@ export default function App() {
       )}
 
       {mode === "system" ? (
-        <SystemPanel projectId={projectId} />
+        <SystemPanel projectId={projectId} onProjectChanged={(pid) => {
+          // Refresh projects list and switch to the (possibly new) project
+          getProjects().then((items: any[]) => {
+            setProjects(items);
+            if (pid && pid !== projectId) setProjectId(pid);
+          }).catch(() => {});
+        }} />
       ) : mode === "map" ? (
         /* ---- MAP VIEW ---- */
         <div>

@@ -110,6 +110,89 @@ def _parse_nextracker_details(lines: list) -> dict:
     return table
 
 
+def _parse_pier_type_specs(pdf_doc) -> list:
+    """
+    Parse the pier type spec table from page 4 of the construction PDF.
+    Returns a list of {pier_type, pier_type_full, zones: [{zone, size, part_no}, ...]}.
+
+    Zones seen:
+      - REMAINING AREA SLOPE 0-6.1%
+      - CANAL AREA SLOPE 0-6.1%
+      - SLOPE 6.1%-10%
+    """
+    # Look at pages 4-6 for the PIER LEGEND table
+    pier_types = [
+        ("HAP", "HEAVY ARRAY PIER"),
+        ("HMP", "HEAVY MOTOR PIER"),
+        ("SAP", "STANDARD ARRAY PIER"),
+        ("SAPE", "STANDARD ARRAY PIER, EDGE"),
+        ("SAPEND", "STANDARD ARRAY PIER END"),
+        ("SMP", "STANDARD MOTOR PIER"),
+    ]
+    specs = []
+    for page_idx in range(min(len(pdf_doc), 20)):
+        try:
+            text = pdf_doc.load_page(page_idx).get_text("text") or ""
+        except Exception:
+            continue
+        if "PIER LEGEND" not in text.upper() or "HEAVY ARRAY PIER" not in text.upper():
+            continue
+        lines = [l.strip() for l in text.split("\n") if l.strip()]
+        for abbr, full_name in pier_types:
+            # find the line matching "HEAVY ARRAY PIER (HAP)" or similar
+            for i, line in enumerate(lines):
+                u = line.upper()
+                if full_name in u and f"({abbr})" in u:
+                    # next 6 lines should be: size1, partno1, size2, partno2, size3, partno3
+                    zones_names = ["remaining_0_6.1", "canal_0_6.1", "slope_6.1_10"]
+                    zones = []
+                    for k, zname in enumerate(zones_names):
+                        idx_size = i + 1 + k * 2
+                        idx_part = i + 2 + k * 2
+                        if idx_part < len(lines):
+                            zones.append({
+                                "zone": zname,
+                                "size": lines[idx_size],
+                                "part_no": lines[idx_part],
+                            })
+                    specs.append({
+                        "pier_type": abbr,
+                        "pier_type_full": full_name.title(),
+                        "zones": zones,
+                    })
+                    break
+            if len(specs) >= len(pier_types):
+                return specs
+        if specs:
+            return specs
+    return specs
+
+
+def _parse_pier_spacing(pdf_doc) -> list:
+    """
+    Parse the PIER SPACING table from pages 30-42 of the construction PDF.
+    Shows distances like 7.594m, 17.022m, 25.127m along tracker length.
+    Returns a sorted list of distances in meters.
+    """
+    import re
+    distances_m = set()
+    for page_idx in range(min(len(pdf_doc), 45)):
+        try:
+            text = pdf_doc.load_page(page_idx).get_text("text") or ""
+        except Exception:
+            continue
+        if "PIER SPACING" not in text.upper():
+            continue
+        for m in re.finditer(r"(\d{1,3}\.\d{2,3})m(?!\w)", text):
+            try:
+                d = float(m.group(1))
+                if 1 < d < 100:
+                    distances_m.add(round(d, 3))
+            except ValueError:
+                pass
+    return sorted(distances_m)
+
+
 def _parse_bill_of_materials(lines: list) -> list:
     """
     Parse the Bill of Materials table. Each entry is a QTY/NAME/PART NO triple.
@@ -187,6 +270,22 @@ def _extract_from_construction(construction_pdf: str) -> dict:
             out["bill_of_materials"] = tracker_bom
             out["expected_piers"] = sum(e["qty"] * e["pier_count"] for e in tracker_bom)
             out["expected_modules_from_bom"] = sum(e["qty"] * e["module_count"] for e in tracker_bom)
+
+        # Pier type specs (HAP/HMP/SAP/SAPE/SAPEND/SMP sizes + part numbers by zone)
+        try:
+            specs = _parse_pier_type_specs(doc)
+            if specs:
+                out["pier_type_specs"] = specs
+        except Exception:
+            pass
+
+        # Pier spacing distances along tracker length
+        try:
+            spacing = _parse_pier_spacing(doc)
+            if spacing:
+                out["pier_spacing_m"] = spacing
+        except Exception:
+            pass
 
         # Plant totals
         out["total_output_mw"] = _to_float(_label_value(lines, "TOTAL CAPACITY [MW]"))
@@ -314,6 +413,8 @@ def extract_electrical_metadata(construction_pdf: str, ramming_pdf: Optional[str
         "expected_modules_from_bom": None,
         "tracker_matrix": None,
         "bill_of_materials": None,
+        "pier_type_specs": None,
+        "pier_spacing_m": None,
         "_extracted": False,
     }
 

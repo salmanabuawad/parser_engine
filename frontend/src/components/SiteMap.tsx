@@ -21,11 +21,12 @@ const PIER_RADIUS = 3;
 const SELECTED_RADIUS = 6;
 
 const STATUS_COLORS: Record<string, string> = {
-  "Not Started": "",              // no ring
-  "Implemented": "#3b82f6",
-  "Approved": "#22c55e",
-  "Rejected": "#ef4444",
-  "Fixed": "#f59e0b",
+  "New": "",                      // no ring (default)
+  "In Progress": "#eab308",       // yellow
+  "Implemented": "#10b981",       // light green
+  "Approved": "#16a34a",          // green
+  "Rejected": "#ef4444",          // red
+  "Fixed": "#2563eb",             // blue
 };
 
 interface Props {

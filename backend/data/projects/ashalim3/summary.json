@@ -213,6 +213,172 @@
         "module_count": 28,
         "pier_count": 5
       }
+    ],
+    "pier_type_specs": [
+      {
+        "pier_type": "HAP",
+        "pier_type_full": "Heavy Array Pier",
+        "zones": [
+          {
+            "zone": "remaining_0_6.1",
+            "size": "W6X20/138",
+            "part_no": "73392"
+          },
+          {
+            "zone": "canal_0_6.1",
+            "size": "W6X20/138",
+            "part_no": "73392"
+          },
+          {
+            "zone": "slope_6.1_10",
+            "size": "W6X20/162",
+            "part_no": "73400"
+          }
+        ]
+      },
+      {
+        "pier_type": "HMP",
+        "pier_type_full": "Heavy Motor Pier",
+        "zones": [
+          {
+            "zone": "remaining_0_6.1",
+            "size": "W6X20/138",
+            "part_no": "72014"
+          },
+          {
+            "zone": "canal_0_6.1",
+            "size": "W6X25/138",
+            "part_no": "72064"
+          },
+          {
+            "zone": "slope_6.1_10",
+            "size": "W6X25/162",
+            "part_no": "72072"
+          }
+        ]
+      },
+      {
+        "pier_type": "SAP",
+        "pier_type_full": "Standard Array Pier",
+        "zones": [
+          {
+            "zone": "remaining_0_6.1",
+            "size": "W6X8.5/120",
+            "part_no": "73536"
+          },
+          {
+            "zone": "canal_0_6.1",
+            "size": "W6X8.5/120",
+            "part_no": "73536"
+          },
+          {
+            "zone": "slope_6.1_10",
+            "size": "W6X9/141",
+            "part_no": "73593"
+          }
+        ]
+      },
+      {
+        "pier_type": "SAPE",
+        "pier_type_full": "Standard Array Pier, Edge",
+        "zones": [
+          {
+            "zone": "remaining_0_6.1",
+            "size": "W6X12/126",
+            "part_no": "73292"
+          },
+          {
+            "zone": "canal_0_6.1",
+            "size": "W6X12/126",
+            "part_no": "73292"
+          },
+          {
+            "zone": "slope_6.1_10",
+            "size": "W6X12/150",
+            "part_no": "73300"
+          }
+        ]
+      },
+      {
+        "pier_type": "SAPEND",
+        "pier_type_full": "Standard Array Pier End",
+        "zones": [
+          {
+            "zone": "remaining_0_6.1",
+            "size": "W6X8.5/120",
+            "part_no": "73536"
+          },
+          {
+            "zone": "canal_0_6.1",
+            "size": "W6X8.5/120",
+            "part_no": "73536"
+          },
+          {
+            "zone": "slope_6.1_10",
+            "size": "W6X9/141",
+            "part_no": "73593"
+          }
+        ]
+      },
+      {
+        "pier_type": "SMP",
+        "pier_type_full": "Standard Motor Pier",
+        "zones": [
+          {
+            "zone": "remaining_0_6.1",
+            "size": "W6X15/120",
+            "part_no": "71958"
+          },
+          {
+            "zone": "canal_0_6.1",
+            "size": "W6X25/120",
+            "part_no": "72064"
+          },
+          {
+            "zone": "slope_6.1_10",
+            "size": "W6X25/162",
+            "part_no": "72072"
+          }
+        ]
+      }
+    ],
+    "pier_spacing_m": [
+      7.28,
+      7.594,
+      8.53,
+      8.61,
+      9.93,
+      10.24,
+      11.25,
+      15.699,
+      17.022,
+      20.991,
+      21.74,
+      23.804,
+      25.127,
+      30.419,
+      30.587,
+      34.556,
+      37.202,
+      37.369,
+      38.701,
+      38.868,
+      39.766,
+      39.934,
+      41.171,
+      42.661,
+      50.599,
+      52.09,
+      60.028,
+      60.195,
+      68.133,
+      68.3,
+      74.915,
+      75.083,
+      76.414,
+      76.582,
+      77.402,
+      77.736
     ]
   }
 }

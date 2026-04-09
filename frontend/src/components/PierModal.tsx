@@ -9,18 +9,20 @@ const PIER_COLORS: Record<string, string> = {
   SMP: "#00ff00",
 };
 
-const STATUSES = ["Not Started", "Implemented", "Approved", "Rejected", "Fixed"] as const;
+const STATUSES = ["New", "In Progress", "Implemented", "Approved", "Rejected", "Fixed"] as const;
 
 const STATUS_COLORS: Record<string, string> = {
-  "Not Started": "#94a3b8",
-  "Implemented": "#3b82f6",
-  "Approved": "#22c55e",
-  "Rejected": "#ef4444",
-  "Fixed": "#f59e0b",
+  "New": "#94a3b8",          // gray text
+  "In Progress": "#eab308",  // yellow
+  "Implemented": "#10b981",  // light green
+  "Approved": "#16a34a",     // green
+  "Rejected": "#ef4444",     // red
+  "Fixed": "#2563eb",        // blue
 };
 
 const STATUS_ICONS: Record<string, string> = {
-  "Not Started": "\u25cb",   // ○
+  "New": "\u25cb",           // ○
+  "In Progress": "\u25d0",   // ◐
   "Implemented": "\u25cf",   // ●
   "Approved": "\u2714",      // ✔
   "Rejected": "\u2718",      // ✘
@@ -39,7 +41,7 @@ export default function PierModal({ selected, status, onStatusChange, onClose }:
   if (!selected?.pier) return null;
   const { pier } = selected;
   const color = PIER_COLORS[pier.pier_type] || "#888";
-  const currentStatus = status || "Not Started";
+  const currentStatus = status || "New";
   const statusColor = STATUS_COLORS[currentStatus] || "#94a3b8";
 
   return (
