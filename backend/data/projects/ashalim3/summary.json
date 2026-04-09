@@ -57,5 +57,162 @@
     "origin_tracker_id": "T0001",
     "origin_x": 262.61866760253906,
     "origin_y": 758.3813781738281
+  },
+  "electrical": {
+    "total_output_mw": 114.795,
+    "total_strings": 5578,
+    "total_modules": 156184,
+    "modules_per_string": 28,
+    "module_capacity_w": 735,
+    "module_length_m": 2.384,
+    "module_width_m": 1.303,
+    "pitch_m": 4.5,
+    "inverters": 26,
+    "dccb": 282,
+    "string_groups": 104,
+    "blocks_in_electrical": 13,
+    "site_id": "008780",
+    "project_number": "2850345",
+    "nextracker_model": "XTR-1.5_NXH 2.4.1.24",
+    "lat_long": "30.9555722/34.7127778",
+    "snow_load": "- kN/m2",
+    "wind_load": "21.74m/s EUROCODE",
+    "review_by": "DS",
+    "issue_date": "11/07/2025",
+    "expected_trackers": 1533,
+    "expected_piers": 24130,
+    "expected_modules_from_bom": 156184,
+    "tracker_matrix": {
+      "EXTERIOR": {
+        "112": 58,
+        "84": 36,
+        "56": 30,
+        "28": 37
+      },
+      "INTERIOR": {
+        "112": 496,
+        "84": 10,
+        "56": 0,
+        "28": 0
+      },
+      "EPNS": {
+        "112": 12,
+        "84": 8,
+        "56": 6,
+        "28": 2
+      },
+      "EPN": {
+        "112": 265,
+        "84": 69,
+        "56": 46,
+        "28": 36
+      },
+      "EPS": {
+        "112": 391,
+        "84": 25,
+        "56": 1,
+        "28": 5
+      },
+      "TOTAL": {
+        "112": 1222,
+        "84": 148,
+        "56": 83,
+        "28": 80
+      },
+      "grand_total": 1533
+    },
+    "bill_of_materials": [
+      {
+        "qty": 58,
+        "name": "NX Horizon 112 module, 19 pier, Exterior Row - XTR - 1.5",
+        "part_no": "NXH - 2.4.1.24.1132",
+        "module_count": 112,
+        "pier_count": 19
+      },
+      {
+        "qty": 12,
+        "name": "NX Horizon 112 module, 17 pier, Edge Row - XTR - 1.5",
+        "part_no": "NXH - 2.4.1.24.1133",
+        "module_count": 112,
+        "pier_count": 17
+      },
+      {
+        "qty": 496,
+        "name": "NX Horizon 112 module, 17 pier, Interior Row - XTR - 1.5",
+        "part_no": "NXH - 2.4.1.24.1134",
+        "module_count": 112,
+        "pier_count": 17
+      },
+      {
+        "qty": 656,
+        "name": "NX Horizon 112 module, 17 pier,Hybrid Edge Row - XTR - 1.5",
+        "part_no": "NXH - 2.4.1.24.1135",
+        "module_count": 112,
+        "pier_count": 17
+      },
+      {
+        "qty": 36,
+        "name": "NX Horizon 84 module, 15 pier, Exterior Row - XTR - 1.5",
+        "part_no": "NXH - 2.4.1.24.1136",
+        "module_count": 84,
+        "pier_count": 15
+      },
+      {
+        "qty": 8,
+        "name": "NX Horizon 84 module, 13 pier, Edge Row - XTR - 1.5",
+        "part_no": "NXH - 2.4.1.24.1137",
+        "module_count": 84,
+        "pier_count": 13
+      },
+      {
+        "qty": 10,
+        "name": "NX Horizon 84 module, 13 pier, Interior Row",
+        "part_no": "NXH - 2.4.1.24.1137",
+        "module_count": 84,
+        "pier_count": 13
+      },
+      {
+        "qty": 94,
+        "name": "NX Horizon 84 module, 13 pier, Hybrid Short Wing Exposed - XTR - 1.5",
+        "part_no": "NXH - 2.4.1.24.1138",
+        "module_count": 84,
+        "pier_count": 13
+      },
+      {
+        "qty": 30,
+        "name": "NX Horizon 56 module, 11 pier, Exterior Row - XTR - 1.5",
+        "part_no": "NXH - 2.4.1.24.1139",
+        "module_count": 56,
+        "pier_count": 11
+      },
+      {
+        "qty": 6,
+        "name": "NX Horizon 56 module, 9 pier, Edge Row - XTR - 1.5",
+        "part_no": "NXH - 2.4.1.24.1140",
+        "module_count": 56,
+        "pier_count": 9
+      },
+      {
+        "qty": 47,
+        "name": "NX Horizon 56 module, 9 pier, Hybrid Edge Row - XTR - 1.5",
+        "part_no": "NXH - 2.4.1.24.1141",
+        "module_count": 56,
+        "pier_count": 9
+      },
+      {
+        "qty": 37,
+        "name": "NX Horizon 28 module, 6 pier, Exterior Row - XTR - 1.5",
+        "part_no": "NXH - 2.4.1.24.1142",
+        "module_count": 28,
+        "pier_count": 6
+      },
+      {
+        "qty": 43,
+        "name": "NX Horizon 28 module, 5 pier, Edge Row - XTR - 1.5",
+        "part_no": "NXH - 2.4.1.24.1143",
+        "module_count": 28,
+        "pier_count": 5
+      }
+    ]
   }
 }

@@ -1,229 +1,210 @@
-import { useEffect, useMemo, useState } from "react";
-import SimpleGrid from "./SimpleGrid";
-import SystemMapCanvas from "./SystemMapCanvas";
-import {
-  ensureSystem,
-  exportSystemExcel,
-  getSystemMeta,
-  getSystemPierTypeCounts,
-  getSystemPierTypeLegend,
-  getSystemPiers,
-  getSystemTrackers
-} from "../api";
+import { useEffect, useState } from "react";
+import { getProject, getPlantInfo, updatePlantInfo } from "../api";
+import { useResponsive } from "../hooks/useResponsive";
 
 export default function SystemPanel({ projectId }: { projectId: string }) {
-  const [status, setStatus] = useState(null);
+  const { isMobile } = useResponsive();
   const [error, setError] = useState("");
-  const [meta, setMeta] = useState(null);
-  const [counts, setCounts] = useState([]);
-  const [legend, setLegend] = useState([]);
-  const [trackers, setTrackers] = useState([]);
-  const [pierType, setPierType] = useState("");
-  const [selectedTracker, setSelectedTracker] = useState(null);
-  const [piersResp, setPiersResp] = useState({ total: 0, items: [] });
-  const [selectedPierId, setSelectedPierId] = useState("");
-  const [excelUrl, setExcelUrl] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const legendByType = useMemo(() => {
-    const m = new Map();
-    for (const row of legend || []) m.set(row.pier_type, row);
-    return m;
-  }, [legend]);
+  const [project, setProject] = useState<any>(null);
+  const [plantInfo, setPlantInfo] = useState<any>(null);
+  const [editingPlant, setEditingPlant] = useState(false);
+  const [plantDraft, setPlantDraft] = useState<any>({});
 
   useEffect(() => {
     if (!projectId) return;
-    setStatus(null);
     setError("");
-    setMeta(null);
-    setCounts([]);
-    setLegend([]);
-    setTrackers([]);
-    setPierType("");
-    setSelectedTracker(null);
-    setPiersResp({ total: 0, items: [] });
-    setSelectedPierId("");
-    setExcelUrl("");
+    setProject(null);
+    setPlantInfo(null);
+    setEditingPlant(false);
+
+    Promise.all([getProject(projectId), getPlantInfo(projectId)])
+      .then(([proj, pi]) => { setProject(proj); setPlantInfo(pi); })
+      .catch((e: any) => setError(String(e.message || e)));
   }, [projectId]);
 
-  async function handleEnsure(force = false) {
+  async function handlePlantSave() {
     if (!projectId) return;
-    setLoading(true);
-    setError("");
     try {
-      const res = await ensureSystem(projectId, { force });
-      setStatus(res);
-      const [m, c, l, t] = await Promise.all([
-        getSystemMeta(projectId),
-        getSystemPierTypeCounts(projectId),
-        getSystemPierTypeLegend(projectId),
-        getSystemTrackers(projectId)
-      ]);
-      setMeta(m);
-      setCounts(c);
-      setLegend(l);
-      setTrackers(t);
-    } catch (e) {
+      const toSave = { ...plantDraft };
+      if (toSave.tolerance_ratio != null && toSave.tolerance_ratio !== "") {
+        const n = parseFloat(toSave.tolerance_ratio);
+        toSave.tolerance_ratio = isNaN(n) ? 0.05 : n;
+      }
+      const updated = await updatePlantInfo(projectId, toSave);
+      setPlantInfo(updated);
+      setEditingPlant(false);
+    } catch (e: any) {
       setError(String(e.message || e));
-    } finally {
-      setLoading(false);
     }
   }
-
-  async function refreshPiers(next) {
-    if (!projectId) return;
-    setLoading(true);
-    setError("");
-    try {
-      const resp = await getSystemPiers(projectId, next);
-      setPiersResp(resp);
-      setSelectedPierId("");
-    } catch (e) {
-      setError(String(e.message || e));
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  async function handleExport(force = false) {
-    if (!projectId) return;
-    setLoading(true);
-    setError("");
-    try {
-      const res = await exportSystemExcel(projectId, { force });
-      setExcelUrl(res.url);
-    } catch (e) {
-      setError(String(e.message || e));
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  const selectedLegend = pierType ? legendByType.get(pierType) : null;
 
   return (
     <div style={{ display: "grid", gap: 14 }}>
-      <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
-        <button onClick={() => handleEnsure(false)} disabled={loading} style={{ padding: "8px 10px" }}>
-          Ensure System Cache
-        </button>
-        <button onClick={() => handleEnsure(true)} disabled={loading} style={{ padding: "8px 10px" }}>
-          Force Rebuild
-        </button>
-        <button onClick={() => handleExport(false)} disabled={loading} style={{ padding: "8px 10px" }}>
-          Export Excel
-        </button>
-        {excelUrl && <a href={excelUrl} target="_blank" rel="noreferrer">Download xlsx</a>}
-        {status?.vector_json && <span style={{ fontSize: 12, color: "#475569" }}>vector: {status.vector_json}</span>}
-      </div>
-
-      {error && <div style={{ color: "#b00020" }}>{error}</div>}
-
-      <div style={{ display: "grid", gridTemplateColumns: "360px 1fr 420px", gap: 14, alignItems: "start" }}>
-        <div style={{ display: "grid", gap: 14 }}>
-          <div style={{ border: "1px solid #e2e8f0", borderRadius: 16, padding: 12 }}>
-            <div style={{ fontWeight: 700, marginBottom: 8 }}>Pier Type Counts</div>
-            <SimpleGrid
-              rows={counts}
-              columns={[
-                { field: "pier_type", pinned: "left" },
-                { field: "count" }
-              ]}
-              height={210}
-              enableQuickFilter
-              quickFilterPlaceholder="Search type..."
-              onRowClick={(r) => {
-                setPierType(r.pier_type);
-                setSelectedTracker(null);
-                refreshPiers({ pier_type: r.pier_type, limit: 5000, offset: 0 });
-              }}
-            />
-            <div style={{ marginTop: 10, fontSize: 12, color: "#334155", lineHeight: 1.4 }}>
-              {pierType ? (
-                <>
-                  <div><b>{pierType}</b> {selectedLegend?.pier_type_name ? `- ${selectedLegend.pier_type_name}` : ""}</div>
-                  {selectedLegend?.details_raw ? <div style={{ opacity: 0.85 }}>{selectedLegend.details_raw}</div> : null}
-                </>
-              ) : (
-                <div style={{ opacity: 0.8 }}>Click a type to filter piers and map</div>
-              )}
-            </div>
+      {/* Project Metadata Card */}
+      {project && (
+        <div style={{ border: "1px solid #e2e8f0", borderRadius: 16, padding: isMobile ? 12 : 16, background: "#f8fafc" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12, flexWrap: "wrap" }}>
+            <div style={{ fontWeight: 800, fontSize: 16 }}>Project Info</div>
+            <span style={{ fontSize: 12, color: "#64748b", background: "#e2e8f0", padding: "2px 8px", borderRadius: 6 }}>{projectId}</span>
           </div>
+          <SectionTitle>Site</SectionTitle>
+          <MetaGrid isMobile={isMobile}>
+            <MetaField label="Project" value={projectId} />
+            <MetaField label="Project #" value={plantInfo?.project_number} />
+            <MetaField label="Site ID" value={plantInfo?.site_id} />
+            <MetaField label="Lat / Long" value={plantInfo?.lat_long} />
+            <MetaField label="Wind Load" value={plantInfo?.wind_load} />
+            <MetaField label="Snow Load" value={plantInfo?.snow_load} />
+            <MetaField label="Issue Date" value={plantInfo?.issue_date} />
+            <MetaField label="Nextracker" value={plantInfo?.nextracker_model} />
+          </MetaGrid>
 
-          <div style={{ border: "1px solid #e2e8f0", borderRadius: 16, padding: 12 }}>
-            <div style={{ fontWeight: 700, marginBottom: 8 }}>System Trackers (ROW/TRK)</div>
-            <SimpleGrid
-              rows={trackers}
-              columns={[
-                { field: "block", headerName: "Block" },
-                { field: "row", headerName: "Row" },
-                { field: "tracker", headerName: "Trk" },
-                { field: "total_piers", headerName: "Total" }
-              ]}
-              height={330}
-              enableQuickFilter
-              quickFilterPlaceholder="Search block/row/trk..."
-              onRowClick={(r) => {
-                setSelectedTracker(r);
-                setPierType("");
-                refreshPiers({ block: r.block, row: r.row, tracker: r.tracker, limit: 5000, offset: 0 });
-              }}
+          <SectionTitle>Structure</SectionTitle>
+          <MetaGrid isMobile={isMobile}>
+            <MetaField label="Piers" value={project.pier_count?.toLocaleString()} />
+            <MetaField label="Trackers" value={project.tracker_count?.toLocaleString()} />
+            <MetaField label="Blocks" value={project.block_count} />
+            <MetaField label="Rows" value={project.row_count} />
+          </MetaGrid>
+
+          <SectionTitle>Electrical</SectionTitle>
+          <MetaGrid isMobile={isMobile}>
+            <MetaField label="Total Output (MW)" value={plantInfo?.total_output_mw} />
+            <MetaField label="Inverters" value={plantInfo?.inverters} />
+            <MetaField label="DCCB" value={plantInfo?.dccb?.toLocaleString?.() ?? plantInfo?.dccb} />
+            <MetaField label="String Groups" value={plantInfo?.string_groups} />
+            <MetaField label="Total Strings" value={plantInfo?.total_strings?.toLocaleString?.() ?? plantInfo?.total_strings} />
+            <MetaField label="Total Modules" value={plantInfo?.total_modules?.toLocaleString?.() ?? plantInfo?.total_modules} />
+            <MetaField label="Modules / String" value={plantInfo?.modules_per_string} />
+            <MetaField label="Devices" value={plantInfo?.devices} />
+          </MetaGrid>
+
+          <SectionTitle>Module</SectionTitle>
+          <MetaGrid isMobile={isMobile}>
+            <MetaField label="Module Power (W)" value={plantInfo?.module_capacity_w} />
+            <MetaField label="Length (m)" value={plantInfo?.module_length_m} />
+            <MetaField label="Width (m)" value={plantInfo?.module_width_m} />
+            <MetaField label="Pitch (m)" value={plantInfo?.pitch_m} />
+          </MetaGrid>
+          <SectionTitle>Validation</SectionTitle>
+          <MetaGrid isMobile={isMobile}>
+            <ValidationField
+              label="Trackers"
+              actual={project.tracker_count}
+              expected={plantInfo?.expected_trackers}
+              tolerance={plantInfo?.tolerance_ratio ?? 0.05}
             />
-          </div>
-        </div>
+            <ValidationField
+              label="Piers"
+              actual={project.pier_count}
+              expected={plantInfo?.expected_piers}
+              tolerance={plantInfo?.tolerance_ratio ?? 0.05}
+            />
+            <ValidationField
+              label="Modules (BoM)"
+              actual={plantInfo?.total_modules}
+              expected={plantInfo?.expected_modules_from_bom}
+              tolerance={plantInfo?.tolerance_ratio ?? 0.05}
+            />
+            <MetaField label="Tolerance" value={`±${Math.round((plantInfo?.tolerance_ratio ?? 0.05) * 100)}%`} />
+          </MetaGrid>
 
-        <div style={{ display: "grid", gap: 14 }}>
-          <div style={{ display: "flex", gap: 10, alignItems: "baseline", flexWrap: "wrap" }}>
-            <div style={{ fontWeight: 800, fontSize: 14 }}>System Map</div>
-            {meta?.pier_count != null && <div style={{ fontSize: 12, color: "#475569" }}>piers: {meta.pier_count}</div>}
-            {piersResp?.total != null && <div style={{ fontSize: 12, color: "#475569" }}>shown: {piersResp.total}</div>}
-            {(selectedTracker || pierType) && (
-              <button
-                onClick={() => {
-                  setSelectedTracker(null);
-                  setPierType("");
-                  setPiersResp({ total: 0, items: [] });
-                  setSelectedPierId("");
-                }}
-                style={{ marginLeft: "auto", padding: "6px 10px" }}
-              >
-                Clear Filter
+          {plantInfo?.notes && <div style={{ marginTop: 8, fontSize: 12, color: "#475569" }}>{plantInfo.notes}</div>}
+          <div style={{ marginTop: 10 }}>
+            {!editingPlant ? (
+              <button onClick={() => { setPlantDraft({ ...plantInfo }); setEditingPlant(true); }} style={{ fontSize: 12, padding: "4px 10px", borderRadius: 6, border: "1px solid #d1d5db", background: "#fff", cursor: "pointer" }}>
+                Edit Plant Info
               </button>
+            ) : (
+              <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr", gap: 8 }}>
+                <PlantInput label="Total Output (MW)" field="total_output_mw" draft={plantDraft} setDraft={setPlantDraft} />
+                <PlantInput label="Total Strings" field="total_strings" draft={plantDraft} setDraft={setPlantDraft} />
+                <PlantInput label="Total Modules" field="total_modules" draft={plantDraft} setDraft={setPlantDraft} />
+                <PlantInput label="Inverters" field="inverters" draft={plantDraft} setDraft={setPlantDraft} />
+                <PlantInput label="DCCB" field="dccb" draft={plantDraft} setDraft={setPlantDraft} />
+                <PlantInput label="Devices" field="devices" draft={plantDraft} setDraft={setPlantDraft} />
+                <PlantInput label="Tolerance (0-1)" field="tolerance_ratio" draft={plantDraft} setDraft={setPlantDraft} />
+                <div style={{ gridColumn: isMobile ? undefined : "1 / -1" }}>
+                  <PlantInput label="Notes" field="notes" draft={plantDraft} setDraft={setPlantDraft} />
+                </div>
+                <div style={{ display: "flex", gap: 6 }}>
+                  <button onClick={handlePlantSave} style={{ fontSize: 12, padding: "6px 14px", borderRadius: 6, border: "none", background: "#0f172a", color: "#fff", cursor: "pointer" }}>Save</button>
+                  <button onClick={() => setEditingPlant(false)} style={{ fontSize: 12, padding: "6px 14px", borderRadius: 6, border: "1px solid #d1d5db", background: "#fff", cursor: "pointer" }}>Cancel</button>
+                </div>
+              </div>
             )}
           </div>
-
-          <SystemMapCanvas
-            piers={piersResp.items}
-            selectedPierId={selectedPierId}
-            onPickPier={(id) => setSelectedPierId(id)}
-            height={560}
-          />
         </div>
+      )}
 
-        <div style={{ display: "grid", gap: 14 }}>
-          <div style={{ border: "1px solid #e2e8f0", borderRadius: 16, padding: 12 }}>
-            <div style={{ fontWeight: 700, marginBottom: 8 }}>Filtered Piers</div>
-            <SimpleGrid
-              rows={piersResp.items}
-              columns={[
-                { field: "pier_id", pinned: "left" },
-                { field: "block" },
-                { field: "row" },
-                { field: "tracker" },
-                { field: "pier_label", headerName: "Label" },
-                { field: "pier_type", headerName: "Type" }
-              ]}
-              height={560}
-              enableQuickFilter
-              quickFilterPlaceholder="Search pier id / type..."
-              pagination
-              pageSize={200}
-              getRowId={(p) => p.data?.pier_id}
-              onRowClick={(r) => setSelectedPierId(r.pier_id)}
-            />
-          </div>
-        </div>
+      {error && <div style={{ color: "#b00020" }}>{error}</div>}
+    </div>
+  );
+}
+
+function SectionTitle({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ fontSize: 11, fontWeight: 700, color: "#475569", textTransform: "uppercase", letterSpacing: 0.5, marginTop: 14, marginBottom: 6, borderBottom: "1px solid #e2e8f0", paddingBottom: 3 }}>
+      {children}
+    </div>
+  );
+}
+
+function MetaGrid({ children, isMobile }: { children: React.ReactNode; isMobile: boolean }) {
+  return (
+    <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, 1fr)", gap: isMobile ? "8px 12px" : "8px 20px", fontSize: 13 }}>
+      {children}
+    </div>
+  );
+}
+
+function MetaField({ label, value }: { label: string; value: any }) {
+  return (
+    <div>
+      <div style={{ fontSize: 11, color: "#64748b", marginBottom: 2 }}>{label}</div>
+      <div style={{ fontWeight: 600, fontSize: 14 }}>{value ?? "-"}</div>
+    </div>
+  );
+}
+
+function ValidationField({ label, actual, expected, tolerance }: { label: string; actual: any; expected: any; tolerance: number }) {
+  const hasBoth = typeof actual === "number" && typeof expected === "number" && expected > 0;
+  let status: "pass" | "fail" | "unknown" = "unknown";
+  let diffPct = 0;
+  if (hasBoth) {
+    diffPct = (actual - expected) / expected;
+    status = Math.abs(diffPct) <= tolerance ? "pass" : "fail";
+  }
+  const color = status === "pass" ? "#16a34a" : status === "fail" ? "#dc2626" : "#94a3b8";
+  const icon = status === "pass" ? "✓" : status === "fail" ? "⚠" : "—";
+  return (
+    <div>
+      <div style={{ fontSize: 11, color: "#64748b", marginBottom: 2 }}>{label}</div>
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <span style={{ fontWeight: 700, fontSize: 14, color }}>{icon}</span>
+        <span style={{ fontWeight: 600, fontSize: 13 }}>
+          {actual?.toLocaleString?.() ?? actual ?? "-"}
+          {hasBoth && <span style={{ color: "#64748b", fontWeight: 400 }}> / {expected.toLocaleString()}</span>}
+        </span>
       </div>
+      {hasBoth && (
+        <div style={{ fontSize: 10, color, marginTop: 1 }}>
+          {diffPct >= 0 ? "+" : ""}{(diffPct * 100).toFixed(1)}%
+        </div>
+      )}
+    </div>
+  );
+}
+
+function PlantInput({ label, field, draft, setDraft }: { label: string; field: string; draft: any; setDraft: (d: any) => void }) {
+  return (
+    <div>
+      <div style={{ fontSize: 11, color: "#64748b", marginBottom: 2 }}>{label}</div>
+      <input
+        value={draft[field] ?? ""}
+        onChange={(e) => setDraft({ ...draft, [field]: e.target.value || null })}
+        style={{ width: "100%", padding: "6px 8px", borderRadius: 6, border: "1px solid #d1d5db", fontSize: 13, boxSizing: "border-box" }}
+      />
     </div>
   );
 }

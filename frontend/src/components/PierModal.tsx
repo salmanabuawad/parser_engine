@@ -1,3 +1,5 @@
+import { useResponsive } from "../hooks/useResponsive";
+
 const PIER_COLORS: Record<string, string> = {
   HAP: "#ff0000",
   HMP: "#ff0000",
@@ -33,8 +35,9 @@ interface Props {
 }
 
 export default function PierModal({ selected, status, onStatusChange, onClose }: Props) {
+  const { isMobile } = useResponsive();
   if (!selected?.pier) return null;
-  const { pier, tracker, block, drawing_bundle } = selected;
+  const { pier } = selected;
   const color = PIER_COLORS[pier.pier_type] || "#888";
   const currentStatus = status || "Not Started";
   const statusColor = STATUS_COLORS[currentStatus] || "#94a3b8";
@@ -57,9 +60,10 @@ export default function PierModal({ selected, status, onStatusChange, onClose }:
         style={{
           background: "#fff",
           borderRadius: 16,
-          padding: "20px 24px",
-          minWidth: 320,
-          maxWidth: 460,
+          padding: isMobile ? "16px 16px" : "20px 24px",
+          minWidth: isMobile ? "auto" : 320,
+          maxWidth: isMobile ? "95vw" : 460,
+          width: isMobile ? "95vw" : undefined,
           boxShadow: "0 8px 32px rgba(0,0,0,0.2)",
           position: "relative",
           maxHeight: "90vh",
@@ -71,11 +75,13 @@ export default function PierModal({ selected, status, onStatusChange, onClose }:
           onClick={onClose}
           style={{
             position: "absolute",
-            top: 12,
-            right: 14,
+            top: isMobile ? 8 : 12,
+            right: isMobile ? 8 : 14,
             background: "none",
             border: "none",
-            fontSize: 20,
+            fontSize: isMobile ? 28 : 20,
+            width: isMobile ? 44 : undefined,
+            height: isMobile ? 44 : undefined,
             cursor: "pointer",
             color: "#64748b",
           }}
@@ -97,10 +103,10 @@ export default function PierModal({ selected, status, onStatusChange, onClose }:
             value={currentStatus}
             onChange={(e) => onStatusChange(pier.pier_code, e.target.value)}
             style={{
-              padding: "6px 12px",
+              padding: isMobile ? "10px 14px" : "6px 12px",
               borderRadius: 8,
               border: `2px solid ${statusColor}`,
-              fontSize: 13,
+              fontSize: isMobile ? 15 : 13,
               fontWeight: 600,
               background: "#fff",
               cursor: "pointer",
@@ -118,37 +124,9 @@ export default function PierModal({ selected, status, onStatusChange, onClose }:
           <Field label="Pier code" value={pier.pier_code} />
           <Field label="Pier type" value={pier.pier_type} />
           <Field label="Structure" value={pier.structure_code} />
-          <Field label="Row index" value={pier.row_index} />
+          <Field label="Row" value={pier.row_num} />
           <Field label="Slope band" value={pier.slope_band} />
-          <Field label="Pier sheet" value={pier.pier_type_sheet} />
-          <Field label="Slope sheet" value={pier.slope_sheet} />
         </Section>
-
-        {/* Tracker details */}
-        <Section title="Tracker">
-          <Field label="Tracker" value={tracker?.tracker_code ?? pier.tracker_code} />
-          <Field label="Type" value={tracker?.tracker_type_code ?? pier.tracker_type_code} />
-          <Field label="Row" value={tracker?.row} />
-          <Field label="TRK" value={tracker?.trk} />
-          <Field label="Pier count" value={tracker?.pier_count} />
-          <Field label="Tracker sheet" value={tracker?.tracker_sheet ?? pier.tracker_sheet} />
-        </Section>
-
-        {/* Block details */}
-        <Section title="Block">
-          <Field label="Block" value={block?.block_code ?? pier.block_code} />
-          <Field label="Block plan sheet" value={block?.block_pier_plan_sheet} />
-        </Section>
-
-        {/* Drawing bundle */}
-        {drawing_bundle && (
-          <Section title="Drawing bundle">
-            <Field label="Block plan" value={drawing_bundle.block_pier_plan?.sheet_no} />
-            <Field label="Tracker typical" value={drawing_bundle.tracker_typical?.sheet_no} />
-            <Field label="Tolerances" value={drawing_bundle.pier_tolerances?.sheet_no} />
-            <Field label="Slope detail" value={drawing_bundle.slope_detail?.sheet_no} />
-          </Section>
-        )}
       </div>
     </div>
   );

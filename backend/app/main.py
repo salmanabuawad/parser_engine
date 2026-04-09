@@ -35,9 +35,18 @@ def list_projects():
 @app.get("/api/projects/{project_id}")
 def get_project(project_id: str):
     try:
-        return cache.get_project(project_id)["summary"]
+        proj = cache.get_project(project_id)
     except Exception:
         raise HTTPException(status_code=404, detail="Project not found")
+    summary = dict(proj["summary"])
+    # Augment with row stats from trackers
+    trackers = proj.get("trackers", [])
+    rows = [t.get("row") for t in trackers if t.get("row")]
+    unique_rows = set(rows)
+    numeric_rows = [int(r) for r in rows if str(r).isdigit()]
+    summary["row_count"] = len(unique_rows)
+    summary["mean_row_num"] = round(sum(numeric_rows) / len(numeric_rows), 1) if numeric_rows else None
+    return summary
 
 @app.get("/api/projects/{project_id}/blocks")
 def get_blocks(project_id: str):
@@ -120,6 +129,129 @@ def update_pier_status(project_id: str, pier_id: str, body: StatusUpdate):
         statuses[pier_id] = body.status
     _save_statuses(project_id, statuses)
     return {"pier_id": pier_id, "status": body.status}
+
+
+# --- Plant info (editable project metadata) --------------------------------
+
+PLANT_INFO_DEFAULTS = {
+    "total_output_mw": None,
+    "total_strings": None,
+    "total_modules": None,
+    "modules_per_string": None,
+    "module_capacity_w": None,
+    "module_length_m": None,
+    "module_width_m": None,
+    "pitch_m": None,
+    "inverters": None,
+    "dccb": None,
+    "string_groups": None,
+    "devices": None,
+    "site_id": None,
+    "project_number": None,
+    "nextracker_model": None,
+    "lat_long": None,
+    "snow_load": None,
+    "wind_load": None,
+    "issue_date": None,
+    "expected_trackers": None,
+    "expected_piers": None,
+    "expected_modules_from_bom": None,
+    "tolerance_ratio": 0.05,
+    "notes": "",
+}
+
+ELECTRICAL_KEYS = (
+    "total_output_mw", "total_strings", "total_modules", "modules_per_string",
+    "module_capacity_w", "module_length_m", "module_width_m", "pitch_m",
+    "inverters", "dccb", "string_groups", "devices",
+    "site_id", "project_number", "nextracker_model", "lat_long",
+    "snow_load", "wind_load", "issue_date",
+    "expected_trackers", "expected_piers", "expected_modules_from_bom",
+    "tracker_matrix", "bill_of_materials",
+)
+
+def _plant_info_path(project_id: str) -> Path:
+    return PROJECTS_ROOT / project_id / "plant_info.json"
+
+def _load_plant_info(project_id: str) -> dict:
+    p = _plant_info_path(project_id)
+    base = dict(PLANT_INFO_DEFAULTS)
+    # Fall back to electrical metadata extracted from PDFs (in summary.json)
+    try:
+        proj = cache.get_project(project_id)
+        elec = (proj.get("summary") or {}).get("electrical") or {}
+        for key in ELECTRICAL_KEYS:
+            if elec.get(key) is not None:
+                base[key] = elec[key]
+    except Exception:
+        pass
+    # User overrides win
+    if p.exists():
+        try:
+            user = json.loads(p.read_text(encoding="utf-8"))
+            for key, value in user.items():
+                if value is not None and value != "":
+                    base[key] = value
+        except Exception:
+            pass
+    return base
+
+def _save_plant_info(project_id: str, data: dict):
+    p = _plant_info_path(project_id)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps(data, indent=2), encoding="utf-8")
+
+@app.get("/api/projects/{project_id}/plant-info")
+def get_plant_info(project_id: str):
+    project_dir = PROJECTS_ROOT / project_id
+    if not project_dir.exists():
+        raise HTTPException(status_code=404, detail="Project not found")
+    return _load_plant_info(project_id)
+
+@app.post("/api/projects/{project_id}/plant-info/extract")
+def extract_plant_info(project_id: str):
+    """Re-extract electrical metadata from the construction PDF and merge into summary.json."""
+    project_dir = PROJECTS_ROOT / project_id
+    if not project_dir.exists():
+        raise HTTPException(status_code=404, detail="Project not found")
+    manifest_path = project_dir / "manifest.json"
+    if not manifest_path.exists():
+        raise HTTPException(status_code=400, detail="No manifest.json found for project")
+    summary_path = project_dir / "summary.json"
+    if not summary_path.exists():
+        raise HTTPException(status_code=400, detail="No summary.json found for project")
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        inputs = manifest.get("inputs") or {}
+        construction_pdf = inputs.get("construction_pdf")
+        ramming_pdf = inputs.get("ramming_pdf")
+        if not construction_pdf or not Path(construction_pdf).exists():
+            raise HTTPException(status_code=400, detail=f"Construction PDF not found at {construction_pdf}")
+        from app.electrical_metadata import extract_electrical_metadata
+        elec = extract_electrical_metadata(construction_pdf, ramming_pdf)
+        summary = json.loads(summary_path.read_text(encoding="utf-8"))
+        if elec.get("_extracted"):
+            summary["electrical"] = {k: elec.get(k) for k in ELECTRICAL_KEYS}
+            summary_path.write_text(json.dumps(summary, indent=2), encoding="utf-8")
+            cache.projects.pop(project_id, None)
+        return summary.get("electrical", {})
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.put("/api/projects/{project_id}/plant-info")
+def update_plant_info(project_id: str, body: dict):
+    project_dir = PROJECTS_ROOT / project_id
+    if not project_dir.exists():
+        raise HTTPException(status_code=404, detail="Project not found")
+    current = _load_plant_info(project_id)
+    for key in PLANT_INFO_DEFAULTS:
+        if key in body:
+            current[key] = body[key]
+    _save_plant_info(project_id, current)
+    return current
 
 
 @app.post("/api/projects/{project_id}/system/ensure")

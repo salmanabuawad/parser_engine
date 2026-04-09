@@ -1,6 +1,7 @@
 import { AgGridReact } from "ag-grid-react";
 import { themeQuartz } from "ag-grid-community";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useResponsive } from "../hooks/useResponsive";
 
 function setQuickFilter(api, value) {
   if (!api) return;
@@ -23,19 +24,21 @@ export default function SimpleGrid({
   pagination = false,
   pageSize = 200,
   getRowId,
+  getRowStyle,
   rowSelection = "single",
   paginationPageSizeSelector = [20, 50, 100, 200]
 }: any) {
+  const { isMobile } = useResponsive();
   const gridApiRef = useRef<any>(null);
   const [q, setQ] = useState("");
 
   const defaultColDef = useMemo(() => ({
     resizable: true,
     sortable: true,
-    filter: true,
-    floatingFilter: true,
-    minWidth: 80
-  }), []);
+    filter: !isMobile,
+    floatingFilter: !isMobile,
+    minWidth: isMobile ? 60 : 80
+  }), [isMobile]);
 
   useEffect(() => {
     setQuickFilter(gridApiRef.current, q);
@@ -51,7 +54,8 @@ export default function SimpleGrid({
             placeholder={quickFilterPlaceholder}
             style={{
               width: "100%",
-              padding: "10px 12px",
+              padding: isMobile ? "12px 14px" : "10px 12px",
+              fontSize: isMobile ? 15 : undefined,
               borderRadius: 12,
               border: "1px solid #e2e8f0",
               outline: "none"
@@ -71,6 +75,7 @@ export default function SimpleGrid({
           paginationPageSize={pageSize}
           paginationPageSizeSelector={paginationPageSizeSelector}
           getRowId={getRowId}
+          getRowStyle={getRowStyle}
           onGridReady={(e) => {
             gridApiRef.current = e.api;
             setQuickFilter(e.api, q);

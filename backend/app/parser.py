@@ -891,6 +891,7 @@ def classify_trackers_and_piers(trackers, all_piers):
         t["piers"] = plist
         for p in plist:
             p["row_pier_count"] = cnt
+            p["row_num"] = t.get("_original_row", "")
             p["tracker_type_code"] = t["tracker_type_code"]
             p["tracker_sheet"] = t["tracker_sheet"]
             p["pier_type"] = _infer_pier_type(p["row_index"], cnt)
@@ -1052,7 +1053,7 @@ def build_drawing_bundles(blocks, trackers, piers):
             "pier_tolerances": {"sheet_no": "S-501"},
             "slope_detail": {"sheet_no": "S-601"},
             "crops": {"block_plan": {"x":100,"y":100,"w":2400,"h":1600}, "tracker_typical": {"x":200,"y":250,"w":2200,"h":700}},
-            "highlights": {"tracker_typical": {"row_index": p.get("row_index"), "row_pier_count": p.get("row_pier_count"), "pier_type": p.get("pier_type")}}
+            "highlights": {"tracker_typical": {"row_pier_count": p.get("row_pier_count"), "pier_type": p.get("pier_type")}}
         }
     return out
 
@@ -1194,6 +1195,24 @@ def run_pipeline(construction_pdf, ramming_pdf, overlay_source, out_dir, profile
         "pier_count": len(piers),
         "coordinate_system": coord,
     }
+
+    # Read-only electrical metadata extraction. Wrapped in try/except so any
+    # failure here cannot affect the main pier/tracker extraction artifacts.
+    try:
+        from app.electrical_metadata import extract_electrical_metadata
+        elec = extract_electrical_metadata(construction_pdf, ramming_pdf)
+        if elec.get("_extracted"):
+            summary["electrical"] = {
+                k: v for k, v in elec.items() if not k.startswith("_")
+            }
+    except Exception:
+        pass
+
+    # Strip internal-only row_index from piers before persisting — it's redundant
+    # with pier_code (which already encodes the position as -P01, -P02, ...)
+    for _p in piers:
+        _p.pop("row_index", None)
+
     save_json(out / "blocks.json", blocks_json)
     save_json(out / "trackers.json", trackers_json)
     save_json(out / "piers.json", piers)

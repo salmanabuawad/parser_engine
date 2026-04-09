@@ -45,7 +45,6 @@ CREATE TABLE piers (
     pier_code TEXT NOT NULL,
     tracker_code TEXT,
     block_code TEXT,
-    row_index INT,
     row_pier_count INT,
     tracker_type_code TEXT,
     tracker_sheet TEXT,

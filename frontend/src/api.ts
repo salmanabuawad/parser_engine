@@ -33,6 +33,17 @@ export const exportSystemExcel = async (pid: string, { force = false }: { force?
   return r.json();
 };
 
+export const getPlantInfo = (pid: string) => j<any>(`${API}/api/projects/${pid}/plant-info`);
+export const updatePlantInfo = async (pid: string, data: Record<string, any>) => {
+  const r = await fetch(`${API}/api/projects/${pid}/plant-info`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  if (!r.ok) throw new Error(await r.text());
+  return r.json();
+};
+
 export const getPierStatuses = (pid: string) => j<Record<string, string>>(`${API}/api/projects/${pid}/pier-statuses`);
 
 export const updatePierStatus = async (pid: string, pierId: string, status: string) => {

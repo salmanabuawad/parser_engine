@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import OpenSeadragon from "openseadragon";
+import { useResponsive } from "../hooks/useResponsive";
 
 function poly(points) {
   return points.map((p) => `${p.x},${p.y}`).join(" ");
@@ -23,6 +24,7 @@ export default function EngineeringViewer({
   selectedBlock, selectedTracker, selectedPier,
   layers, onBlockClick, onTrackerClick, onPierClick, zoomTarget
 }: any) {
+  const { isMobile, isTablet } = useResponsive();
   const viewerRef = useRef<any>(null);
   const hostRef = useRef<HTMLDivElement | null>(null);
   const [overlayRect, setOverlayRect] = useState<any>(null);
@@ -97,7 +99,7 @@ export default function EngineeringViewer({
   const height = contentSize?.height || imageHeight || 1;
 
   return (
-    <div style={{ position: "relative", border: "1px solid #ddd", borderRadius: 16, overflow: "hidden", height: "78vh", background: "#f7f7f7" }}>
+    <div style={{ position: "relative", border: "1px solid #ddd", borderRadius: 16, overflow: "hidden", height: isMobile ? "60vh" : isTablet ? "70vh" : "78vh", background: "#f7f7f7" }}>
       <div ref={hostRef} style={{ width: "100%", height: "100%" }} />
       {overlayRect && (
         <div

@@ -9,7 +9,7 @@ export default function PierDetailsPanel({ selected }: any) {
       <div><strong>Pier:</strong> {pier.pier_code}</div>
       <div><strong>Block:</strong> {block?.block_code ?? pier.block_code}</div>
       <div><strong>Tracker:</strong> {tracker?.tracker_code ?? pier.tracker_code}</div>
-      <div><strong>Row index:</strong> {pier.row_index}</div>
+      <div><strong>Row:</strong> {pier.row_num}</div>
       <div><strong>Pier type:</strong> {pier.pier_type}</div>
       <div><strong>Tracker type:</strong> {pier.tracker_type_code}</div>
       <div><strong>Local coords:</strong> ({pier.x_local?.toFixed?.(2)}, {pier.y_local?.toFixed?.(2)})</div>

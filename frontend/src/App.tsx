@@ -6,6 +6,7 @@ import SiteMap from "./components/SiteMap";
 import PierDetailsPanel from "./components/PierDetailsPanel";
 import PierModal from "./components/PierModal";
 import SystemPanel from "./components/SystemPanel";
+import { useResponsive } from "./hooks/useResponsive";
 
 const INITIAL_LAYERS = [
   { key: "blocks", label: "Blocks", visible: true },
@@ -20,6 +21,7 @@ function getInitialProjectId() {
 }
 
 export default function App() {
+  const { isMobile, isTablet } = useResponsive();
   const [mode, setMode] = useState<"grid" | "map" | "system">("grid");
   const [projects, setProjects] = useState<any[]>([]);
   const [projectId, setProjectId] = useState(getInitialProjectId);
@@ -128,16 +130,35 @@ export default function App() {
     return [...new Set(filteredTrackers.map((t: any) => t.tracker_code))].sort();
   }, [filteredTrackers]);
 
+  const gridRows = useMemo(() => {
+    return filteredPiers.map((p: any) => ({
+      ...p,
+      status: pierStatuses[p.pier_code] || "Not Started",
+    }));
+  }, [filteredPiers, pierStatuses]);
+
+  const STATUS_BG: Record<string, string> = {
+    "Not Started": "#ffffff",
+    "Implemented": "#dbeafe",
+    "Approved": "#dcfce7",
+    "Rejected": "#fee2e2",
+    "Fixed": "#fef3c7",
+  };
+  const getRowStyle = (p: any) => {
+    const bg = STATUS_BG[p.data?.status] || "#ffffff";
+    return { backgroundColor: bg };
+  };
+
   const Pill = ({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) => (
     <button
       onClick={onClick}
       style={{
-        padding: "6px 14px",
+        padding: isMobile ? "10px 16px" : "6px 14px",
         borderRadius: 10,
         border: "1px solid #e2e8f0",
         background: active ? "#0f172a" : "white",
         color: active ? "white" : "#0f172a",
-        fontSize: 13,
+        fontSize: isMobile ? 14 : 13,
         fontWeight: 500,
         cursor: "pointer",
       }}
@@ -147,21 +168,21 @@ export default function App() {
   );
 
   return (
-    <div style={{ maxWidth: 1200, margin: "0 auto", padding: "12px 16px", fontFamily: "Arial, sans-serif" }}>
+    <div style={{ maxWidth: isMobile ? "100%" : 1200, margin: "0 auto", padding: isMobile ? "8px 10px" : "12px 16px", fontFamily: "Arial, sans-serif" }}>
       {/* Header */}
-      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10, flexWrap: "wrap" }}>
-        <h2 style={{ margin: 0, fontSize: 20 }}>Solarica</h2>
+      <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 8 : 10, marginBottom: 10, flexWrap: "wrap" }}>
+        <h2 style={{ margin: 0, fontSize: isMobile ? 17 : 20 }}>Solarica</h2>
         <select
           value={projectId}
           onChange={(e) => setProjectId(e.target.value)}
-          style={{ minWidth: 160, padding: "6px 8px", borderRadius: 8, border: "1px solid #d1d5db" }}
+          style={{ minWidth: isMobile ? 0 : 160, flex: isMobile ? 1 : undefined, padding: isMobile ? "8px 8px" : "6px 8px", borderRadius: 8, border: "1px solid #d1d5db", fontSize: isMobile ? 14 : undefined }}
         >
           {!projects.length && <option value="">No projects</option>}
           {projects.map((item: any) => (
             <option key={item.project_id} value={item.project_id}>{item.project_id}</option>
           ))}
         </select>
-        <div style={{ marginLeft: "auto", display: "flex", gap: 6 }}>
+        <div style={{ marginLeft: isMobile ? 0 : "auto", width: isMobile ? "100%" : undefined, display: "flex", gap: 6 }}>
           <Pill active={mode === "grid"} onClick={() => setMode("grid")}>Grid</Pill>
           <Pill active={mode === "map"} onClick={() => setMode("map")}>Map</Pill>
           <Pill active={mode === "system"} onClick={() => setMode("system")}>System</Pill>
@@ -200,13 +221,14 @@ export default function App() {
               <button onClick={() => { setFilterBlock(""); setFilterTracker(""); }} style={{ fontSize: 12, background: "none", border: "none", cursor: "pointer", color: "#64748b" }}>Clear filter</button>
             )}
           </div>
-          <div style={{ height: "calc(100vh - 160px)", minHeight: 400, borderRadius: 12, overflow: "hidden", border: "1px solid #e2e8f0" }}>
+          <div style={{ height: isMobile ? "calc(100vh - 130px)" : "calc(100vh - 160px)", minHeight: isMobile ? 300 : 400, borderRadius: 12, overflow: "hidden", border: "1px solid #e2e8f0" }}>
             <SiteMap
               imageWidth={project?.base_image?.width || 1}
               imageHeight={project?.base_image?.height || 1}
               blocks={blocks}
               trackers={filteredTrackers}
               piers={filteredPiers}
+              pierStatuses={pierStatuses}
               selectedBlock={filterBlock ? blocks.find((b: any) => b.block_code === filterBlock) : null}
               selectedTracker={filterTracker ? trackers.find((t: any) => t.tracker_code === filterTracker) : null}
               selectedPier={selectedPier}
@@ -255,25 +277,32 @@ export default function App() {
           </div>
 
           <SimpleGrid
-            rows={filteredPiers}
-            columns={[
-              { field: "pier_code", headerName: "Pier", pinned: "left", maxWidth: 120 },
+            rows={gridRows}
+            columns={isMobile ? [
+              { field: "block_code", headerName: "Block" },
+              { field: "pier_code", headerName: "Pier" },
+              { field: "tracker_code", headerName: "Tracker" },
+              { field: "pier_type", headerName: "Pier Type" },
+              { field: "status", headerName: "Status", cellStyle: { fontWeight: 600 } },
+              { field: "row_num", headerName: "Row" },
+            ] : [
               { field: "block_code", headerName: "Block", maxWidth: 80 },
+              { field: "pier_code", headerName: "Pier", pinned: "left", maxWidth: 120 },
               { field: "tracker_code", headerName: "Tracker", maxWidth: 100 },
-              { field: "row_index", headerName: "Row", maxWidth: 60 },
+              { field: "row_num", headerName: "Row", maxWidth: 80 },
               { field: "pier_type", headerName: "Pier Type", maxWidth: 100 },
+              { field: "status", headerName: "Status", maxWidth: 130, cellStyle: { fontWeight: 600 } },
               { field: "structure_code", headerName: "Structure", maxWidth: 100 },
               { field: "slope_band", headerName: "Slope", maxWidth: 90 },
               { field: "tracker_type_code", headerName: "Tracker Type" },
-              { field: "x", headerName: "X", maxWidth: 80, valueFormatter: (p: any) => p.value?.toFixed(1) },
-              { field: "y", headerName: "Y", maxWidth: 80, valueFormatter: (p: any) => p.value?.toFixed(1) },
             ]}
-            height={Math.min(700, Math.max(400, window.innerHeight - 200))}
+            height={isMobile ? Math.min(500, Math.max(300, window.innerHeight - 180)) : Math.min(700, Math.max(400, window.innerHeight - 200))}
             enableQuickFilter
             quickFilterPlaceholder="Search piers..."
             pagination
             pageSize={100}
             getRowId={(p: any) => p.data?.pier_code}
+            getRowStyle={getRowStyle}
             onRowClick={handlePierClick}
           />
 

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useResponsive } from "../hooks/useResponsive";
 
 /**
  * Lightweight canvas-based site map.
@@ -19,12 +20,21 @@ const PIER_COLORS: Record<string, string> = {
 const PIER_RADIUS = 3;
 const SELECTED_RADIUS = 6;
 
+const STATUS_COLORS: Record<string, string> = {
+  "Not Started": "",              // no ring
+  "Implemented": "#3b82f6",
+  "Approved": "#22c55e",
+  "Rejected": "#ef4444",
+  "Fixed": "#f59e0b",
+};
+
 interface Props {
   imageWidth: number;
   imageHeight: number;
   blocks: any[];
   trackers: any[];
   piers: any[];
+  pierStatuses?: Record<string, string>;
   selectedBlock: any;
   selectedTracker: any;
   selectedPier: any;
@@ -40,6 +50,7 @@ export default function SiteMap({
   blocks,
   trackers,
   piers,
+  pierStatuses,
   selectedBlock,
   selectedTracker,
   selectedPier,
@@ -48,6 +59,7 @@ export default function SiteMap({
   onTrackerClick,
   onPierClick,
 }: Props) {
+  const { isMobile } = useResponsive();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [view, setView] = useState({ x: 0, y: 0, scale: 1 });
@@ -175,7 +187,7 @@ export default function SiteMap({
       for (const t of trackers) {
         const tPiers = piersByTracker[t.tracker_code];
         if (!tPiers || tPiers.length < 2) continue;
-        const sorted = [...tPiers].sort((a: any, b: any) => (a.row_index || 0) - (b.row_index || 0));
+        const sorted = [...tPiers].sort((a: any, b: any) => String(a.pier_code || "").localeCompare(String(b.pier_code || "")));
         const isSel = selectedTracker?.tracker_code === t.tracker_code;
         ctx.strokeStyle = isSel ? "#16a34a" : "rgba(22,163,74,0.3)";
         ctx.lineWidth = isSel ? 2.5 : 1;
@@ -209,18 +221,13 @@ export default function SiteMap({
 
     // Piers
     if (layerVisible("piers")) {
-      const showRowNums = s > 0.6;
-      if (showRowNums) {
-        ctx.font = `${Math.max(4, 5 * s)}px Arial`;
-        ctx.textAlign = "left";
-        ctx.textBaseline = "middle";
-      }
       for (const p of piers) {
         const [px, py] = mapPt(p.x, p.y);
         const isSel = selectedPier?.pier_code === p.pier_code;
         const r = isSel ? SELECTED_RADIUS : PIER_RADIUS;
+        const drawR = r * Math.min(s * 2, 1.5);
         ctx.beginPath();
-        ctx.arc(px, py, r * Math.min(s * 2, 1.5), 0, Math.PI * 2);
+        ctx.arc(px, py, drawR, 0, Math.PI * 2);
         ctx.fillStyle = isSel ? "#ef4444" : (PIER_COLORS[p.pier_type] || PIER_COLORS.UNKNOWN);
         ctx.fill();
         if (isSel) {
@@ -228,14 +235,19 @@ export default function SiteMap({
           ctx.lineWidth = 2;
           ctx.stroke();
         }
-        // Row number label
-        if (showRowNums && p.row_index != null) {
-          ctx.fillStyle = "#333";
-          ctx.fillText(String(p.row_index), px + r * s + 2, py);
+        // Status ring
+        const status = pierStatuses?.[p.pier_code];
+        const ringColor = status ? STATUS_COLORS[status] : "";
+        if (ringColor) {
+          ctx.beginPath();
+          ctx.arc(px, py, drawR + 1.5, 0, Math.PI * 2);
+          ctx.strokeStyle = ringColor;
+          ctx.lineWidth = 1.8;
+          ctx.stroke();
         }
       }
     }
-  }, [view, blocks, trackers, piers, selectedBlock, selectedTracker, selectedPier, layers, imageWidth, imageHeight, layerVisible]);
+  }, [view, blocks, trackers, piers, pierStatuses, selectedBlock, selectedTracker, selectedPier, layers, imageWidth, imageHeight, layerVisible]);
 
   // Zoom with scroll wheel — use native listener to avoid passive event issue
   useEffect(() => {
@@ -444,12 +456,12 @@ export default function SiteMap({
             key={btn.label}
             onClick={btn.action}
             style={{
-              width: 36,
-              height: 36,
+              width: isMobile ? 48 : 36,
+              height: isMobile ? 48 : 36,
               borderRadius: 8,
               border: "1px solid #d1d5db",
               background: "white",
-              fontSize: 18,
+              fontSize: isMobile ? 22 : 18,
               fontWeight: 600,
               cursor: "pointer",
               boxShadow: "0 1px 3px rgba(0,0,0,0.12)",

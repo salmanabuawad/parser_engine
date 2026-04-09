@@ -48,10 +48,10 @@ def save_snapshot(project_id, blocks, trackers, piers, zoom_targets, drawing_bun
             for p in piers:
                 cur.execute(
                     '''
-                    INSERT INTO piers (project_id, pier_code, tracker_code, block_code, row_index, row_pier_count, tracker_type_code, tracker_sheet, structure_code, structure_sheet, pier_type, pier_type_sheet, slope_band, slope_sheet, x, y, bbox_json, assignment_method)
-                    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s::jsonb,%s)
+                    INSERT INTO piers (project_id, pier_code, tracker_code, block_code, row_pier_count, tracker_type_code, tracker_sheet, structure_code, structure_sheet, pier_type, pier_type_sheet, slope_band, slope_sheet, x, y, bbox_json, assignment_method)
+                    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s::jsonb,%s)
                     ''',
-                    (project_id, p["pier_code"], p["tracker_code"], p.get("block_code"), p.get("row_index"), p.get("row_pier_count"),
+                    (project_id, p["pier_code"], p["tracker_code"], p.get("block_code"), p.get("row_pier_count"),
                      p.get("tracker_type_code"), p.get("tracker_sheet"), p.get("structure_code"), p.get("structure_sheet"),
                      p.get("pier_type"), p.get("pier_type_sheet"), p.get("slope_band"), p.get("slope_sheet"),
                      p.get("x"), p.get("y"), json.dumps(p.get("bbox", {})), p.get("assignment_method"))
