@@ -13,6 +13,18 @@ Based on field assessments of >2 GW across 130+ operating solar assets (Enurgen 
 - [x] Electrical metadata extraction (inverters, DCCB, BOM, pier type specs)
 - [x] Project Info / Details / Devices / Config tab layout
 
+## Phase 1.5: Block Mapping (Design → Execution)
+
+- [ ] Support optional 3rd file upload: block mapping (Excel/CSV or PDF table)
+- [ ] New upload kind: `block_mapping` in SystemPanel + backend
+- [ ] Auto-detect format by extension (.xlsx/.csv → pandas, .pdf → pdfplumber table extraction)
+- [ ] Mapping structure: design blocks can split or merge into execution blocks
+- [ ] Mapping includes which trackers/rows belong to which execution block
+- [ ] When mapping file is present, parser overrides PDF-derived block assignments
+- [ ] Reassign all piers and trackers to execution blocks per the mapping
+- [ ] UI: show execution block names everywhere (grid, map, filters, Project Info)
+- [ ] Backward compatible: if no mapping file uploaded, use design blocks as before
+
 ## Phase 2: Loss Detection & Recovery
 
 ### 2.1 Inverter Monitoring
