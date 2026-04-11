@@ -26,11 +26,14 @@ export default function SimpleGrid({
   getRowId,
   getRowStyle,
   rowSelection = "single",
-  paginationPageSizeSelector = [20, 50, 100, 200]
+  paginationPageSizeSelector = [20, 50, 100, 200],
+  selectedIds,
+  onSelectionChange,
 }: any) {
   const { isMobile } = useResponsive();
   const gridApiRef = useRef<any>(null);
   const [q, setQ] = useState("");
+  const applyingExternalSelection = useRef(false);
 
   const defaultColDef = useMemo(() => ({
     resizable: true,
@@ -43,6 +46,26 @@ export default function SimpleGrid({
   useEffect(() => {
     setQuickFilter(gridApiRef.current, q);
   }, [q]);
+
+  // Push an external selection set into the grid whenever it changes.
+  useEffect(() => {
+    const api = gridApiRef.current;
+    if (!api || !selectedIds) return;
+    applyingExternalSelection.current = true;
+    try {
+      api.forEachNode((node: any) => {
+        const id = node.id;
+        if (id == null) return;
+        const shouldBeSelected = selectedIds.has(id);
+        if (node.isSelected() !== shouldBeSelected) {
+          node.setSelected(shouldBeSelected, false, "api");
+        }
+      });
+    } finally {
+      // The flag is cleared in the onSelectionChanged handler — one tick later.
+      setTimeout(() => { applyingExternalSelection.current = false; }, 0);
+    }
+  }, [selectedIds, rows]);
 
   return (
     <div style={{ width: "100%" }}>
@@ -70,7 +93,12 @@ export default function SimpleGrid({
           columnDefs={columns}
           defaultColDef={defaultColDef}
           animateRows
-          rowSelection={{ mode: rowSelection === "multiple" ? "multiRow" : "singleRow" }}
+          rowSelection={{
+            mode: rowSelection === "multiple" ? "multiRow" : "singleRow",
+            checkboxes: rowSelection === "multiple",
+            headerCheckbox: rowSelection === "multiple",
+            enableClickSelection: false,
+          }}
           pagination={pagination}
           paginationPageSize={pageSize}
           paginationPageSizeSelector={paginationPageSizeSelector}
@@ -81,8 +109,27 @@ export default function SimpleGrid({
             setQuickFilter(e.api, q);
             // A nice default for dashboards.
             e.api.sizeColumnsToFit?.();
+            // Apply any pre-existing external selection.
+            if (selectedIds) {
+              applyingExternalSelection.current = true;
+              e.api.forEachNode((node: any) => {
+                if (node.id != null && selectedIds.has(node.id)) {
+                  node.setSelected(true, false, "api");
+                }
+              });
+              setTimeout(() => { applyingExternalSelection.current = false; }, 0);
+            }
           }}
           onRowClicked={(e) => onRowClick?.(e.data)}
+          onSelectionChanged={(e) => {
+            if (!onSelectionChange || applyingExternalSelection.current) return;
+            const ids = new Set<string>();
+            for (const row of e.api.getSelectedRows()) {
+              const id = getRowId ? getRowId({ data: row }) : row.pier_code;
+              if (id != null) ids.add(id);
+            }
+            onSelectionChange(ids);
+          }}
         />
       </div>
     </div>
