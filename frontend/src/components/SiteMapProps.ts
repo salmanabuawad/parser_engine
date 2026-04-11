@@ -16,8 +16,6 @@ export interface SiteMapProps {
   onAreaSelect?: (piers: any[]) => void;
   /** Shared bulk selection — pier codes currently selected in either view. */
   bulkSelectedPierCodes?: Set<string>;
-  /** Called on every map pan/zoom end with the pier codes inside the viewport. */
-  onViewportChange?: (visiblePierCodes: Set<string>) => void;
   /** Pier-code labels show only when the number of visible piers is ≤ this. */
   pierLabelThreshold?: number;
   /** Full detail cards show only when the number of visible piers is ≤ this. */

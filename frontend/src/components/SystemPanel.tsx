@@ -16,9 +16,11 @@ import { BusyOverlay, ConfirmModal } from "./Modals";
 interface Props {
   projectId: string;
   onProjectChanged?: (projectId: string) => void;
+  /** Render only a specific section: "files" (upload/parse) or "info" (metadata/validation). Omit to render both. */
+  section?: "files" | "info";
 }
 
-export default function SystemPanel({ projectId, onProjectChanged }: Props) {
+export default function SystemPanel({ projectId, onProjectChanged, section }: Props) {
   const { isMobile } = useResponsive();
   const { online } = useOnlineStatus();
   const [error, setError] = useState("");
@@ -178,6 +180,8 @@ export default function SystemPanel({ projectId, onProjectChanged }: Props) {
         </div>
       )}
 
+      {/* New Project + Files — shown when section is "files" or unset */}
+      {(section === "files" || !section) && (<>
       {/* New Project + Files */}
       <div style={{ border: "1px solid #e2e8f0", borderRadius: 16, padding: isMobile ? 12 : 16, background: "#fff" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10, flexWrap: "wrap" }}>
@@ -257,6 +261,10 @@ export default function SystemPanel({ projectId, onProjectChanged }: Props) {
         )}
       </div>
 
+      </>)}
+
+      {/* Project Metadata Card — shown when section is "info" or unset */}
+      {(section === "info" || !section) && (<>
       {/* Project Metadata Card */}
       {project && (
         <div style={{ border: "1px solid #e2e8f0", borderRadius: 16, padding: isMobile ? 12 : 16, background: "#f8fafc" }}>
@@ -353,6 +361,7 @@ export default function SystemPanel({ projectId, onProjectChanged }: Props) {
           </div>
         </div>
       )}
+      </>)}
 
       {error && <div style={{ color: "#b00020" }}>{error}</div>}
 

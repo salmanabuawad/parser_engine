@@ -60,7 +60,6 @@ export default function SiteMapMapLibre({
   onPierClick,
   onAreaSelect,
   bulkSelectedPierCodes,
-  onViewportChange,
   pierLabelThreshold = 25,
   pierDetailThreshold = 4,
 }: SiteMapProps) {
@@ -68,10 +67,7 @@ export default function SiteMapMapLibre({
   const mapRef = useRef<MLMap | null>(null);
   const blockMarkersRef = useRef<maplibregl.Marker[]>([]);
   const pierLabelMarkersRef = useRef<maplibregl.Marker[]>([]);
-  const onViewportChangeRef = useRef<typeof onViewportChange>(undefined);
   const [selectMode, setSelectMode] = useState(false);
-
-  useEffect(() => { onViewportChangeRef.current = onViewportChange; }, [onViewportChange]);
 
   // ---- GeoJSON sources (memoized by dataset) ------------------------------
 
@@ -365,7 +361,6 @@ export default function SiteMapMapLibre({
       // Pier number labels + viewport change: recompute on any movement end.
       const refresh = () => {
         refreshPierLabels();
-        emitViewport();
       };
       map.on("moveend", refresh);
       map.on("zoomend", refresh);
@@ -379,6 +374,22 @@ export default function SiteMapMapLibre({
       mapRef.current = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Resize the GL canvas when the container transitions from hidden to visible
+  // (e.g. accordion toggling). Without this the canvas stays at 0x0 after a
+  // display:none→block cycle.
+  useEffect(() => {
+    const el = containerRef.current;
+    const map = mapRef.current;
+    if (!el || !map) return;
+    const ro = new ResizeObserver(() => {
+      if (el.clientWidth > 0 && el.clientHeight > 0) {
+        map.resize();
+      }
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
   }, []);
 
   // Keep the latest selectMode in a ref so map-level handlers see it.
@@ -527,22 +538,6 @@ export default function SiteMapMapLibre({
         .addTo(map);
       blockMarkersRef.current.push(marker);
     }
-  }
-
-  function emitViewport() {
-    const map = mapRef.current;
-    if (!map) return;
-    const cb = onViewportChangeRef.current;
-    if (!cb) return;
-    const visible = map.queryRenderedFeatures(undefined, {
-      layers: ["piers-layer"],
-    });
-    const codes = new Set<string>();
-    for (const f of visible) {
-      const c = (f.properties as any)?.pier_code;
-      if (c) codes.add(c);
-    }
-    cb(codes);
   }
 
   function refreshPierLabels() {

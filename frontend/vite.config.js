@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: "autoUpdate",
+      registerType: "prompt",
       // Inject a light manifest so browsers treat this as an installable
       // PWA; nothing else in the app depends on the manifest, it is only
       // here so that Chrome / Safari will happily cache the shell.

@@ -24,7 +24,6 @@ import {
   patchPierStatus,
   patchProjectBundle,
   removePendingMutation,
-  saveProjectBundle,
   saveProjectsList,
 } from "./offlineStore";
 
@@ -45,6 +44,21 @@ async function j<T = any>(url: string, init?: RequestInit): Promise<T> {
   const r = await fetch(url, init);
   if (!r.ok) throw new Error(await r.text());
   return r.json();
+}
+
+/**
+ * Deduplicates concurrent GET requests to the same URL. If a fetch for
+ * `/api/projects/TEST` is already in flight, a second caller gets the
+ * same promise instead of firing another HTTP request.
+ */
+const inflightGets = new Map<string, Promise<any>>();
+function jDeduped<T = any>(url: string): Promise<T> {
+  let pending = inflightGets.get(url);
+  if (!pending) {
+    pending = j<T>(url).finally(() => { inflightGets.delete(url); });
+    inflightGets.set(url, pending);
+  }
+  return pending;
 }
 
 /**
@@ -81,103 +95,60 @@ async function networkFirst<T>(
 
 export const getProjects = () =>
   networkFirst<any[]>(
-    () => j<any[]>(`${API}/api/projects`),
+    () => jDeduped<any[]>(`${API}/api/projects`),
     () => loadProjectsList(),
     async (items) => { await saveProjectsList(items); },
   );
 
-/* ---------------- Per-project bundle ----------------
- *
- * We cache each project's blocks/trackers/piers/etc as a single bundle so
- * the Map and Grid views can reload instantly from cache offline.
- */
+/* ---------------- Per-project data (individual endpoints) ---------------- */
 
 /**
- * In-flight bundle fetches are deduped by project id so that when the
- * App fires getProject / getBlocks / getTrackers / getPiers /
- * getPierStatuses in parallel we hit the server exactly once per project
- * instead of five times in a row.
+ * Lightweight project metadata — only fetches the summary endpoint, not the
+ * full pier/block/tracker data. Used by the Project Info tab.
  */
-const inflightBundles = new Map<string, Promise<BundleShape>>();
+export const getProject = async (id: string) =>
+  networkFirst<any>(
+    () => jDeduped<any>(`${API}/api/projects/${id}`),
+    async () => (await loadProjectBundle(id))?.project ?? null,
+    async (v) => { await patchProjectBundle(id, { project: v }); },
+  );
 
-interface BundleShape {
-  project: any;
-  blocks: any[];
-  trackers: any[];
-  piers: any[];
-  pierStatuses: Record<string, string>;
-  plantInfo: any;
-  files: any[];
-}
+/**
+ * Heavy data endpoints — each fetches only its own slice, cached individually.
+ * These are called by the Details tab (Grid/Map), NOT by Project Info.
+ */
+export const getBlocks = async (id: string) =>
+  networkFirst<any[]>(
+    () => jDeduped<any[]>(`${API}/api/projects/${id}/blocks`),
+    async () => (await loadProjectBundle(id))?.blocks ?? [],
+    async (v) => { await patchProjectBundle(id, { blocks: v }); },
+  );
 
-async function fetchAndCacheProjectBundle(id: string): Promise<BundleShape> {
-  // Each sub-request has its own `.catch` so a single missing endpoint
-  // (common on a freshly-created unparsed project) does not nuke the
-  // entire bundle. Missing pieces fall back to sensible empty defaults.
-  const [project, blocks, trackers, piers, pierStatuses, plantInfo, files] =
-    await Promise.all([
-      j<any>(`${API}/api/projects/${id}`).catch(() => null),
-      j<any[]>(`${API}/api/projects/${id}/blocks`).catch(() => []),
-      j<any[]>(`${API}/api/projects/${id}/trackers`).catch(() => []),
-      j<any[]>(`${API}/api/projects/${id}/piers`).catch(() => []),
-      j<Record<string, string>>(`${API}/api/projects/${id}/pier-statuses`).catch(() => ({})),
-      j<any>(`${API}/api/projects/${id}/plant-info`).catch(() => ({})),
-      j<any[]>(`${API}/api/projects/${id}/files`).catch(() => []),
-    ]);
-  const bundle: BundleShape = { project, blocks, trackers, piers, pierStatuses, plantInfo, files };
-  await saveProjectBundle({
-    project_id: id,
-    ...bundle,
-    fetchedAt: Date.now(),
-  });
-  return bundle;
-}
+export const getTrackers = async (id: string) =>
+  networkFirst<any[]>(
+    () => jDeduped<any[]>(`${API}/api/projects/${id}/trackers`),
+    async () => (await loadProjectBundle(id))?.trackers ?? [],
+    async (v) => { await patchProjectBundle(id, { trackers: v }); },
+  );
 
-async function ensureBundle(id: string): Promise<BundleShape> {
-  if (isOnline()) {
-    // Reuse any in-flight request for this project id.
-    let pending = inflightBundles.get(id);
-    if (!pending) {
-      pending = fetchAndCacheProjectBundle(id).finally(() => {
-        inflightBundles.delete(id);
-      });
-      inflightBundles.set(id, pending);
-    }
-    try {
-      return await pending;
-    } catch {
-      // fall through to cached
-    }
-  }
-  const cached = await loadProjectBundle(id);
-  if (!cached) throw new OfflineError(`No offline copy of project ${id}.`);
-  return cached;
-}
-
-export const getProject = async (id: string) => {
-  const b = await ensureBundle(id);
-  return b.project;
-};
-export const getBlocks = async (id: string) => {
-  const b = await ensureBundle(id);
-  return b.blocks;
-};
-export const getTrackers = async (id: string) => {
-  const b = await ensureBundle(id);
-  return b.trackers;
-};
-export const getPiers = async (id: string) => {
-  const b = await ensureBundle(id);
-  return b.piers;
-};
+export const getPiers = async (id: string) =>
+  networkFirst<any[]>(
+    () => jDeduped<any[]>(`${API}/api/projects/${id}/piers`),
+    async () => (await loadProjectBundle(id))?.piers ?? [],
+    async (v) => { await patchProjectBundle(id, { piers: v }); },
+  );
 
 /**
  * getPierStatuses merges server statuses with any locally-queued mutations
  * so the UI never loses in-flight edits.
  */
 export const getPierStatuses = async (id: string) => {
-  const b = await ensureBundle(id);
-  return applyPendingToStatuses(id, b.pierStatuses || {});
+  const base = await networkFirst<Record<string, string>>(
+    () => jDeduped<Record<string, string>>(`${API}/api/projects/${id}/pier-statuses`),
+    async () => (await loadProjectBundle(id))?.pierStatuses ?? {},
+    async (v) => { await patchProjectBundle(id, { pierStatuses: v }); },
+  );
+  return applyPendingToStatuses(id, base);
 };
 
 export const getPier = async (pid: string, pier: string) => {
@@ -185,7 +156,7 @@ export const getPier = async (pid: string, pier: string) => {
   // reconstruct from the cached piers/blocks/trackers.
   if (isOnline()) {
     try {
-      return await j<any>(`${API}/api/projects/${pid}/pier/${pier}`);
+      return await jDeduped<any>(`${API}/api/projects/${pid}/pier/${pier}`);
     } catch {
       // fall through to cached lookup
     }
@@ -198,24 +169,13 @@ export const getPier = async (pid: string, pier: string) => {
   return { pier: match };
 };
 
-export const getZoomTarget = (pid: string, pier: string) =>
-  j<any>(`${API}/api/projects/${pid}/pier/${pier}/zoom-target`);
-
-/* ---------------- Aggregations (online only) ---------------- */
-
-export const getPierTypeCounts = (pid: string) =>
-  j<any[]>(`${API}/api/projects/${pid}/pier-type-counts`);
-export const getBlockSummary = (pid: string) =>
-  j<any[]>(`${API}/api/projects/${pid}/block-summary`);
-export const getRowSummary = (pid: string) =>
-  j<any[]>(`${API}/api/projects/${pid}/row-summary`);
 
 /* ---------------- Plant info ---------------- */
 
 export const getPlantInfo = async (pid: string) => {
   if (isOnline()) {
     try {
-      const v = await j<any>(`${API}/api/projects/${pid}/plant-info`);
+      const v = await jDeduped<any>(`${API}/api/projects/${pid}/plant-info`);
       await patchProjectBundle(pid, { plantInfo: v });
       return v;
     } catch {
@@ -322,7 +282,7 @@ export async function listPending(projectId?: string): Promise<PendingMutation[]
 export const listProjectFiles = async (pid: string) => {
   if (isOnline()) {
     try {
-      const v = await j<any[]>(`${API}/api/projects/${pid}/files`);
+      const v = await jDeduped<any[]>(`${API}/api/projects/${pid}/files`);
       await patchProjectBundle(pid, { files: v });
       return v;
     } catch {

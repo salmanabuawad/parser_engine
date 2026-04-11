@@ -107,8 +107,20 @@ export default function SimpleGrid({
           onGridReady={(e) => {
             gridApiRef.current = e.api;
             setQuickFilter(e.api, q);
-            // A nice default for dashboards.
-            e.api.sizeColumnsToFit?.();
+            // sizeColumnsToFit fails if the grid is inside a hidden tab
+            // (display:none → zero width). Defer until visible.
+            const el = e.api.getGridBodyElement?.();
+            if (el && el.clientWidth > 0) {
+              e.api.sizeColumnsToFit?.();
+            } else {
+              const ro = new ResizeObserver((entries) => {
+                if (entries[0]?.contentRect?.width > 0) {
+                  e.api.sizeColumnsToFit?.();
+                  ro.disconnect();
+                }
+              });
+              if (el) ro.observe(el);
+            }
             // Apply any pre-existing external selection.
             if (selectedIds) {
               applyingExternalSelection.current = true;
