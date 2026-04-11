@@ -17,7 +17,7 @@ Based on field assessments of >2 GW across 130+ operating solar assets (Enurgen 
 
 - [ ] Support optional 3rd file upload: block mapping (Excel/CSV or PDF table)
 - [ ] New upload kind: `block_mapping` in SystemPanel + backend
-- [ ] Auto-detect format by extension (.xlsx/.csv → pandas, .pdf → pdfplumber table extraction)
+- [ ] Auto-detect format by extension (.xlsx/.csv → pandas, .pdf → pdfplumber table extraction, .png/.jpg → OCR/CV to extract block boundaries and labels from image)
 - [ ] Mapping structure: design blocks can split or merge into execution blocks
 - [ ] Mapping includes which trackers/rows belong to which execution block
 - [ ] When mapping file is present, parser overrides PDF-derived block assignments
