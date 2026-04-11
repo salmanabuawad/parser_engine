@@ -16,16 +16,25 @@ import { BusyOverlay, ConfirmModal } from "./Modals";
 interface Props {
   projectId: string;
   onProjectChanged?: (projectId: string) => void;
-  /** Render only a specific section: "files" (upload/parse) or "info" (metadata/validation). Omit to render both. */
+  /** Render only a specific section: "files" (upload/parse) or "info" (metadata/validation). */
   section?: "files" | "info";
+  /** Project summary — passed from App.tsx so we don't re-fetch. */
+  project?: any;
+  /** Plant info — passed from App.tsx so we don't re-fetch. */
+  plantInfo?: any;
+  /** Called after plant info is updated so App can refresh its own state. */
+  onPlantInfoChanged?: (info: any) => void;
 }
 
-export default function SystemPanel({ projectId, onProjectChanged, section }: Props) {
+export default function SystemPanel({ projectId, onProjectChanged, section, project: projectProp, plantInfo: plantInfoProp, onPlantInfoChanged }: Props) {
   const { isMobile } = useResponsive();
   const { online } = useOnlineStatus();
   const [error, setError] = useState("");
-  const [project, setProject] = useState<any>(null);
-  const [plantInfo, setPlantInfo] = useState<any>(null);
+  // Use props from App when available; fall back to local state for backward compat.
+  const [localProject, setLocalProject] = useState<any>(null);
+  const [localPlantInfo, setLocalPlantInfo] = useState<any>(null);
+  const project = projectProp ?? localProject;
+  const plantInfo = plantInfoProp ?? localPlantInfo;
   const [editingPlant, setEditingPlant] = useState(false);
   const [plantDraft, setPlantDraft] = useState<any>({});
   const [files, setFiles] = useState<any[]>([]);
@@ -39,16 +48,28 @@ export default function SystemPanel({ projectId, onProjectChanged, section }: Pr
     | { title: string; message: string; confirmLabel: string; danger?: boolean; action: () => void }
   >(null);
 
+  // Only fetch files (lightweight); project + plantInfo come from props.
+  async function refreshFiles() {
+    if (!projectId) return;
+    try {
+      const fl = await listProjectFiles(projectId).catch(() => []);
+      setFiles(fl);
+    } catch (e: any) {
+      setError(String(e.message || e));
+    }
+  }
+
+  // Legacy: fetch everything only when props aren't provided.
   async function refreshAll() {
     if (!projectId) return;
     try {
       const [proj, pi, fl] = await Promise.all([
-        getProject(projectId).catch(() => null),
-        getPlantInfo(projectId).catch(() => ({})),
+        projectProp ? Promise.resolve(null) : getProject(projectId).catch(() => null),
+        plantInfoProp ? Promise.resolve(null) : getPlantInfo(projectId).catch(() => ({})),
         listProjectFiles(projectId).catch(() => []),
       ]);
-      setProject(proj);
-      setPlantInfo(pi);
+      if (!projectProp) setLocalProject(proj);
+      if (!plantInfoProp) setLocalPlantInfo(pi);
       setFiles(fl);
     } catch (e: any) {
       setError(String(e.message || e));
@@ -58,11 +79,17 @@ export default function SystemPanel({ projectId, onProjectChanged, section }: Pr
   useEffect(() => {
     setError("");
     setParseMsg("");
-    setProject(null);
-    setPlantInfo(null);
+    setLocalProject(null);
+    setLocalPlantInfo(null);
     setFiles([]);
     setEditingPlant(false);
-    if (projectId) refreshAll();
+    if (projectId) {
+      if (projectProp && plantInfoProp) {
+        refreshFiles();
+      } else {
+        refreshAll();
+      }
+    }
   }, [projectId]);
 
   async function handleCreateProject() {
@@ -153,7 +180,8 @@ export default function SystemPanel({ projectId, onProjectChanged, section }: Pr
         toSave.tolerance_ratio = isNaN(n) ? 0.05 : n;
       }
       const updated = await updatePlantInfo(projectId, toSave);
-      setPlantInfo(updated);
+      setLocalPlantInfo(updated);
+      onPlantInfoChanged?.(updated);
       setEditingPlant(false);
     } catch (e: any) {
       setError(String(e.message || e));

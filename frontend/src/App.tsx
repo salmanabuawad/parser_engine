@@ -1,5 +1,5 @@
 import { Suspense, lazy, useCallback, useEffect, useMemo, useState } from "react";
-import { getProjects, getProject, getBlocks, getTrackers, getPiers, getPier, getPierStatuses, updatePierStatus, createProject } from "./api";
+import { getProjects, getProject, getPlantInfo, getBlocks, getTrackers, getPiers, getPier, getPierStatuses, updatePierStatus, createProject } from "./api";
 import SimpleGrid from "./components/SimpleGrid";
 import LayerTogglePanel from "./components/LayerTogglePanel";
 import PierModal from "./components/PierModal";
@@ -35,6 +35,7 @@ export default function App() {
   const [projects, setProjects] = useState<any[]>([]);
   const [projectId, setProjectId] = useState(getInitialProjectId);
   const [project, setProject] = useState<any>(null);
+  const [plantInfo, setPlantInfo] = useState<any>(null);
   const [blocks, setBlocks] = useState<any[]>([]);
   const [trackers, setTrackers] = useState<any[]>([]);
   const [piers, setPiers] = useState<any[]>([]);
@@ -92,14 +93,20 @@ export default function App() {
     let ignore = false;
     setError("");
     setProject(null);
+    setPlantInfo(null);
     setSelectedPier(null);
     setSelectedPierFull(null);
     setFilterBlock("");
     setFilterTracker("");
 
-    getProject(projectId)
-      .then((p) => { if (!ignore) setProject(p); })
-      .catch((e: any) => { if (!ignore) setError(String(e.message || e)); });
+    Promise.all([
+      getProject(projectId).catch(() => null),
+      getPlantInfo(projectId).catch(() => ({})),
+    ]).then(([p, pi]) => {
+      if (ignore) return;
+      setProject(p);
+      setPlantInfo(pi);
+    }).catch((e: any) => { if (!ignore) setError(String(e.message || e)); });
 
     const params = new URLSearchParams(window.location.search);
     params.set("project", projectId);
@@ -199,6 +206,17 @@ export default function App() {
   }
 
   // Stable callbacks for the map component to prevent re-render loops.
+  const handleProjectChanged = useCallback((pid: string) => {
+    getProjects().then((items: any[]) => {
+      setProjects(items);
+      if (pid && pid !== projectId) {
+        setProjectId(pid);
+      } else {
+        setRefreshKey((k) => k + 1);
+      }
+    }).catch(() => {});
+  }, [projectId]);
+
   const handleAreaSelect = useCallback((items: any[]) => {
     setSelectedPierCodes((prev) => {
       const next = new Set(prev);
@@ -400,30 +418,12 @@ export default function App() {
 
       {/* ---- TAB: Config (upload/parse only) ---- */}
       <div style={{ display: activeTab === "config" ? "block" : "none" }}>
-        <SystemPanel projectId={projectId} section="files" onProjectChanged={(pid) => {
-          getProjects().then((items: any[]) => {
-            setProjects(items);
-            if (pid && pid !== projectId) {
-              setProjectId(pid);
-            } else {
-              setRefreshKey((k) => k + 1);
-            }
-          }).catch(() => {});
-        }} />
+        <SystemPanel projectId={projectId} section="files" project={project} plantInfo={plantInfo} onProjectChanged={handleProjectChanged} onPlantInfoChanged={setPlantInfo} />
       </div>
 
       {/* ---- TAB: Project Info (metadata only) ---- */}
       <div style={{ display: activeTab === "details" ? "block" : "none" }}>
-        <SystemPanel projectId={projectId} section="info" onProjectChanged={(pid) => {
-          getProjects().then((items: any[]) => {
-            setProjects(items);
-            if (pid && pid !== projectId) {
-              setProjectId(pid);
-            } else {
-              setRefreshKey((k) => k + 1);
-            }
-          }).catch(() => {});
-        }} />
+        <SystemPanel projectId={projectId} section="info" project={project} plantInfo={plantInfo} onProjectChanged={handleProjectChanged} onPlantInfoChanged={setPlantInfo} />
       </div>
 
       {/* ---- TAB: Details (Grid / Map) ---- */}
