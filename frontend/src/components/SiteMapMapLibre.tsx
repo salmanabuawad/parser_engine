@@ -66,6 +66,7 @@ export default function SiteMapMapLibre({
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MLMap | null>(null);
   const blockMarkersRef = useRef<maplibregl.Marker[]>([]);
+  const rowLabelMarkersRef = useRef<maplibregl.Marker[]>([]);
   const pierLabelMarkersRef = useRef<maplibregl.Marker[]>([]);
   const [selectMode, setSelectMode] = useState(false);
 
@@ -148,6 +149,25 @@ export default function SiteMapMapLibre({
       .filter(Boolean) as any[];
     return { type: "FeatureCollection" as const, features };
   }, [trackers, piers, imageWidth]);
+
+  // Row labels: compute the topmost pier position per row number so we can
+  // place a label above each row on the map.
+  const rowLabelData = useMemo(() => {
+    const rowEdges: Record<string, { lng: number; lat: number }> = {};
+    for (const p of piers) {
+      const row = String(p.row_num || "");
+      if (!row) continue;
+      const [rx, ry] = rotate90CCW(p.x, p.y, imageWidth);
+      const lng = pt2lng(rx);
+      const lat = pt2lat(ry);
+      const existing = rowEdges[row];
+      // "Topmost" = largest lat (least negative) in the rotated space.
+      if (!existing || lat > existing.lat) {
+        rowEdges[row] = { lng, lat };
+      }
+    }
+    return rowEdges;
+  }, [piers, imageWidth]);
 
   const bounds = useMemo(() => {
     if (!piers.length) return null;
@@ -361,11 +381,13 @@ export default function SiteMapMapLibre({
       // Pier number labels + viewport change: recompute on any movement end.
       const refresh = () => {
         refreshPierLabels();
+        refreshRowLabels();
       };
       map.on("moveend", refresh);
       map.on("zoomend", refresh);
       refresh();
       refreshBlockLabels();
+      refreshRowLabels();
     });
 
     return () => {
@@ -427,6 +449,7 @@ export default function SiteMapMapLibre({
     const map = mapRef.current;
     if (!map || !map.isStyleLoaded()) return;
     (map.getSource("trackers") as GeoJSONSource | undefined)?.setData(trackersGeoJSON as any);
+    refreshRowLabels();
   }, [trackersGeoJSON]);
 
   useEffect(() => {
@@ -507,6 +530,9 @@ export default function SiteMapMapLibre({
     for (const m of blockMarkersRef.current) {
       m.getElement().style.display = blockLabelsOn ? "" : "none";
     }
+    for (const m of rowLabelMarkersRef.current) {
+      m.getElement().style.display = trackersOn ? "" : "none";
+    }
     refreshPierLabels();
   }, [layers, pierLabelThreshold, pierDetailThreshold]);
 
@@ -515,6 +541,8 @@ export default function SiteMapMapLibre({
   function clearMarkers() {
     for (const m of pierLabelMarkersRef.current) m.remove();
     pierLabelMarkersRef.current = [];
+    for (const m of rowLabelMarkersRef.current) m.remove();
+    rowLabelMarkersRef.current = [];
     for (const m of blockMarkersRef.current) m.remove();
     blockMarkersRef.current = [];
   }
@@ -537,6 +565,43 @@ export default function SiteMapMapLibre({
         .setLngLat([lng, lat])
         .addTo(map);
       blockMarkersRef.current.push(marker);
+    }
+  }
+
+  function refreshRowLabels() {
+    const map = mapRef.current;
+    if (!map) return;
+    for (const m of rowLabelMarkersRef.current) m.remove();
+    rowLabelMarkersRef.current = [];
+    if (!layerVisible(layers, "trackers")) return;
+
+    // Only show row labels when zoomed in enough to read them.
+    const zoom = map.getZoom();
+    if (zoom < 4) return;
+
+    // Query which trackers are visible in the current viewport to avoid
+    // placing 314 DOM markers at once.
+    const visibleFeatures = map.queryRenderedFeatures(undefined, {
+      layers: ["trackers-line"],
+    });
+    const visibleRows = new Set<string>();
+    for (const f of visibleFeatures) {
+      const row = (f.properties as any)?.row;
+      if (row) visibleRows.add(row);
+    }
+
+    for (const row of visibleRows) {
+      const pos = rowLabelData[row];
+      if (!pos) continue;
+      const el = document.createElement("div");
+      el.textContent = `R-${row}`;
+      el.style.cssText =
+        "font: 700 13px Arial, sans-serif; color: #0f172a; pointer-events: none; " +
+        "white-space: nowrap; text-shadow: 0 0 3px #fff, 0 0 3px #fff, 0 0 3px #fff;";
+      const marker = new maplibregl.Marker({ element: el, anchor: "bottom" })
+        .setLngLat([pos.lng, pos.lat + 0.003])
+        .addTo(map);
+      rowLabelMarkersRef.current.push(marker);
     }
   }
 

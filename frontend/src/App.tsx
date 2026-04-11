@@ -41,8 +41,8 @@ export default function App() {
   const [piers, setPiers] = useState<any[]>([]);
   const [selectedPier, setSelectedPier] = useState<any>(null);
   const [selectedPierFull, setSelectedPierFull] = useState<any>(null);
-  const [filterBlock, setFilterBlock] = useState("");
-  const [filterTracker, setFilterTracker] = useState("");
+  const [gridFilterBy, setGridFilterBy] = useState<"row" | "tracker">("row");
+  const [gridFilterValue, setGridFilterValue] = useState("");
   const [pierStatuses, setPierStatuses] = useState<Record<string, string>>({});
   const [layers, setLayers] = useState(INITIAL_LAYERS);
   const [error, setError] = useState("");
@@ -96,8 +96,7 @@ export default function App() {
     setPlantInfo(null);
     setSelectedPier(null);
     setSelectedPierFull(null);
-    setFilterBlock("");
-    setFilterTracker("");
+    setGridFilterValue("");
 
     Promise.all([
       getProject(projectId).catch(() => null),
@@ -236,27 +235,29 @@ export default function App() {
     }
   }
 
-  // Filtered data based on block/tracker selection
+  // Parse comma-separated filter values into a Set for fast lookup.
+  const gridFilterSet = useMemo(() => {
+    if (!gridFilterValue.trim()) return null;
+    const vals = gridFilterValue.split(",").map((s) => s.trim().toUpperCase()).filter(Boolean);
+    return vals.length > 0 ? new Set(vals) : null;
+  }, [gridFilterValue]);
+
+  // Filtered data based on row/tracker filter
   const filteredPiers = useMemo(() => {
-    let result = piers;
-    if (filterBlock) result = result.filter((p: any) => p.block_code === filterBlock);
-    if (filterTracker) result = result.filter((p: any) => p.tracker_code === filterTracker);
-    return result;
-  }, [piers, filterBlock, filterTracker]);
+    if (!gridFilterSet) return piers;
+    if (gridFilterBy === "row") {
+      return piers.filter((p: any) => gridFilterSet.has(String(p.row_num || "").toUpperCase()));
+    }
+    return piers.filter((p: any) => gridFilterSet.has(String(p.tracker_code || "").toUpperCase()));
+  }, [piers, gridFilterBy, gridFilterSet]);
 
   const filteredTrackers = useMemo(() => {
-    if (!filterBlock) return trackers;
-    return trackers.filter((t: any) => t.block_code === filterBlock);
-  }, [trackers, filterBlock]);
-
-  // Unique block codes for filter dropdown
-  const blockCodes = useMemo(() => {
-    return [...new Set(blocks.map((b: any) => b.block_code))].sort();
-  }, [blocks]);
-
-  const trackerCodes = useMemo(() => {
-    return [...new Set(filteredTrackers.map((t: any) => t.tracker_code))].sort();
-  }, [filteredTrackers]);
+    if (!gridFilterSet) return trackers;
+    if (gridFilterBy === "row") {
+      return trackers.filter((t: any) => gridFilterSet.has(String(t.row || "").toUpperCase()));
+    }
+    return trackers.filter((t: any) => gridFilterSet.has(String(t.tracker_code || "").toUpperCase()));
+  }, [trackers, gridFilterBy, gridFilterSet]);
 
   // Grid rows: apply block/tracker filters, then optionally restrict to
   // whatever piers were visible in the map viewport when the user
@@ -416,9 +417,24 @@ export default function App() {
         })}
       </div>
 
-      {/* ---- TAB: Config (upload/parse only) ---- */}
+      {/* ---- TAB: Config (upload/parse + display settings) ---- */}
       <div style={{ display: activeTab === "config" ? "block" : "none" }}>
         <SystemPanel projectId={projectId} section="files" project={project} plantInfo={plantInfo} onProjectChanged={handleProjectChanged} onPlantInfoChanged={setPlantInfo} />
+        <div style={{ marginTop: 14, border: "1px solid #e2e8f0", borderRadius: 16, padding: isMobile ? 12 : 16, background: "#fff" }}>
+          <div style={{ fontWeight: 800, fontSize: 16, marginBottom: 10 }}>Display Settings</div>
+          <div style={{ display: "flex", gap: 16, flexWrap: "wrap", alignItems: "center" }}>
+            <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+              <label htmlFor="pierLabelThreshold" style={{ fontSize: 12, color: "#64748b" }}>Show pier codes when ≤</label>
+              <input id="pierLabelThreshold" type="number" min={0} max={500} step={1} value={pierLabelThreshold} onChange={(e) => { const v = parseInt(e.target.value || "0", 10); setPierLabelThreshold(Number.isFinite(v) ? Math.max(0, Math.min(500, v)) : 0); }} style={{ width: 60, padding: "6px 8px", fontSize: 13, borderRadius: 8, border: "1px solid #d1d5db" }} />
+              <span style={{ fontSize: 12, color: "#94a3b8" }}>piers visible</span>
+            </div>
+            <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+              <label htmlFor="pierDetailThreshold" style={{ fontSize: 12, color: "#64748b" }}>Show detail cards when ≤</label>
+              <input id="pierDetailThreshold" type="number" min={0} max={50} step={1} value={pierDetailThreshold} onChange={(e) => { const v = parseInt(e.target.value || "0", 10); setPierDetailThreshold(Number.isFinite(v) ? Math.max(0, Math.min(50, v)) : 0); }} style={{ width: 60, padding: "6px 8px", fontSize: 13, borderRadius: 8, border: "1px solid #d1d5db" }} />
+              <span style={{ fontSize: 12, color: "#94a3b8" }}>piers visible</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* ---- TAB: Project Info (metadata only) ---- */}
@@ -428,65 +444,23 @@ export default function App() {
 
       {/* ---- TAB: Details (Grid / Map) ---- */}
       <div style={{ display: activeTab === "mapgrid" ? "block" : "none" }}>
-        {/* Bulk-selection toolbar */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 10,
-            padding: "8px 12px",
-            marginBottom: 8,
-            borderRadius: 12,
-            border: "1px solid #e2e8f0",
-            background: selectedPierCodes.size > 0 ? "#eff6ff" : "#f8fafc",
-            flexWrap: "wrap",
-          }}
-        >
-          <span style={{ fontSize: 12, fontWeight: 700, color: selectedPierCodes.size > 0 ? "#1d4ed8" : "#64748b", minWidth: 96 }}>
-            {selectedPierCodes.size.toLocaleString()} selected
-          </span>
-          <select
-            value={bulkStatus}
-            onChange={(e) => setBulkStatus(e.target.value)}
-            disabled={selectedPierCodes.size === 0}
-            style={{ padding: "6px 10px", fontSize: 13, borderRadius: 8, border: "1px solid #d1d5db", background: "#fff", opacity: selectedPierCodes.size === 0 ? 0.5 : 1, cursor: selectedPierCodes.size === 0 ? "not-allowed" : "pointer" }}
-          >
-            <option value="">Change status…</option>
-            {["New", "In Progress", "Implemented", "Approved", "Rejected", "Fixed"].map((s) => (
-              <option key={s} value={s}>{s}</option>
-            ))}
-          </select>
-          <button onClick={() => setBulkConfirmOpen(true)} disabled={selectedPierCodes.size === 0 || !bulkStatus} style={{ padding: "6px 14px", fontSize: 13, fontWeight: 600, borderRadius: 8, border: "none", background: selectedPierCodes.size === 0 || !bulkStatus ? "#cbd5e1" : "#0f172a", color: "#fff", cursor: selectedPierCodes.size === 0 || !bulkStatus ? "not-allowed" : "pointer" }}>Apply</button>
-          <button onClick={() => { setSelectedPierCodes(new Set()); setBulkStatus(""); }} disabled={selectedPierCodes.size === 0} style={{ padding: "6px 12px", fontSize: 12, borderRadius: 8, border: "1px solid #d1d5db", background: "#fff", cursor: selectedPierCodes.size === 0 ? "not-allowed" : "pointer", opacity: selectedPierCodes.size === 0 ? 0.5 : 1 }}>Clear</button>
-        </div>
-
-        {/* Grid/Map toggle + thresholds */}
-        <div style={{ display: "flex", gap: 10, marginBottom: 8, flexWrap: "wrap", alignItems: "center" }}>
-          <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
-            <Pill active={mode === "grid"} onClick={() => setMode("grid")}>Grid</Pill>
-            <Pill active={mode === "map"} onClick={() => setMode("map")}>Map</Pill>
-          </div>
-          <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
-            <label htmlFor="pierLabelThreshold2" style={{ fontSize: 11, color: "#64748b", textTransform: "uppercase", letterSpacing: 0.5, fontWeight: 600 }}>Pier #s ≤</label>
-            <input id="pierLabelThreshold2" type="number" min={0} max={500} step={1} value={pierLabelThreshold} onChange={(e) => { const v = parseInt(e.target.value || "0", 10); setPierLabelThreshold(Number.isFinite(v) ? Math.max(0, Math.min(500, v)) : 0); }} style={{ width: 60, padding: "4px 8px", fontSize: 12, borderRadius: 8, border: "1px solid #d1d5db" }} />
-          </div>
-          <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
-            <label htmlFor="pierDetailThreshold2" style={{ fontSize: 11, color: "#64748b", textTransform: "uppercase", letterSpacing: 0.5, fontWeight: 600 }}>Details ≤</label>
-            <input id="pierDetailThreshold2" type="number" min={0} max={50} step={1} value={pierDetailThreshold} onChange={(e) => { const v = parseInt(e.target.value || "0", 10); setPierDetailThreshold(Number.isFinite(v) ? Math.max(0, Math.min(50, v)) : 0); }} style={{ width: 60, padding: "4px 8px", fontSize: 12, borderRadius: 8, border: "1px solid #d1d5db" }} />
-            <span style={{ fontSize: 11, color: "#94a3b8" }}>visible</span>
-          </div>
+        {/* Grid/Map toggle */}
+        <div style={{ display: "flex", gap: 6, marginBottom: 8, alignItems: "center" }}>
+          <Pill active={mode === "grid"} onClick={() => setMode("grid")}>Grid</Pill>
+          <Pill active={mode === "map"} onClick={() => setMode("map")}>Map</Pill>
         </div>
 
         {mode === "map" ? (
           <div>
             <div style={{ display: "flex", gap: 8, marginBottom: 8, flexWrap: "wrap", alignItems: "center" }}>
               <LayerTogglePanel layers={layers} onChange={(key: string, visible: boolean) => setLayers((prev) => prev.map((l) => l.key === key ? { ...l, visible } : l))} inline />
-              <select value={filterBlock} onChange={(e) => { setFilterBlock(e.target.value); setFilterTracker(""); }} style={{ padding: "4px 8px", borderRadius: 8, border: "1px solid #d1d5db", fontSize: 12 }}>
-                <option value="">All blocks</option>
-                {blockCodes.map((c: string) => <option key={c} value={c}>{c}</option>)}
-              </select>
-              {filterBlock && (
-                <button onClick={() => { setFilterBlock(""); setFilterTracker(""); }} style={{ fontSize: 12, background: "none", border: "none", cursor: "pointer", color: "#64748b" }}>Clear filter</button>
+              {gridFilterValue && (
+                <span style={{ fontSize: 12, color: "#1d4ed8", fontWeight: 600 }}>
+                  {gridFilterBy === "row" ? "Rows" : "Trackers"}: {gridFilterValue}
+                </span>
+              )}
+              {gridFilterValue && (
+                <button onClick={() => setGridFilterValue("")} style={{ fontSize: 12, background: "none", border: "none", cursor: "pointer", color: "#64748b" }}>Clear filter</button>
               )}
             </div>
             <div style={{ height: isMobile ? "calc(100vh - 300px)" : "calc(100vh - 320px)", minHeight: isMobile ? 300 : 400, borderRadius: 12, overflow: "hidden", border: "1px solid #e2e8f0" }}>
@@ -498,12 +472,12 @@ export default function App() {
                   trackers={filteredTrackers}
                   piers={filteredPiers}
                   pierStatuses={pierStatuses}
-                  selectedBlock={filterBlock ? blocks.find((b: any) => b.block_code === filterBlock) : null}
-                  selectedTracker={filterTracker ? trackers.find((t: any) => t.tracker_code === filterTracker) : null}
+                  selectedBlock={null}
+                  selectedTracker={gridFilterBy === "tracker" && gridFilterSet ? trackers.find((t: any) => gridFilterSet.has(String(t.tracker_code || "").toUpperCase())) : null}
                   selectedPier={selectedPier}
                   layers={layers}
-                  onBlockClick={(b: any) => { setFilterBlock(b.block_code); setFilterTracker(""); }}
-                  onTrackerClick={(t: any) => { setFilterTracker(t.tracker_code); }}
+                  onBlockClick={() => {}}
+                  onTrackerClick={(t: any) => { setGridFilterBy("tracker"); setGridFilterValue(t.tracker_code || ""); }}
                   onPierClick={handlePierClick}
                   onAreaSelect={handleAreaSelect}
                   bulkSelectedPierCodes={selectedPierCodes}
@@ -519,16 +493,19 @@ export default function App() {
         ) : (
           <div>
             <div style={{ display: "flex", gap: 8, marginBottom: 10, flexWrap: "wrap", alignItems: "center" }}>
-              <select value={filterBlock} onChange={(e) => { setFilterBlock(e.target.value); setFilterTracker(""); }} style={{ padding: "6px 10px", borderRadius: 8, border: "1px solid #d1d5db", fontSize: 13 }}>
-                <option value="">All blocks</option>
-                {blockCodes.map((c: string) => <option key={c} value={c}>{c}</option>)}
+              <span style={{ fontSize: 12, color: "#64748b", fontWeight: 600 }}>Filter by</span>
+              <select value={gridFilterBy} onChange={(e) => { setGridFilterBy(e.target.value as any); setGridFilterValue(""); }} style={{ padding: "6px 10px", borderRadius: 8, border: "1px solid #d1d5db", fontSize: 13 }}>
+                <option value="row">Rows</option>
+                <option value="tracker">Trackers</option>
               </select>
-              <select value={filterTracker} onChange={(e) => setFilterTracker(e.target.value)} style={{ padding: "6px 10px", borderRadius: 8, border: "1px solid #d1d5db", fontSize: 13 }}>
-                <option value="">All trackers</option>
-                {trackerCodes.map((c: string) => <option key={c} value={c}>{c}</option>)}
-              </select>
-              {(filterBlock || filterTracker) && (
-                <button onClick={() => { setFilterBlock(""); setFilterTracker(""); }} style={{ fontSize: 13, padding: "6px 10px", borderRadius: 8, border: "1px solid #d1d5db", background: "#fff", cursor: "pointer" }}>Clear</button>
+              <input
+                value={gridFilterValue}
+                onChange={(e) => setGridFilterValue(e.target.value)}
+                placeholder={gridFilterBy === "row" ? "e.g. 1, 2, 107" : "e.g. T0001, T0002"}
+                style={{ flex: 1, minWidth: 140, padding: "6px 10px", borderRadius: 8, border: "1px solid #d1d5db", fontSize: 13 }}
+              />
+              {gridFilterValue && (
+                <button onClick={() => setGridFilterValue("")} style={{ fontSize: 13, padding: "6px 10px", borderRadius: 8, border: "1px solid #d1d5db", background: "#fff", cursor: "pointer" }}>Clear</button>
               )}
               <span style={{ fontSize: 12, color: "#64748b" }}>{filteredPiers.length.toLocaleString()} piers</span>
             </div>
