@@ -10,6 +10,8 @@ import {
   parseProject,
 } from "../api";
 import { useResponsive } from "../hooks/useResponsive";
+import { useOnlineStatus } from "../hooks/useOnlineStatus";
+import { BusyOverlay, ConfirmModal } from "./Modals";
 
 interface Props {
   projectId: string;
@@ -18,6 +20,7 @@ interface Props {
 
 export default function SystemPanel({ projectId, onProjectChanged }: Props) {
   const { isMobile } = useResponsive();
+  const { online } = useOnlineStatus();
   const [error, setError] = useState("");
   const [project, setProject] = useState<any>(null);
   const [plantInfo, setPlantInfo] = useState<any>(null);
@@ -28,6 +31,11 @@ export default function SystemPanel({ projectId, onProjectChanged }: Props) {
   const [parseMsg, setParseMsg] = useState("");
   const [showNewProject, setShowNewProject] = useState(false);
   const [newProjectId, setNewProjectId] = useState("");
+  const [busy, setBusy] = useState<string | null>(null);
+  const [confirmState, setConfirmState] = useState<
+    | null
+    | { title: string; message: string; confirmLabel: string; danger?: boolean; action: () => void }
+  >(null);
 
   async function refreshAll() {
     if (!projectId) return;
@@ -71,44 +79,67 @@ export default function SystemPanel({ projectId, onProjectChanged }: Props) {
   async function handleFileUpload(kind: string, file: File) {
     if (!projectId || !file) return;
     try {
-      setParseMsg(`Uploading ${file.name}...`);
+      setBusy(`Uploading ${file.name}…`);
       await uploadProjectFile(projectId, kind, file);
+      setBusy(`Refreshing file list…`);
       const fl = await listProjectFiles(projectId);
       setFiles(fl);
       setParseMsg(`Uploaded ${file.name}`);
       setTimeout(() => setParseMsg(""), 2000);
     } catch (e: any) {
       setError(String(e.message || e));
-    }
-  }
-
-  async function handleClearFiles() {
-    if (!projectId) return;
-    if (!confirm("Delete all uploaded files for this project? (Parsed data will not be affected until you re-parse)")) return;
-    try {
-      await clearProjectFiles(projectId);
-      setFiles([]);
-    } catch (e: any) {
-      setError(String(e.message || e));
-    }
-  }
-
-  async function handleParse() {
-    if (!projectId) return;
-    if (!confirm("Parse will clear all existing project data and rebuild from uploaded files. Continue?")) return;
-    try {
-      setParsing(true);
-      setParseMsg("Parsing... this may take a minute or two");
-      const result = await parseProject(projectId);
-      setParseMsg(`Parsed: ${result.block_count} blocks, ${result.tracker_count} trackers, ${result.pier_count} piers`);
-      await refreshAll();
-      onProjectChanged?.(projectId);
-    } catch (e: any) {
-      setError(String(e.message || e));
-      setParseMsg("");
     } finally {
-      setParsing(false);
+      setBusy(null);
     }
+  }
+
+  function handleClearFiles() {
+    if (!projectId) return;
+    setConfirmState({
+      title: "Delete uploaded files?",
+      message: "Delete all uploaded files for this project?\n(Parsed data will not be affected until you re-parse.)",
+      confirmLabel: "Delete",
+      danger: true,
+      action: async () => {
+        setConfirmState(null);
+        try {
+          setBusy("Clearing files…");
+          await clearProjectFiles(projectId);
+          setFiles([]);
+        } catch (e: any) {
+          setError(String(e.message || e));
+        } finally {
+          setBusy(null);
+        }
+      },
+    });
+  }
+
+  function handleParse() {
+    if (!projectId) return;
+    setConfirmState({
+      title: "Parse project?",
+      message: "Parse will clear all existing project data and rebuild from uploaded files. Continue?",
+      confirmLabel: "Parse",
+      danger: true,
+      action: async () => {
+        setConfirmState(null);
+        try {
+          setParsing(true);
+          setBusy("Parsing… this may take a minute or two");
+          const result = await parseProject(projectId);
+          setParseMsg(`Parsed: ${result.block_count} blocks, ${result.tracker_count} trackers, ${result.pier_count} piers`);
+          await refreshAll();
+          onProjectChanged?.(projectId);
+        } catch (e: any) {
+          setError(String(e.message || e));
+          setParseMsg("");
+        } finally {
+          setParsing(false);
+          setBusy(null);
+        }
+      },
+    });
   }
 
   async function handlePlantSave() {
@@ -129,13 +160,41 @@ export default function SystemPanel({ projectId, onProjectChanged }: Props) {
 
   return (
     <div style={{ display: "grid", gap: 14 }}>
+      {/* Offline warning banner */}
+      {!online && (
+        <div
+          style={{
+            border: "1px solid #fecaca",
+            background: "#fef2f2",
+            color: "#991b1b",
+            padding: "8px 12px",
+            borderRadius: 10,
+            fontSize: 12,
+            fontWeight: 600,
+          }}
+        >
+          You are offline. Uploading files, parsing, and creating projects are disabled.
+          Pier status changes will keep working and sync automatically once you are back online.
+        </div>
+      )}
+
       {/* New Project + Files */}
       <div style={{ border: "1px solid #e2e8f0", borderRadius: 16, padding: isMobile ? 12 : 16, background: "#fff" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10, flexWrap: "wrap" }}>
           <div style={{ fontWeight: 800, fontSize: 16 }}>Project Files</div>
           <button
             onClick={() => setShowNewProject(true)}
-            style={{ fontSize: 12, padding: "6px 12px", borderRadius: 6, border: "1px solid #d1d5db", background: "#fff", cursor: "pointer" }}
+            disabled={!online}
+            title={online ? "" : "Creating a project requires an internet connection"}
+            style={{
+              fontSize: 12,
+              padding: "6px 12px",
+              borderRadius: 6,
+              border: "1px solid #d1d5db",
+              background: online ? "#fff" : "#f1f5f9",
+              cursor: online ? "pointer" : "not-allowed",
+              opacity: online ? 1 : 0.6,
+            }}
           >
             + New Project
           </button>
@@ -155,24 +214,38 @@ export default function SystemPanel({ projectId, onProjectChanged }: Props) {
         {projectId ? (
           <>
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 10, marginBottom: 10 }}>
-              <FileUploadField label="Construction PDF" kind="construction_pdf" files={files} onUpload={handleFileUpload} />
-              <FileUploadField label="Ramming PDF" kind="ramming_pdf" files={files} onUpload={handleFileUpload} />
+              <FileUploadField label="Construction PDF" kind="construction_pdf" files={files} onUpload={handleFileUpload} disabled={!online} />
+              <FileUploadField label="Ramming PDF" kind="ramming_pdf" files={files} onUpload={handleFileUpload} disabled={!online} />
             </div>
             <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
               <button
                 onClick={handleParse}
-                disabled={parsing || files.length < 2}
+                disabled={parsing || files.length < 2 || !online}
+                title={online ? "" : "Parsing requires an internet connection"}
                 style={{
                   fontSize: 13, padding: "8px 16px", borderRadius: 6, border: "none",
-                  background: parsing || files.length < 2 ? "#cbd5e1" : "#0f172a",
+                  background: parsing || files.length < 2 || !online ? "#cbd5e1" : "#0f172a",
                   color: "#fff", fontWeight: 600,
-                  cursor: parsing || files.length < 2 ? "not-allowed" : "pointer",
+                  cursor: parsing || files.length < 2 || !online ? "not-allowed" : "pointer",
                 }}
               >
                 {parsing ? "Parsing..." : "Parse"}
               </button>
               {files.length > 0 && (
-                <button onClick={handleClearFiles} style={{ fontSize: 12, padding: "6px 10px", borderRadius: 6, border: "1px solid #d1d5db", background: "#fff", cursor: "pointer" }}>
+                <button
+                  onClick={handleClearFiles}
+                  disabled={!online}
+                  title={online ? "" : "Clearing files requires an internet connection"}
+                  style={{
+                    fontSize: 12,
+                    padding: "6px 10px",
+                    borderRadius: 6,
+                    border: "1px solid #d1d5db",
+                    background: online ? "#fff" : "#f1f5f9",
+                    cursor: online ? "pointer" : "not-allowed",
+                    opacity: online ? 1 : 0.6,
+                  }}
+                >
                   Clear Files
                 </button>
               )}
@@ -282,6 +355,18 @@ export default function SystemPanel({ projectId, onProjectChanged }: Props) {
       )}
 
       {error && <div style={{ color: "#b00020" }}>{error}</div>}
+
+      {busy && <BusyOverlay message={busy} />}
+      {confirmState && (
+        <ConfirmModal
+          title={confirmState.title}
+          message={confirmState.message}
+          confirmLabel={confirmState.confirmLabel}
+          danger={confirmState.danger}
+          onConfirm={confirmState.action}
+          onCancel={() => setConfirmState(null)}
+        />
+      )}
     </div>
   );
 }
@@ -340,10 +425,10 @@ function ValidationField({ label, actual, expected, tolerance }: { label: string
   );
 }
 
-function FileUploadField({ label, kind, files, onUpload }: { label: string; kind: string; files: any[]; onUpload: (kind: string, file: File) => void }) {
+function FileUploadField({ label, kind, files, onUpload, disabled }: { label: string; kind: string; files: any[]; onUpload: (kind: string, file: File) => void; disabled?: boolean }) {
   const existing = files.filter((f) => f.kind === kind);
   return (
-    <div style={{ border: "1px dashed #cbd5e1", borderRadius: 8, padding: 10, background: "#f8fafc" }}>
+    <div style={{ border: "1px dashed #cbd5e1", borderRadius: 8, padding: 10, background: disabled ? "#f1f5f9" : "#f8fafc", opacity: disabled ? 0.6 : 1 }}>
       <div style={{ fontSize: 11, color: "#64748b", marginBottom: 4, fontWeight: 600, textTransform: "uppercase", letterSpacing: 0.5 }}>{label}</div>
       {existing.length > 0 && (
         <div style={{ fontSize: 12, color: "#334155", marginBottom: 6 }}>
@@ -355,6 +440,7 @@ function FileUploadField({ label, kind, files, onUpload }: { label: string; kind
       <input
         type="file"
         accept=".pdf,.png,.jpg,.jpeg"
+        disabled={disabled}
         onChange={(e) => {
           const f = e.target.files?.[0];
           if (f) {
